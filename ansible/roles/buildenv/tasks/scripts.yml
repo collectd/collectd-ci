@@ -1,0 +1,6 @@
+- name: install various build scripts
+  copy: src=roles/buildenv/files/{{item}} dest=/usr/local/bin/ mode=0755 owner=root
+  with_items:
+    - make-dist-archive.sh
+    - make-rpms.sh
+    - make-debs.sh

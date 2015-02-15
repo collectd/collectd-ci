@@ -1,0 +1,3 @@
+Defaults:jenkins !authenticate
+jenkins   ALL=(root) SETENV:/usr/sbin/cowbuilder
+jenkins   ALL=(root) /usr/sbin/service jenkins *

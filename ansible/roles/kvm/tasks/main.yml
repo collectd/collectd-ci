@@ -1,0 +1,19 @@
+- name: apt prefs for kvm
+  copy: src=roles/kvm/files/apt_prefs dest=/etc/apt/preferences.d/kvm
+
+- name: install kvm-related packages
+  apt: package={{item}} state=present
+  with_items:
+    - qemu-kvm
+    - qemu-utils
+    - dnsmasq
+    - ebtables
+    - libvirt-bin
+    - libvirt-daemon
+    - libvirt-dev
+
+- name: disable dnsmasq service
+  service: name=dnsmasq state=stopped enabled=no
+
+- name: prevent dnsmasq service from starting
+  replace: dest=/etc/default/dnsmasq regexp='ENABLED=.+' replace='ENABLED=0'

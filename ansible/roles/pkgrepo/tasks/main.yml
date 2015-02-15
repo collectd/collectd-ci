@@ -1,0 +1,5 @@
+- name: install yum repo utils
+  apt: name=createrepo state=present
+
+- name: install apt repo utils
+  apt: name=dpkg-dev state=present

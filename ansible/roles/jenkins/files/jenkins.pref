@@ -1,0 +1,8 @@
+Package: *
+Pin: origin "pkg.jenkins-ci.org"
+Pin-Priority: -1
+
+Package: jenkins
+Pin: origin "pkg.jenkins-ci.org"
+Pin-Priority: 1010
+

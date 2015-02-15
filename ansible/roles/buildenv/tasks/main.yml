@@ -1,0 +1,5 @@
+- include: autotools.yml
+- include: scripts.yml
+
+- name: enforce permissions and ownership on /usr/src
+  file: path=/usr/src/ state=directory owner=root group=src mode=2775

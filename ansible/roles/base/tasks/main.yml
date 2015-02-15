@@ -1,0 +1,13 @@
+- include: apt.yml
+
+- name: install misc generic utilities
+  apt: package={{item}} state=present
+  with_items:
+    - curl
+    - git
+    - net-tools
+    - procps
+    - rsync
+    - screen
+    - sudo
+    - wget

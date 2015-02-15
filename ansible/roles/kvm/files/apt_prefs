@@ -1,0 +1,3 @@
+Package: qemu-kvm qemu-system-x86 qemu-utils libspice-server1 libusb-1.0-0 seabios ipxe-qemu libvirt-daemon libvirt-bin libvirt0 libvirt-dev
+Pin: release a=wheezy-backports
+Pin-Priority: 1010

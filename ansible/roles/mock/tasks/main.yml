@@ -1,0 +1,28 @@
+- name: apt prefs for mock
+  copy: src=roles/mock/files/apt_prefs dest=/etc/apt/preferences.d/mock
+
+- name: install mock package and dependencies
+  apt: name={{ item }} state=present
+  with_items:
+    - mock
+    - pigz
+
+- name: mock config files
+  copy: src=roles/mock/files/mock/ dest=/etc/mock/
+
+- name: mock user
+  user: name=mock system=yes
+
+- name: mock workdir ownership and permissions
+  file: path=/var/lib/mock/ state=directory owner=mock group=mock mode=2775
+
+- name: initialize mock base images
+  command: sudo -u mock /usr/bin/mock -r {{item}} --init
+  args:
+    creates: /var/cache/mock/{{item}}
+  with_items:
+    - epel-5-i386
+    - epel-5-x86_64
+    - epel-6-i386
+    - epel-6-x86_64
+    - epel-7-x86_64

@@ -1,0 +1,20 @@
+- name: remove default sources.list
+  file: path=/etc/apt/sources.list state=absent
+
+- name: apt main repo
+  apt_repository: repo='deb http://http.debian.net/debian wheezy main contrib non-free' state=present
+
+- name: apt updates repo
+  apt_repository: repo='deb http://http.debian.net/debian wheezy-updates main contrib non-free' state=present
+
+- name: apt backports repo
+  apt_repository: repo='deb http://security.debian.org/ wheezy/updates main contrib non-free' state=present
+
+- name: apt security repo
+  apt_repository: repo='deb http://http.debian.net/debian wheezy-backports main contrib non-free' state=present
+
+- name: backports prefs
+  copy: src=roles/base/files/backports.pref dest=/etc/apt/preferences.d/
+
+- name: install and suggests apt conf
+  copy: src=roles/base/files/50no-install-suggests-recommends dest=/etc/apt/apt.conf.d/

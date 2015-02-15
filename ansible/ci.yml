@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+  roles:
+    - base
+    - buildenv
+    - mock
+    - pbuilder
+    - kvm
+    - jenkins
+    - vagrant
+    - pkgrepo

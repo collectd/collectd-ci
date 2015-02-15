@@ -1,0 +1,34 @@
+- name: download vagrant package
+  command: wget -P /opt/ {{vagrant_baseurl}}/vagrant_{{vagrant_version}}_x86_64.deb
+  args:
+    creates: /opt/vagrant_{{vagrant_version}}_x86_64.deb
+
+- name: download vagrant package checksums
+  shell: curl -s "{{vagrant_baseurl}}/{{vagrant_version}}_SHA256SUMS?direct" | grep "x86_64.deb$" > /opt/vagrant-{{vagrant_version}}_SHA256SUMS
+  args:
+    creates: /opt/vagrant-{{vagrant_version}}_SHA256SUMS
+
+- name: verify vagrant package checksum
+  shell: sha256sum -c vagrant-{{vagrant_version}}_SHA256SUMS
+  args:
+    chdir: /opt/
+    creates: /opt/vagrant
+
+- name: install vagrant
+  apt: deb=/opt/vagrant_{{vagrant_version}}_x86_64.deb
+
+- name: install various dependencies
+  apt: package={{item}} state=present
+  with_items:
+    - libxslt1-dev
+    - libxml2-dev
+
+- name: install vagrant plugins
+  shell: sudo -u jenkins vagrant plugin install {{item.plugin}} --plugin-version {{item.version}}
+  args:
+    chdir: /var/lib/jenkins
+    creates: /var/lib/jenkins/.vagrant.d/gems/gems/{{item.plugin}}-{{item.version}}
+  with_items:
+    - {plugin: vagrant-libvirt, version: 0.0.24}
+    - {plugin: vagrant-digitalocean, version: 0.7.3}
+

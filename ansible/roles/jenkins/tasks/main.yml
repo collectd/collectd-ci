@@ -1,0 +1,35 @@
+- name: jenkins apt key
+  apt_key: id=9B7D32F2D50582E6 url=http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key state=present
+
+- name: jenkins apt repo
+  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian-stable binary/' state=present
+
+- name: jenkins repo prefs
+  copy: src=roles/jenkins/files/jenkins.pref dest=/etc/apt/preferences.d/
+
+- name: install jenkins package
+  apt: name=jenkins state=present
+
+- name: add jenkins user to various groups
+  user: name=jenkins groups=mock,libvirt,src state=present
+  notify:
+    - restart jenkins
+
+- name: delegate some privileges to jenkins user
+  copy: src=roles/jenkins/files/jenkins_sudo dest=/etc/sudoers.d/ mode=0440 owner=root group=root
+
+- name: run jenkins service
+  service: name=jenkins state=started enabled=yes
+
+- name: create build artefacts directory
+  file: path=/srv/build_artefacts state=directory owner=jenkins group=jenkins mode=0755
+
+- name: jenkins user ssh authorized_keys
+  authorized_key: user=jenkins
+                  key="{{item}}"
+  with_file:
+    - public_keys/octo
+    - public_keys/tokkee
+    - public_keys/pyr
+    - public_keys/mfournier
+    - public_keys/skottler
