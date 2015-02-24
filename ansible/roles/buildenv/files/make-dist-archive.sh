@@ -21,10 +21,10 @@ git checkout --force "$REF"
 ./clean.sh
 ./build.sh
 ./configure
-make dist-bzip2
+make dist-gzip
 
 COLLECTD_BUILD=$(./version-gen.sh)
-TARBALL="${REPO}/collectd-${COLLECTD_BUILD}.tar.bz2"
+TARBALL="${REPO}/collectd-${COLLECTD_BUILD}.tar.gz"
 
 test -f $TARBALL
 
