@@ -1,20 +1,18 @@
 #!/bin/sh
 
-# Usage: make-debs.sh <distro> <arch> <tarball>
+# Usage: make-debs.sh <distro> <arch>
 
 set -xe
 
 test "x$(id -un)" = "xjenkins"
 test -n "$1"
 test "$2" = "i386" || test "$2" = "amd64"
-test -n "$3"
-test -f "$3"
 
 case "$1" in
   precise|trusty|squeeze|wheezy|jessie)
     DIST="$1"
     ARCH="$2"
-    TARBALL="$3"
+    SRC="/usr/src/collectd"
   ;;
 
   *)
@@ -23,8 +21,14 @@ case "$1" in
   ;;
 esac
 
+. $SRC/jenkins-env.sh
+
+test -n "$COLLECTD_BUILD"
+test -n "$GIT_BRANCH"
+test -n "$TARBALL"
+test -f $TARBALL
+
 REPO="/usr/src/pkg-debian"
-COLLECTD_BUILD=$(cd /usr/src/collectd && ./version-gen.sh)
 
 test -d $REPO || git clone https://github.com/mfournier/pkg-debian.git "$REPO"
 cd "$REPO"
@@ -47,12 +51,14 @@ if [ $(git tag -l upstream/$COLLECTD_BUILD | wc -l) -eq "0" ]; then
   gbp import-orig -u $COLLECTD_BUILD --no-merge $TARBALL
 fi
 
-git checkout -f origin/nightlies/$DIST
+git checkout -f "origin/nightlies/${GIT_BRANCH}/${DIST}"
 
-if [ $(git branch --list "nightlies/${DIST}-${COLLECTD_BUILD}" | wc -l) -eq "1" ]; then
-  git branch -D "nightlies/${DIST}-${COLLECTD_BUILD}"
+DEBIAN_BRANCH="nightlies/${GIT_BRANCH}/${DIST}-${COLLECTD_BUILD}"
+
+if [ $(git branch --list $DEBIAN_BRANCH | wc -l) -eq "1" ]; then
+  git branch -D $DEBIAN_BRANCH
 fi
-git checkout -B "nightlies/${DIST}-${COLLECTD_BUILD}"
+git checkout -B $DEBIAN_BRANCH
 git rm debian/patches/*.dpatch
 echo > debian/patches/00list
 git add debian/patches/00list
@@ -62,9 +68,9 @@ git add debian/changelog
 git commit -m "automatic changelog update"
 git merge --no-edit upstream/$COLLECTD_BUILD
 
-export GIT_PBUILDER_OUTPUT_DIR="/srv/build_artefacts/${DIST}-${ARCH}"
+export GIT_PBUILDER_OUTPUT_DIR="/srv/build_artefacts/$GIT_BRANCH/${DIST}-${ARCH}"
 rm -fr $GIT_PBUILDER_OUTPUT_DIR
 mkdir -p $GIT_PBUILDER_OUTPUT_DIR
 
-git-buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-branch="nightlies/${DIST}-${COLLECTD_BUILD}" --git-pbuilder-options="--aptcache /var/cache/pbuilder/aptcache/$DIST"
+git-buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-branch=$DEBIAN_BRANCH --git-pbuilder-options="--aptcache /var/cache/pbuilder/aptcache/$DIST"
 

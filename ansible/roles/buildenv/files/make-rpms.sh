@@ -1,20 +1,17 @@
 #!/bin/sh
 
-# Usage: make-rpms.sh <distro> <tarball>
+# Usage: make-rpms.sh <distro>
 
 set -xe
 
 test "x$(id -un)" = "xjenkins"
 test -n "$1"
-test -n "$2"
-test -f "$2"
 
 case "$1" in
   epel-5-i386|epel-5-x86_64|epel-6-i386|epel-6-x86_64|epel-7-x86_64)
     DIST="$1"
-    TARBALL="$2"
-    RESULTDIR="/srv/build_artefacts/$DIST"
     RPMBUILD="/var/lib/jenkins/rpmbuild"
+    SRC="/usr/src/collectd"
   ;;
 
   *)
@@ -23,8 +20,12 @@ case "$1" in
   ;;
 esac
 
-COLLECTD_BUILD=$(cd /usr/src/collectd && ./version-gen.sh)
+. $SRC/jenkins-env.sh
 
+test -n "$COLLECTD_BUILD"
+test -n "$GIT_BRANCH"
+test -n "$TARBALL"
+test -f $TARBALL
 test -d "/var/cache/mock/$DIST"
 
 rm -fr "$RPMBUILD"
@@ -38,6 +39,8 @@ cp /usr/src/collectd/contrib/redhat/collectd.spec "$RPMBUILD/SPECS/"
 sed -ri "s/^(Version:\s+).+/\1$COLLECTD_BUILD/" "$RPMBUILD/SPECS/collectd.spec"
 
 rpmbuild -bs "$RPMBUILD/SPECS/collectd.spec"
+
+RESULTDIR="/srv/build_artefacts/$GIT_BRANCH/$DIST"
 
 rm -fr "$RESULTDIR"
 mkdir -p "$RESULTDIR"
