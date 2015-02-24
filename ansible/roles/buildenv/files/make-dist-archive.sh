@@ -23,4 +23,17 @@ git checkout --force "$REF"
 ./configure
 make dist-bzip2
 
-test -f $REPO/collectd-$(./version-gen.sh).tar.bz2
+COLLECTD_BUILD=$(./version-gen.sh)
+TARBALL="${REPO}/collectd-${COLLECTD_BUILD}.tar.bz2"
+
+test -f $TARBALL
+
+cat > jenkins-env.sh << EOF
+COLLECTD_BUILD=$COLLECTD_BUILD
+GIT_COMMIT=$GIT_COMMIT
+GIT_BRANCH=$GIT_BRANCH
+TARBALL=/tmp/collectd-$COLLECTD_BUILD/$(basename $TARBALL)
+EOF
+
+mkdir -p /tmp/collectd-$COLLECTD_BUILD
+mv $TARBALL /tmp/collectd-$COLLECTD_BUILD
