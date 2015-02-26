@@ -1,0 +1,19 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "ubuntu-12-04-x32",
+      "region": "lon1",
+      "size": "512mb",
+      "snapshot_name": "buildenv-precise-i386"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/packages-precise.sh"
+      ]
+    }
+  ]
+}

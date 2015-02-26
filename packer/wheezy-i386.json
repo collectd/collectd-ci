@@ -1,0 +1,19 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "debian-7-0-x32",
+      "region": "lon1",
+      "size": "512mb",
+      "snapshot_name": "buildenv-wheezy-i386"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/packages-wheezy.sh"
+      ]
+    }
+  ]
+}

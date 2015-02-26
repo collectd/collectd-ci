@@ -1,0 +1,19 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "centos-7-0-x64",
+      "region": "lon1",
+      "size": "512mb",
+      "snapshot_name": "buildenv-epel7-x86_64"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/packages-el7.sh"
+      ]
+    }
+  ]
+}

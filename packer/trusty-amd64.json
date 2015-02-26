@@ -1,0 +1,19 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "ubuntu-14-04-x64",
+      "region": "lon1",
+      "size": "512mb",
+      "snapshot_name": "buildenv-trusty-amd64"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/packages-trusty.sh"
+      ]
+    }
+  ]
+}

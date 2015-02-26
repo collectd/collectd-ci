@@ -1,0 +1,19 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "centos-5-8-x32",
+      "region": "lon1",
+      "size": "512mb",
+      "snapshot_name": "buildenv-epel5-i386"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/packages-el5.sh"
+      ]
+    }
+  ]
+}
