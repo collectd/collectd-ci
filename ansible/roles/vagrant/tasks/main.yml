@@ -29,6 +29,11 @@
     chdir: /var/lib/jenkins
     creates: /var/lib/jenkins/.vagrant.d/gems/gems/{{item.plugin}}-{{item.version}}
   with_items:
-    - {plugin: vagrant-libvirt, version: 0.0.24}
-    - {plugin: vagrant-digitalocean, version: 0.7.3}
+    - {plugin: vagrant-libvirt, version: "{{vagrant_libvirt_version}}"}
+    - {plugin: vagrant-digitalocean, version: "{{vagrant_digitalocean_version}}"}
 
+- name: fix vagrant-digitalocean to search images names rather than slugs
+  replace: dest={{item}} regexp=':slug(\s+=>\s+@machine.provider_config)' replace=':name\1' backup=yes
+  with_items:
+    - /var/lib/jenkins/.vagrant.d/gems/gems/vagrant-digitalocean-{{vagrant_digitalocean_version}}/lib/vagrant-digitalocean/actions/create.rb
+    - /var/lib/jenkins/.vagrant.d/gems/gems/vagrant-digitalocean-{{vagrant_digitalocean_version}}/lib/vagrant-digitalocean/actions/rebuild.rb
