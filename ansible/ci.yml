@@ -8,5 +8,4 @@
     - pbuilder
     - kvm
     - jenkins
-    - vagrant
     - pkgrepo
