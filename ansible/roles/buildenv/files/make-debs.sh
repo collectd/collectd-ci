@@ -12,7 +12,6 @@ case "$1" in
   precise|trusty|squeeze|wheezy|jessie)
     DIST="$1"
     ARCH="$2"
-    SRC="/usr/src/collectd"
   ;;
 
   *)
@@ -21,14 +20,17 @@ case "$1" in
   ;;
 esac
 
-. $SRC/jenkins-env.sh
+# This file, as well as $TARBALL, comes from jenkins' upstream job, using the
+# "copy artefact plugin".
+. "${WORKSPACE}/jenkins-env.sh"
 
 test -n "$COLLECTD_BUILD"
 test -n "$GIT_BRANCH"
 test -n "$TARBALL"
-test -f $TARBALL
+test -f "${WORKSPACE}/${TARBALL}"
 
 REPO="/usr/src/pkg-debian"
+BRANCH=$(basename $GIT_BRANCH)
 
 test -d $REPO || git clone https://github.com/mfournier/pkg-debian.git "$REPO"
 cd "$REPO"
@@ -48,12 +50,12 @@ if ! git show upstream > /dev/null 2>&1; then
 fi
 
 if [ $(git tag -l upstream/$COLLECTD_BUILD | wc -l) -eq "0" ]; then
-  gbp import-orig -u $COLLECTD_BUILD --no-merge $TARBALL
+  gbp import-orig -u $COLLECTD_BUILD --no-merge "${WORKSPACE}/${TARBALL}"
 fi
 
-git checkout -f "origin/nightlies/${GIT_BRANCH}/${DIST}"
+git checkout -f "origin/nightlies/${BRANCH}/${DIST}"
 
-DEBIAN_BRANCH="nightlies/${GIT_BRANCH}/${DIST}-${COLLECTD_BUILD}"
+DEBIAN_BRANCH="nightlies/${BRANCH}/${DIST}-${COLLECTD_BUILD}"
 
 if [ $(git branch --list $DEBIAN_BRANCH | wc -l) -eq "1" ]; then
   git branch -D $DEBIAN_BRANCH
@@ -68,7 +70,7 @@ git add debian/changelog
 git commit -m "automatic changelog update"
 git merge --no-edit upstream/$COLLECTD_BUILD
 
-export GIT_PBUILDER_OUTPUT_DIR="/srv/build_artefacts/$GIT_BRANCH/${DIST}-${ARCH}"
+export GIT_PBUILDER_OUTPUT_DIR="/srv/build_artefacts/$BRANCH/${DIST}-${ARCH}"
 rm -fr $GIT_PBUILDER_OUTPUT_DIR
 mkdir -p $GIT_PBUILDER_OUTPUT_DIR
 

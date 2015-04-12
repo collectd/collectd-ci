@@ -8,32 +8,25 @@ test "x$(id -un)" = "xjenkins"
 test -n "$1"
 
 REF="$1"
-REPO="/usr/src/collectd"
-
-test -d $REPO || git clone https://github.com/collectd/collectd.git $REPO
-cd $REPO
-
-git config --local remote.origin.fetch "+refs/pull/*/head:refs/remotes/origin/pr/*"
-git fetch --all --quiet
-git reset --hard
-git checkout --force "$REF"
 
 ./clean.sh
 ./build.sh
 ./configure
-make dist-gzip
+make dist-bzip2
 
 COLLECTD_BUILD=$(./version-gen.sh)
-TARBALL="${REPO}/collectd-${COLLECTD_BUILD}.tar.gz"
+TARBALL="collectd-${COLLECTD_BUILD}.tar.bz2"
 
 test -f $TARBALL
+
+git show "${GIT_BRANCH}:contrib/redhat/collectd.spec" > collectd.spec
 
 cat > jenkins-env.sh << EOF
 COLLECTD_BUILD=$COLLECTD_BUILD
 GIT_COMMIT=$GIT_COMMIT
 GIT_BRANCH=$GIT_BRANCH
-TARBALL=/tmp/collectd-$COLLECTD_BUILD/$(basename $TARBALL)
+TARBALL=$(basename $TARBALL)
 EOF
 
-mkdir -p /tmp/collectd-$COLLECTD_BUILD
-mv $TARBALL /tmp/collectd-$COLLECTD_BUILD
+# then use "copy artefact plugin" to pass down the following files to
+# downstream jobs: $TARBALL jenkins-env.sh collectd.spec
