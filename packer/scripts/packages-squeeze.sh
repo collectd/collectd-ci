@@ -1,5 +1,3 @@
-set -e
-
 apt-get -y install sudo rsync
 
 sed -i 's/main$/main contrib non-free/' /etc/apt/sources.list

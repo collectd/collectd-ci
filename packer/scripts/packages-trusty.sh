@@ -1,5 +1,3 @@
-set -e
-
 apt-get -y install sudo rsync
 
 echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/50no-install-recommends

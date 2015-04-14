@@ -11,9 +11,8 @@
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "scripts/packages-el7.sh"
-      ]
+      "execute_command": "/bin/sh -xe {{ .Path }}",
+      "script": "scripts/packages-el7.sh"
     }
   ]
 }

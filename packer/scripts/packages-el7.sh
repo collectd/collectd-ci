@@ -1,5 +1,3 @@
-set -e
-
 yum -y install sudo rsync
 
 yum -y install epel-release
