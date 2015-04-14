@@ -1,0 +1,19 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "freebsd-10-1-x64",
+      "region": "lon1",
+      "size": "512mb",
+      "snapshot_name": "buildenv-freebsd-10",
+      "ssh_username": "freebsd"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -xe {{ .Path }}",
+      "script": "scripts/packages-freebsd10.sh"
+    }
+  ]
+}
