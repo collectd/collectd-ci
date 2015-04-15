@@ -31,6 +31,7 @@ test -f "${WORKSPACE}/collectd.spec"
 test -d "/var/cache/mock/$DIST"
 
 BRANCH=$(basename $GIT_BRANCH)
+PKGDIR="/srv/build_artefacts/rpm"
 
 rm -fr "$RPMBUILD"
 for dir in BUILD BUILDROOT RPMS SOURCES SPECS SRPMS; do
@@ -44,7 +45,7 @@ sed -ri "s/^(Version:\s+).+/\1$COLLECTD_BUILD/" "$RPMBUILD/SPECS/collectd.spec"
 
 rpmbuild -bs "$RPMBUILD/SPECS/collectd.spec"
 
-RESULTDIR="/srv/build_artefacts/$BRANCH/$DIST"
+RESULTDIR="$PKGDIR/$BRANCH/$DIST"
 
 rm -fr "$RESULTDIR"
 mkdir -p "$RESULTDIR"

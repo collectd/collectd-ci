@@ -31,6 +31,7 @@ test -f "${WORKSPACE}/${TARBALL}"
 
 REPO="/usr/src/pkg-debian"
 BRANCH=$(basename $GIT_BRANCH)
+PKGDIR="/srv/build_artefacts/deb"
 
 test -d $REPO || git clone https://github.com/mfournier/pkg-debian.git "$REPO"
 cd "$REPO"
@@ -70,7 +71,7 @@ git add debian/changelog
 git commit -m "automatic changelog update"
 git merge --no-edit upstream/$COLLECTD_BUILD
 
-export GIT_PBUILDER_OUTPUT_DIR="/srv/build_artefacts/$BRANCH/${DIST}-${ARCH}"
+export GIT_PBUILDER_OUTPUT_DIR="$PKGDIR/dists/${DIST}/${BRANCH}/binary-${ARCH}"
 rm -fr $GIT_PBUILDER_OUTPUT_DIR
 mkdir -p $GIT_PBUILDER_OUTPUT_DIR
 
