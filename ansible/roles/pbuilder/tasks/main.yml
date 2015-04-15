@@ -8,7 +8,7 @@
   apt_repository: repo='deb http://archive.ubuntu.com/ubuntu trusty main' state=present
 
 - name: apt prefs for ubuntu, git-buildpackage and pbuilder
-  copy: src=roles/pbuilder/files/apt_prefs dest=/etc/apt/preferences.d/pbuilder
+  copy: src=apt_prefs dest=/etc/apt/preferences.d/pbuilder
 
 - name: install git-buildpackage and dependencies
   apt: name={{ item }} state=present
@@ -26,7 +26,7 @@
     - ubuntu-keyring
 
 - name: pbuilder configuration
-  copy: src=roles/pbuilder/files/pbuilderrc dest=/etc/pbuilderrc
+  copy: src=pbuilderrc dest=/etc/pbuilderrc
 
 - name: initialize pbuilder base images
   shell: DIST={{item.dist}} ARCH={{item.arch}} cowbuilder --create --distribution {{item.dist}} --architecture {{item.arch}} --basepath /var/cache/pbuilder/base-{{item.dist}}-{{item.arch}}.cow

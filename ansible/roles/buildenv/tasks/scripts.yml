@@ -1,5 +1,5 @@
 - name: install various build scripts
-  copy: src=roles/buildenv/files/{{item}} dest=/usr/local/bin/ mode=0755 owner=root
+  copy: src={{item}} dest=/usr/local/bin/ mode=0755 owner=root
   with_items:
     - make-dist-archive.sh
     - make-rpms.sh
@@ -9,6 +9,6 @@
   file: path=/var/lib/jenkins/jobs/DSL-seed/workspace/ state=directory owner=jenkins group=jenkins mode=0775
 
 - name: install jenkins job descriptions
-  copy: src=roles/buildenv/files/{{item}} dest=/var/lib/jenkins/jobs/DSL-seed/workspace/ owner=jenkins group=jenkins mode=0644
+  copy: src={{item}} dest=/var/lib/jenkins/jobs/DSL-seed/workspace/ owner=jenkins group=jenkins mode=0644
   with_items:
     - packages.groovy

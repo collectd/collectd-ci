@@ -5,7 +5,7 @@
   apt_repository: repo='deb http://pkg.jenkins-ci.org/debian-stable binary/' state=present
 
 - name: jenkins repo prefs
-  copy: src=roles/jenkins/files/jenkins.pref dest=/etc/apt/preferences.d/
+  copy: src=jenkins.pref dest=/etc/apt/preferences.d/
 
 - name: install jenkins package
   apt: name=jenkins state=present
@@ -16,7 +16,7 @@
     - restart jenkins
 
 - name: delegate some privileges to jenkins user
-  copy: src=roles/jenkins/files/jenkins_sudo dest=/etc/sudoers.d/ mode=0440 owner=root group=root
+  copy: src=jenkins_sudo dest=/etc/sudoers.d/ mode=0440 owner=root group=root
 
 - name: run jenkins service
   service: name=jenkins state=started enabled=yes

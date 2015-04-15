@@ -1,5 +1,5 @@
 - name: apt prefs for kvm
-  copy: src=roles/kvm/files/apt_prefs dest=/etc/apt/preferences.d/kvm
+  copy: src=apt_prefs dest=/etc/apt/preferences.d/kvm
 
 - name: install kvm-related packages
   apt: package={{item}} state=present

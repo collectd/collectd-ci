@@ -14,7 +14,7 @@
   apt_repository: repo='deb http://http.debian.net/debian wheezy-backports main contrib non-free' state=present
 
 - name: backports prefs
-  copy: src=roles/base/files/backports.pref dest=/etc/apt/preferences.d/
+  copy: src=backports.pref dest=/etc/apt/preferences.d/
 
 - name: install and suggests apt conf
-  copy: src=roles/base/files/50no-install-suggests-recommends dest=/etc/apt/apt.conf.d/
+  copy: src=50no-install-suggests-recommends dest=/etc/apt/apt.conf.d/
