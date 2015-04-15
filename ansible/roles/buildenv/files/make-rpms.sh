@@ -20,7 +20,7 @@ case "$1" in
 esac
 
 # This file, as well as $TARBALL and collectd.spec, comes from jenkins'
-# upstream job, using the "copy artefact plugin".
+# upstream job, using the "copy artifact plugin".
 . "${WORKSPACE}/env.sh"
 
 test -n "$COLLECTD_BUILD"
@@ -31,7 +31,7 @@ test -f "${WORKSPACE}/collectd.spec"
 test -d "/var/cache/mock/$DIST"
 
 BRANCH=$(basename $GIT_BRANCH)
-PKGDIR="/srv/build_artefacts/rpm"
+PKGDIR="/srv/build_artifacts/rpm"
 
 rm -fr "$RPMBUILD"
 for dir in BUILD BUILDROOT RPMS SOURCES SPECS SRPMS; do

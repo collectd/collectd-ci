@@ -21,7 +21,7 @@ case "$1" in
 esac
 
 # This file, as well as $TARBALL, comes from jenkins' upstream job, using the
-# "copy artefact plugin".
+# "copy artifact plugin".
 . "${WORKSPACE}/env.sh"
 
 test -n "$COLLECTD_BUILD"
@@ -31,7 +31,7 @@ test -f "${WORKSPACE}/${TARBALL}"
 
 REPO="/usr/src/pkg-debian"
 BRANCH=$(basename $GIT_BRANCH)
-PKGDIR="/srv/build_artefacts/deb"
+PKGDIR="/srv/build_artifacts/deb"
 
 test -d $REPO || git clone https://github.com/mfournier/pkg-debian.git "$REPO"
 cd "$REPO"

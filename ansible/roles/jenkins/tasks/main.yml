@@ -21,8 +21,8 @@
 - name: run jenkins service
   service: name=jenkins state=started enabled=yes
 
-- name: create build artefacts directory
-  file: path=/srv/build_artefacts state=directory owner=jenkins group=jenkins mode=0755
+- name: create build artifacts directory
+  file: path=/srv/build_artifacts state=directory owner=jenkins group=jenkins mode=0755
 
 - name: jenkins user ssh authorized_keys
   authorized_key: user=jenkins

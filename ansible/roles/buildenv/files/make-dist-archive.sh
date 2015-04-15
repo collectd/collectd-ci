@@ -28,5 +28,5 @@ GIT_BRANCH=$GIT_BRANCH
 TARBALL=$(basename $TARBALL)
 EOF
 
-# then use "copy artefact plugin" to pass down the following files to
+# then use "copy artifact plugin" to pass down the following files to
 # downstream jobs: $TARBALL jenkins-env.sh collectd.spec
