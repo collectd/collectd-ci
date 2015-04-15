@@ -22,7 +22,7 @@ esac
 
 # This file, as well as $TARBALL, comes from jenkins' upstream job, using the
 # "copy artefact plugin".
-. "${WORKSPACE}/jenkins-env.sh"
+. "${WORKSPACE}/env.sh"
 
 test -n "$COLLECTD_BUILD"
 test -n "$GIT_BRANCH"

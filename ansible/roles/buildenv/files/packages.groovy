@@ -28,7 +28,7 @@ branches.each {
     publishers {
       archiveArtifacts {
         pattern('collectd*.tar.bz2')
-        pattern('jenkins-env.sh')
+        pattern('env.sh')
         pattern('collectd.spec')
       }
       downstream("make-deb-pkgs-${branchName}", 'SUCCESS')
@@ -47,7 +47,7 @@ branches.each {
     }
 
     steps {
-      copyArtifacts("make-dist-tarball-${branchName}", 'collectd*.tar.bz2, jenkins-env.sh') {
+      copyArtifacts("make-dist-tarball-${branchName}", 'collectd*.tar.bz2, env.sh') {
         upstreamBuild(true)
       }
 
@@ -65,7 +65,7 @@ branches.each {
     }
 
     steps {
-      copyArtifacts("make-dist-tarball-${branchName}", 'collectd*.tar.bz2, jenkins-env.sh, collectd.spec') {
+      copyArtifacts("make-dist-tarball-${branchName}", 'collectd*.tar.bz2, env.sh, collectd.spec') {
         upstreamBuild(true)
       }
 

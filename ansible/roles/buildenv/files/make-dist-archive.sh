@@ -21,7 +21,7 @@ test -f $TARBALL
 
 git show "${GIT_BRANCH}:contrib/redhat/collectd.spec" > collectd.spec
 
-cat > jenkins-env.sh << EOF
+cat > "${WORKSPACE}/env.sh" << EOF
 COLLECTD_BUILD=$COLLECTD_BUILD
 GIT_COMMIT=$GIT_COMMIT
 GIT_BRANCH=$GIT_BRANCH
