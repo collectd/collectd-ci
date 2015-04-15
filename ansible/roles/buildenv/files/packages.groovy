@@ -52,6 +52,7 @@ branches.each {
       }
 
       shell('/usr/local/bin/make-debs.sh $distro $arch')
+      shell('/usr/local/bin/s3-apt-repo.sh')
     }
   }
 
@@ -70,6 +71,7 @@ branches.each {
       }
 
       shell('/usr/local/bin/make-rpms.sh $distro')
+      shell('/usr/local/bin/s3-yum-repo.sh')
     }
   }
 }

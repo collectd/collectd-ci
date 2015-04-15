@@ -77,3 +77,11 @@ mkdir -p $GIT_PBUILDER_OUTPUT_DIR
 
 git-buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-branch=$DEBIAN_BRANCH --git-pbuilder-options="--aptcache /var/cache/pbuilder/aptcache/$DIST"
 
+cat > "${WORKSPACE}/s3repo.sh" << EOF
+ARCH=$ARCH
+BRANCH=$BRANCH
+COLLECTD_BUILD=$COLLECTD_BUILD
+DIST=$DIST
+PKGDIR=$PKGDIR
+EOF
+
