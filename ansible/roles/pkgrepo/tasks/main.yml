@@ -1,5 +1,10 @@
-- name: install yum repo utils
-  apt: name=createrepo state=present
+- name: install misc repo utils
+  apt: name={{ item }} state=present
+  with_items:
+    - createrepo
+    - dpkg-dev
+    - s3cmd
+    - python-magic
 
-- name: install apt repo utils
-  apt: name=dpkg-dev state=present
+- name: s3cmd configuration
+  template: src=s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600
