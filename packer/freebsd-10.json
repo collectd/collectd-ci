@@ -13,7 +13,7 @@
     {
       "type": "shell",
       "execute_command": "/bin/sh -xe {{ .Path }}",
-      "script": "scripts/packages-freebsd10.sh"
+      "script": "scripts/freebsd10.sh"
     }
   ]
 }

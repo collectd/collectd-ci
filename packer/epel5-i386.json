@@ -12,7 +12,7 @@
     {
       "type": "shell",
       "execute_command": "/bin/sh -xe {{ .Path }}",
-      "script": "scripts/packages-el5.sh"
+      "script": "scripts/el5.sh"
     }
   ]
 }

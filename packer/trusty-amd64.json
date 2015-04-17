@@ -12,7 +12,7 @@
     {
       "type": "shell",
       "execute_command": "/bin/sh -xe {{ .Path }}",
-      "script": "scripts/packages-trusty.sh"
+      "script": "scripts/trusty.sh"
     }
   ]
 }

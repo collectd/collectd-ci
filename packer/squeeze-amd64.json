@@ -12,7 +12,7 @@
     {
       "type": "shell",
       "execute_command": "/bin/sh -xe {{ .Path }}",
-      "script": "scripts/packages-squeeze.sh"
+      "script": "scripts/squeeze.sh"
     }
   ]
 }
