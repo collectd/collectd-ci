@@ -4,6 +4,9 @@ sed -i 's/main$/main contrib non-free/' /etc/apt/sources.list
 echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/50no-install-recommends
 echo 'APT::Install-Suggests "0";' > /etc/apt/apt.conf.d/50no-install-suggests
 
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+sysctl -p
+
 apt-get -y update
 apt-get -y upgrade
 
