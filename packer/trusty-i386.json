@@ -3,7 +3,7 @@
     {
       "type": "digitalocean",
       "image": "ubuntu-14-04-x32",
-      "region": "lon1",
+      "region": "fra1",
       "size": "512mb",
       "snapshot_name": "buildenv-trusty-i386"
     }

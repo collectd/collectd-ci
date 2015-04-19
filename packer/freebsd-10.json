@@ -3,7 +3,7 @@
     {
       "type": "digitalocean",
       "image": "freebsd-10-1-x64",
-      "region": "lon1",
+      "region": "fra1",
       "size": "512mb",
       "snapshot_name": "buildenv-freebsd-10",
       "ssh_username": "freebsd"

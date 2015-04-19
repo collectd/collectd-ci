@@ -3,7 +3,7 @@
     {
       "type": "digitalocean",
       "image": "debian-6-0-x32",
-      "region": "lon1",
+      "region": "fra1",
       "size": "512mb",
       "snapshot_name": "buildenv-squeeze-i386"
     }

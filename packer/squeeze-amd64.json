@@ -3,7 +3,7 @@
     {
       "type": "digitalocean",
       "image": "debian-6-0-x64",
-      "region": "lon1",
+      "region": "fra1",
       "size": "512mb",
       "snapshot_name": "buildenv-squeeze-amd64"
     }
