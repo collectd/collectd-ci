@@ -2,6 +2,10 @@ sed -i '/^net.bridge.bridge-nf-call/d' /etc/sysctl.conf
 echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
 sysctl -p
 
+yum -y install acpid
+chkconfig acpid on
+service acpid start
+
 yum -y install sudo rsync
 
 yum -y install epel-release
