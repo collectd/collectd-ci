@@ -39,3 +39,5 @@
     - public_keys/pyr
     - public_keys/mfournier
     - public_keys/skottler
+
+- include: jobs.yml
