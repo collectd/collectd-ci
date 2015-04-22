@@ -1,7 +1,16 @@
-- name: create DSL-seed workspace
-  file: path=/var/lib/jenkins/jobs/DSL-seed/workspace/ state=directory owner=jenkins group=jenkins mode=0775
+- name: install jenkins Job_DSL_seed config
+  copy: src=Job_DSL_seed_config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+
+- name: create Job_DSL_seed job
+  shell: 'curl -v -XPOST -H "Content-Type: application/xml" -d @/var/lib/jenkins/Job_DSL_seed_config.xml "http://localhost:8080/createItem?name=Job_DSL_seed"'
+  args:
+    creates: /var/lib/jenkins/jobs/Job_DSL_seed/
+  notify:
+    - run Job_DSL_seed
 
 - name: install jenkins job descriptions
-  copy: src={{item}} dest=/var/lib/jenkins/jobs/DSL-seed/workspace/ owner=jenkins group=jenkins mode=0644
+  copy: src={{item}} dest=/var/lib/jenkins/jobs/Job_DSL_seed/workspace/ owner=jenkins group=jenkins mode=0644
   with_items:
     - packages.groovy
+  notify:
+    - run Job_DSL_seed

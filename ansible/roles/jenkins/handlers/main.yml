@@ -1,2 +1,5 @@
 - name: restart jenkins
   service: name=jenkins state=restarted
+
+- name: run Job_DSL_seed
+  shell: curl -v -XPOST http://localhost:8080/job/Job_DSL_seed/build
