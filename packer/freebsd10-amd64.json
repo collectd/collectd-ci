@@ -5,7 +5,7 @@
       "image": "freebsd-10-1-x64",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-freebsd-10",
+      "snapshot_name": "buildenv-freebsd10-amd64",
       "ssh_username": "freebsd"
     }
   ],
