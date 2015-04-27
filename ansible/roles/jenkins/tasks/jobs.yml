@@ -12,5 +12,7 @@
   copy: src={{item}} dest=/var/lib/jenkins/jobs/Job_DSL_seed/workspace/ owner=jenkins group=jenkins mode=0644
   with_items:
     - packages.groovy
+    - build-environments.groovy
+    - pull-requests.groovy
   notify:
     - run Job_DSL_seed
