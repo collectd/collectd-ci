@@ -1,0 +1,18 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "debian-8-x64",
+      "region": "fra1",
+      "size": "512mb",
+      "snapshot_name": "buildenv-jessie-amd64"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -xe {{ .Path }}",
+      "script": "scripts/jessie.sh"
+    }
+  ]
+}
