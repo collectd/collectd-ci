@@ -79,7 +79,7 @@ buildEnvironments = [
         buildName: 'scan-build',
         buildDescription: 'clang\'s scan-build static analyzer',
         buildCommand: 'scan-build -o ./scan-build ./configure && scan-build -o ./scan-build make V=1',
-        artifacts: '${WORKSPACE}/collectd-${COLLECTD_BUILD}/scan-build/*',
+        artifacts: 'collectd-${COLLECTD_BUILD}/scan-build/**',
       ],
     ],
   ],
