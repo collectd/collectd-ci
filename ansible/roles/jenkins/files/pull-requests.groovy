@@ -1,6 +1,13 @@
 job('make-pr-tarball') {
   displayName('prepare tarball for pull-request testing')
-  description('Configuration automatically generated, do not edit !')
+  description("""
+This job:
+ * merges the pull-request with the master branch
+ * generates a release tarball and archives it
+ * exports a couple of environment variables to allow downstream tasks to refer to the release tarball
+
+Configuration generated automatically, do not edit!
+""")
   label('master')
 
   scm {
@@ -44,7 +51,15 @@ EOF
 
 multiJob('test-pull-requests') {
   displayName('test github pull-requests on various environements')
-  description('Configuration automatically generated, do not edit !')
+  description("""
+This multi-step job aggregates various independent tasks, allowing to compute a global build status from them and report this back to github.
+
+This job takes one parameter: a pull-request number from https://github.com/collectd/collectd/pulls
+
+A couple of non-critical jobs are also defined as 'downstream jobs'. They are triggered only if all the others are successful and their exit status won't influence the global status.
+
+Configuration generated automatically, do not edit!
+""")
   label('master')
 
  concurrentBuild(false)
@@ -68,14 +83,16 @@ multiJob('test-pull-requests') {
       propertiesFile('/var/lib/jenkins/jobs/make-pr-tarball/workspace/env-${PR}.sh')
     }
 
-    phase('touchstone platforms', 'SUCCESSFUL') {
+    // NB: unforunately "phase" blocks don't support groovy iterators, so this
+    // forces us to file all the jobs manually here.
+    phase('touchstone (won\'t continue further down if this step fails)', 'SUCCESSFUL') {
       job('build-on-jessie-with-default-toolchain') {
         currentJobParameters(true)
         props(downstreamProperties)
       }
     }
 
-    phase('supported platforms', 'SUCCESSFUL') {
+    phase('mandatory (platforms for which packages are built for)', 'SUCCESSFUL') {
       job('build-on-trusty-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
@@ -111,6 +128,9 @@ multiJob('test-pull-requests') {
         currentJobParameters(true)
         props(downstreamProperties)
       }
+    }
+
+    phase('supported (platforms known to work that new patches shouldn\'t break)', 'SUCCESSFUL') {
       job('build-on-freebsd10-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)

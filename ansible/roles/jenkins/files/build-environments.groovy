@@ -63,7 +63,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "${defaultTeardownTask}",
@@ -89,7 +89,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "${defaultTeardownTask}",
@@ -102,7 +102,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "${defaultTeardownTask}",
@@ -115,7 +115,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "${defaultTeardownTask}",
@@ -128,7 +128,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "${defaultTeardownTask}",
@@ -141,7 +141,7 @@ buildEnvironments = [
       [
         archs: ['x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and rpm build options',
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make V=1",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "${defaultTeardownTask}",
@@ -154,7 +154,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and rpm build options',
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make V=1",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "${defaultTeardownTask}",
@@ -167,7 +167,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: 'distro\'s default toolchain and rpm build options',
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make V=1",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "${defaultTeardownTask}",
@@ -209,7 +209,11 @@ buildEnvironments.each { distro, options ->
     // jobs: PR, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
     matrixJob(jobName) {
       displayName("build on ${distro} (${buildDescription})")
-      description('Configuration automatically generated, do not edit !')
+      description("""
+This job builds the tarball passed down from the 'make-pr-tarball' job on the '${distro}' platform, with various build parameters and optional setup/teardown tasks.
+
+Configuration generated automatically, do not edit!
+""")
 
       axes {
         label ('buildenv', archList)

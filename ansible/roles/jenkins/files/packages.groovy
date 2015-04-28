@@ -4,7 +4,11 @@ branches.each {
 
   job("make-dist-tarball-${branchName}") {
     displayName("prepare tarball for deb/rpm packages (${branchName} branch)")
-    description('Configuration automatically generated, do not edit !')
+    description("""
+This job generates a release tarball out of the '${branchName}' branch and archives it for downstream consumption.
+
+Configuration generated automatically, do not edit!
+""")
     blockOnDownstreamProjects()
 
     scm {
@@ -38,7 +42,14 @@ branches.each {
 
   matrixJob("make-deb-pkgs-${branchName}") {
     displayName("build deb packages for Debian/Ubuntu LTS (${branchName} branch)")
-    description('Configuration automatically generated, do not edit !')
+    description("""
+This job:
+ * extracts the tarball passed down from the 'make-dist-tarball-${branchName}' job
+ * builds .deb packages for various distros
+ * pushes the result to the repository hosted at http://ci.collectd.org/
+
+Configuration generated automatically, do not edit!
+""")
     runSequentially(true)
 
     axes {
@@ -58,7 +69,14 @@ branches.each {
 
   matrixJob("make-rpm-pkgs-${branchName}") {
     displayName("build rpm packages for CentOS/EPEL (${branchName} branch)")
-    description('Configuration automatically generated, do not edit !')
+    description("""
+This job:
+ * extracts the tarball passed down from the 'make-dist-tarball-${branchName}' job
+ * builds .rpm packages for various distros
+ * pushes the result to the repository hosted at http://ci.collectd.org/
+
+Configuration generated automatically, do not edit!
+""")
     runSequentially(true)
 
     axes {
