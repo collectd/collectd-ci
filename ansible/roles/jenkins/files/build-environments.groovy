@@ -198,56 +198,55 @@ buildEnvironments.each { distro, options ->
     def setupTask = it?.setupTask
     def teardownTask = it?.teardownTask
     def artifacts = it?.artifacts
-    def jobName = "build-on-${distro}-with-${buildName}"
 
-    def archList = []
     it.archs.each {
-      archList << "${distro}-${it}"
-    }
+      def arch = "${it}"
+      def jobName = "build-on-${distro}-${arch}-with-${buildName}"
 
-    // The following parameters are passed down from upstream to each of the
-    // jobs: PR, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
-    matrixJob(jobName) {
-      displayName("build on ${distro} (${buildDescription})")
-      description("""
-This job builds the tarball passed down from the 'make-pr-tarball' job on the '${distro}' platform, with various build parameters and optional setup/teardown tasks.
+      // The following parameters are passed down from upstream to each of the
+      // jobs: PR, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
+      job(jobName) {
+        displayName("build on ${distro}-${arch} (${buildDescription})")
+        description("""
+This job builds the tarball passed down from the 'make-pr-tarball' job on the '${distro}-${arch}' platform, with various build parameters and optional setup/teardown tasks.
 
 Configuration generated automatically, do not edit!
 """)
+        label("${distro}-${arch}")
 
-      axes {
-        label ('buildenv', archList)
-      }
+        steps {
+          if (setupTask != null) {
+            shell(setupTask)
+          }
 
-      steps {
-        if (setupTask != null) {
-          shell(setupTask)
-        }
+          copyArtifacts('make-pr-tarball', '$TARBALL') {
+            buildNumber('$TARBALL_BUILD_NUMBER')
+          }
 
-        copyArtifacts('make-pr-tarball', '$TARBALL') {
-          buildNumber('$TARBALL_BUILD_NUMBER')
-        }
-
-        shell('''\
+          shell('''\
 test -f "$TARBALL"
 test -n "$COLLECTD_BUILD"
 test -n "$PR"
 
-echo "### About to build ${COLLECTD_BUILD} from https://github.com/collectd/collectd/pull/${PR} on ${buildenv} ###"
+echo "### About to build ${COLLECTD_BUILD} from https://github.com/collectd/collectd/pull/${PR} ###"
+
+test -f /usr/bin/apt-get && apt-get -y update && apt-get -y install libcap-dev
+test -f /usr/bin/yum && yum -y install libcap-devel
 
 tar -xzvf $TARBALL
 cd collectd-${COLLECTD_BUILD}
 ''' + "${buildCommand}")
 
-        if (teardownTask != null) {
-          shell(teardownTask)
+          if (teardownTask != null) {
+            shell(teardownTask)
+          }
         }
-      }
 
-      publishers {
-        if (artifacts != null) {
-          archiveArtifacts {
-            pattern(artifacts)
+        publishers {
+          if (artifacts != null) {
+            archiveArtifacts {
+              pattern(artifacts)
+            }
           }
         }
       }

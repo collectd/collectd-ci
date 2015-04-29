@@ -86,44 +86,78 @@ Configuration generated automatically, do not edit!
     // NB: unforunately "phase" blocks don't support groovy iterators, so this
     // forces us to file all the jobs manually here.
     phase('touchstone (won\'t continue further down if this step fails)', 'SUCCESSFUL') {
-      job('build-on-jessie-with-default-toolchain') {
+      job('build-on-jessie-amd64-with-default-toolchain') {
         currentJobParameters(true)
         props(downstreamProperties)
       }
     }
 
-    phase('mandatory (platforms for which packages are built for)', 'SUCCESSFUL') {
-      job('build-on-trusty-with-default-toolchain') {
+    phase('mandatory (platforms for which packages are built)', 'SUCCESSFUL') {
+      job('build-on-jessie-i386-with-default-toolchain') {
+        currentJobParameters(true)
+        props(downstreamProperties)
+      }
+      job('build-on-trusty-amd64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
       }
-      job('build-on-precise-with-default-toolchain') {
+      job('build-on-trusty-i386-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
       }
-      job('build-on-wheezy-with-default-toolchain') {
+      job('build-on-precise-amd64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
       }
-      job('build-on-squeeze-with-default-toolchain') {
+      job('build-on-precise-i386-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
       }
-      job('build-on-epel7-with-default-toolchain') {
+      job('build-on-wheezy-amd64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
       }
-      job('build-on-epel6-with-default-toolchain') {
+      job('build-on-wheezy-i386-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
       }
-      job('build-on-epel5-with-default-toolchain') {
+      job('build-on-squeeze-amd64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        currentJobParameters(true)
+        props(downstreamProperties)
+      }
+      job('build-on-squeeze-i386-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        currentJobParameters(true)
+        props(downstreamProperties)
+      }
+      job('build-on-epel7-x86_64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        currentJobParameters(true)
+        props(downstreamProperties)
+      }
+      job('build-on-epel6-x86_64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        currentJobParameters(true)
+        props(downstreamProperties)
+      }
+      job('build-on-epel6-i386-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        currentJobParameters(true)
+        props(downstreamProperties)
+      }
+      job('build-on-epel5-x86_64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        currentJobParameters(true)
+        props(downstreamProperties)
+      }
+      job('build-on-epel5-i386-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
@@ -131,7 +165,7 @@ Configuration generated automatically, do not edit!
     }
 
     phase('supported (platforms known to work that new patches shouldn\'t break)', 'SUCCESSFUL') {
-      job('build-on-freebsd10-with-default-toolchain') {
+      job('build-on-freebsd10-amd64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         currentJobParameters(true)
         props(downstreamProperties)
@@ -141,11 +175,15 @@ Configuration generated automatically, do not edit!
 
   publishers {
     downstreamParameterized {
-      trigger('build-on-jessie-with-clang') {
+      trigger('build-on-jessie-amd64-with-clang') {
         currentBuild()
         predefinedProps(downstreamProperties)
       }
-      trigger('build-on-jessie-with-scan-build') {
+      trigger('build-on-jessie-i386-with-clang') {
+        currentBuild()
+        predefinedProps(downstreamProperties)
+      }
+      trigger('build-on-jessie-amd64-with-scan-build') {
         currentBuild()
         predefinedProps(downstreamProperties)
       }
