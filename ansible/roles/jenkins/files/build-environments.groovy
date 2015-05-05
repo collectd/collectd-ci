@@ -113,8 +113,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'clang',
-        buildDescription: 'CC=clang',
-        buildCommand: "./configure CC=clang && make V=1",
+        buildDescription: 'CC="clang -Wall -Werror"',
+        buildCommand: './configure CC="clang -Wall -Werror" && make V=1 && make check',
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
       ],
       [
