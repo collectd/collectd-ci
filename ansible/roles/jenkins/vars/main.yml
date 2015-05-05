@@ -1,0 +1,11 @@
+jenkins_plugins: # version: 0 means latest version available
+  - { plugin: job-dsl, version: 0 }
+  - { plugin: git, version: 0 }
+  - { plugin: copyartifact, version: 0 }
+  - { plugin: jenkins-multijob-plugin, version: 0 }
+  - { plugin: envinject, version: 0 }
+  - { plugin: parameterized-trigger, version: 0 }
+  - { plugin: libvirt-slave, version: 0 }
+  - { plugin: digitalocean-plugin, version: 0 }
+  - { plugin: console-tail, version: 0 }
+  - { plugin: greenballs, version: 0 }
