@@ -24,6 +24,11 @@
 - name: delegate some privileges to jenkins user
   copy: src=jenkins_sudo dest=/etc/sudoers.d/ mode=0440 owner=root group=root
 
+- name: set fixed SSH port
+  copy: src=org.jenkinsci.main.modules.sshd.SSHD.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  notify:
+    - restart jenkins
+
 - name: run jenkins service
   service: name=jenkins state=started enabled=yes
 
