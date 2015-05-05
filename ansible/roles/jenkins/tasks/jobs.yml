@@ -8,6 +8,9 @@
   notify:
     - run Job_DSL_seed
 
+- name: waiting for Job_DSL_seed job to set up
+  wait_for: path=/var/lib/jenkins/jobs/Job_DSL_seed/
+
 - name: install jenkins job descriptions
   copy: src={{item}} dest=/var/lib/jenkins/jobs/Job_DSL_seed/workspace/ owner=jenkins group=jenkins mode=0644
   with_items:
