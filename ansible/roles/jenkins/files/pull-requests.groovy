@@ -183,6 +183,10 @@ Configuration generated automatically, do not edit!
         currentBuild()
         predefinedProps(downstreamProperties)
       }
+      trigger('build-on-jessie-amd64-with-clang-strict') {
+        currentBuild()
+        predefinedProps(downstreamProperties)
+      }
       trigger('build-on-jessie-amd64-with-scan-build') {
         currentBuild()
         predefinedProps(downstreamProperties)

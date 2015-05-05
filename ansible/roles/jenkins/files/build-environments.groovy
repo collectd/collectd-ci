@@ -119,6 +119,13 @@ buildEnvironments = [
       ],
       [
         archs: ['amd64'],
+        buildName: 'clang-strict',
+        buildDescription: 'CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code"',
+        buildCommand: './configure && make CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code" V=1 && make check',
+        teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
+      ],
+      [
+        archs: ['amd64'],
         buildName: 'scan-build',
         buildDescription: 'clang\'s scan-build static analyzer',
         buildCommand: 'scan-build -o ./scan-build ./configure && scan-build -o ./scan-build make V=1',
