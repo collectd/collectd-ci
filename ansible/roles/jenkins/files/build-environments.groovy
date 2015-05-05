@@ -39,15 +39,15 @@ def defaultConfigureOpts = [
 
 def defaultSetupTask = [
   debian: '''
-echo "installed packages:"
+echo "### Installed packages: ###"
 dpkg -l
 ''',
   redhat: '''
-echo "installed packages:"
+echo "### Installed packages: ###"
 rpm -qa | sort
 ''',
   freebsd: '''
-echo "installed packages:"
+echo "### Installed packages: ###"
 pkg query %n-%v
 ''',
 ]
