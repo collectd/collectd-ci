@@ -53,9 +53,51 @@ pkg query %n-%v
 ]
 
 def defaultTeardownTask = '''
-cat collectd-${COLLECTD_BUILD}/src/config.h || exit 0
-ldd collectd-${COLLECTD_BUILD}/src/.libs/*.so || exit 0
+set +x
+
+SRCDIR="collectd-${COLLECTD_BUILD}/src"
+
+echo "### Generated src/config.h: ###"
+cat ${SRCDIR}/config.h
+
+echo "### Checking whether all known working plugins on this platform have been built ###"
+STATUS=0
+for i in ${PLUGIN_LIST}; do
+  echo "$i plugin:"
+  if test -f ${SRCDIR}/$i.c; then
+    ldd "${SRCDIR}/.libs/${i}.so" || STATUS=1
+  else
+    echo "... doesn't exist in this version"
+  fi
+done
+
+echo "### Checking for new/unknown plugins on this platform ###"
+for i in ${SRCDIR}/.libs/*.so; do
+  plugin="$(basename $i)"
+  FOUND=0
+  for j in ${PLUGIN_LIST}; do
+    [ "x${plugin}" = "x${j}.so" ] && FOUND=1
+  done
+  if [ $FOUND -eq 0 ]; then
+    echo "found unknown plugin: ${plugin}"
+    ldd "${SRCDIR}/.libs/${plugin}"
+  fi
+done
+
+exit $STATUS
 '''
+
+def pluginList = [ // list of plugins known to build on each platform
+  jessie: 'aggregation amqp apache apcups ascent barometer battery bind ceph cgroups conntrack contextswitch cpu cpufreq csv curl curl_json curl_xml dbi df disk dns drbd email entropy ethstat exec filecount fscache gmond hddtemp interface ipc ipmi iptables ipvs irq java load logfile log_logstash lvm madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcachec memcached memory modbus multimeter mysql netlink network nfs nginx notify_desktop notify_email ntpd numa nut olsrd onewire openldap openvpn perl perl pinba ping postgresql powerdns processes protocols python redis rrdcached rrdtool sensors serial sigrok smart snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold tokyotyrant unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_kafka write_log write_redis write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  wheezy: 'aggregation amqp apache apcups ascent barometer battery bind ceph cgroups conntrack contextswitch cpu cpufreq csv curl curl_json curl_xml dbi df disk dns drbd email entropy ethstat exec filecount fscache gmond hddtemp interface ipc ipmi iptables ipvs irq java load logfile log_logstash lvm madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcachec memcached memory modbus multimeter mysql netlink network nfs nginx notify_desktop notify_email ntpd numa nut olsrd onewire openldap openvpn perl perl pinba ping postgresql powerdns processes protocols python redis rrdcached rrdtool sensors serial smart snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold tokyotyrant unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_log write_redis write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  squeeze: 'aggregation apache apcups ascent barometer battery bind ceph cgroups conntrack contextswitch cpu cpufreq csv curl curl_json curl_xml dbi df disk dns drbd email entropy ethstat exec filecount fscache gmond hddtemp interface ipc ipmi iptables ipvs irq java load logfile log_logstash madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcachec memcached memory multimeter mysql network nfs nginx notify_desktop notify_email ntpd numa nut olsrd openldap openvpn perl perl pinba ping postgresql powerdns processes protocols python rrdcached rrdtool sensors serial smart snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold tokyotyrant unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_log write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  trusty: 'aggregation amqp apache apcups ascent barometer battery bind ceph cgroups conntrack contextswitch cpu cpufreq csv curl curl_json curl_xml dbi df disk dns drbd email entropy ethstat exec filecount fscache gmond hddtemp interface ipc iptables ipvs irq java load logfile log_logstash lvm madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcachec memcached memory modbus multimeter mysql netlink network nfs nginx notify_desktop notify_email ntpd numa nut olsrd onewire openldap openvpn perl perl pinba ping postgresql powerdns processes protocols python redis rrdcached rrdtool sensors serial sigrok smart snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold tokyotyrant unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_kafka write_log write_redis write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  precise: 'aggregation amqp apache apcups ascent barometer battery bind ceph cgroups conntrack contextswitch cpu cpufreq csv curl curl_json curl_xml dbi df disk dns drbd email entropy ethstat exec filecount fscache gmond hddtemp interface ipc iptables ipvs irq java load logfile log_logstash madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcachec memcached memory modbus multimeter mysql netlink network nfs nginx notify_desktop notify_email ntpd numa nut olsrd onewire openldap openvpn perl perl pinba ping postgresql powerdns processes protocols python redis rrdcached rrdtool sensors serial smart snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold tokyotyrant unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_log write_redis write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  epel7: 'aggregation amqp apache apcups ascent battery bind ceph cgroups conntrack contextswitch cpu cpufreq csv curl curl_json curl_xml dbi df disk dns drbd email entropy ethstat exec filecount fscache hddtemp interface ipc ipmi iptables ipvs irq java load logfile log_logstash lvm madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcached memory multimeter mysql netlink network nfs nginx notify_desktop notify_email ntpd numa nut olsrd openldap openvpn perl perl pinba ping postgresql powerdns processes protocols python redis rrdcached rrdtool sensors serial smart snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_log write_redis write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  epel6: 'aggregation amqp apache apcups ascent battery bind ceph cgroups conntrack contextswitch cpu cpufreq csv curl curl_json curl_xml dbi df disk dns drbd email entropy ethstat exec filecount fscache gmond hddtemp interface ipc ipmi iptables ipvs irq java load logfile log_logstash lvm madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcachec memcached memory modbus multimeter mysql netlink network nfs nginx notify_desktop notify_email ntpd numa nut olsrd openldap openvpn perl perl pinba ping postgresql powerdns processes protocols python redis rrdtool sensors serial smart snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_log write_redis write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  epel5: 'aggregation amqp apache apcups ascent battery bind cgroups conntrack contextswitch cpu cpufreq csv curl curl_xml dbi df disk drbd email entropy exec filecount fscache hddtemp interface ipc ipmi irq java load logfile madwifi match_empty_counter match_hashed match_regex match_timediff match_value mbmon md memcachec memcached memory multimeter mysql netlink network nfs nginx notify_desktop notify_email ntpd numa nut olsrd openldap openvpn perl perl pinba ping postgresql powerdns processes protocols rrdtool sensors serial snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted thermal threshold unixsock uptime users uuid varnish virt vmem vserver wireless write_graphite write_http write_log write_riemann write_sensu write_tsdb zfs_arc zookeeper',
+  freebsd10: 'aggregation amqp apache apcups ascent bind ceph contextswitch cpu csv curl curl_json curl_xml dbi df disk dns email exec filecount hddtemp interface ipmi load logfile log_logstash match_empty_counter match_hashed match_regex match_timediff match_value mbmon memcachec memcached memory multimeter mysql network nginx notify_desktop notify_email ntpd nut olsrd openldap openvpn perl perl pf ping postgresql powerdns processes python redis rrdcached rrdtool sigrok snmp statsd swap syslog table tail tail_csv target_notification target_replace target_scale target_set target_v5upgrade tcpconns teamspeak2 ted threshold tokyotyrant unixsock uptime users uuid varnish virt write_graphite write_http write_log write_mongodb write_redis write_sensu write_tsdb zfs_arc zookeeper',
+]
 
 buildEnvironments = [
   jessie: [
@@ -66,13 +108,14 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1 && make check",
         setupTask: "${defaultSetupTask.debian}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
       ],
       [
         archs: ['i386', 'amd64'],
         buildName: 'clang',
         buildDescription: 'CC=clang',
         buildCommand: "./configure CC=clang && make V=1",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
       ],
       [
         archs: ['amd64'],
@@ -92,7 +135,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1 && make check",
         setupTask: "${defaultSetupTask.debian}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.wheezy}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
@@ -105,7 +148,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1 && make check",
         setupTask: "${defaultSetupTask.debian}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.squeeze}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
@@ -118,7 +161,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1 && make check",
         setupTask: "${defaultSetupTask.debian}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.trusty}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
@@ -131,7 +174,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and dpkg build options',
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make V=1 && make check",
         setupTask: "${defaultSetupTask.debian}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.precise}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
@@ -144,7 +187,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and rpm build options',
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make V=1 && make check",
         setupTask: "${defaultSetupTask.redhat}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.epel7}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
@@ -157,7 +200,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and rpm build options',
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make V=1 && make check",
         setupTask: "${defaultSetupTask.redhat}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.epel6}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
@@ -170,7 +213,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain and rpm build options',
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make V=1 && make check",
         setupTask: "${defaultSetupTask.redhat}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.epel5}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
@@ -183,7 +226,7 @@ buildEnvironments = [
         buildDescription: 'distro\'s default toolchain',
         buildCommand: "./configure ${defaultConfigureOpts.freebsd} && make V=1 && make check",
         setupTask: "${defaultSetupTask.freebsd}",
-        teardownTask: "${defaultTeardownTask}",
+        teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
       ],
     ],
   ],
