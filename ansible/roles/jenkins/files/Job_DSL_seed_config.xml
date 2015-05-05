@@ -4,9 +4,6 @@
   <description></description>
   <displayName>(run this job to reconfigure all the automatically-generated jobs)</displayName>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <hudson.plugins.libvirt.BeforeJobSnapshotJobProperty plugin="libvirt-slave@1.8.5"/>
-  </properties>
   <scm class="hudson.scm.NullSCM"/>
   <assignedNode>master</assignedNode>
   <canRoam>false</canRoam>
