@@ -114,14 +114,14 @@ buildEnvironments = [
         archs: ['i386', 'amd64'],
         buildName: 'clang',
         buildDescription: 'CC="clang -Wall -Werror"',
-        buildCommand: './configure --enable-debug CC="clang -Wall -Werror" && make --keep-going V=1; make --keep-going check',
+        buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror" V=1; make --keep-going check',
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
       ],
       [
         archs: ['amd64'],
         buildName: 'clang-strict',
         buildDescription: 'CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code"',
-        buildCommand: './configure --enable-debug && make --keep-going CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code" V=1; make --keep-going check',
+        buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code" V=1; make --keep-going check',
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
       ],
       [
