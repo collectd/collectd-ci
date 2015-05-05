@@ -3,3 +3,6 @@
 
 - name: run Job_DSL_seed
   shell: curl -v -XPOST http://localhost:8080/job/Job_DSL_seed/build
+
+- name: waiting for jenkins to reboot
+  wait_for: port=2222 delay=10
