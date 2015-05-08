@@ -2,7 +2,7 @@
   wait_for: path=/var/lib/jenkins/updates/default.json
 
 - name: install required jenkins plugins
-  command: curl -v -XPOST -d '<dummy plugin="{{item.plugin}}@{{item.version}}"/>' http://localhost:8080/pluginManager/installNecessaryPlugins
+  command: curl -vn -XPOST -d '<dummy plugin="{{item.plugin}}@{{item.version}}"/>' http://localhost:8080/pluginManager/installNecessaryPlugins
   args:
     creates: /var/lib/jenkins/plugins/{{item.plugin}}
   notify:

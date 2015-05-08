@@ -31,6 +31,10 @@
     - restart jenkins
     - waiting for jenkins to reboot
 
+- name: store jenkins API credentials
+  template: src=netrc.j2 dest=/root/.netrc owner=root group=root mode=0600
+  when: jenkins_user is defined
+
 - name: run jenkins service
   service: name=jenkins state=started enabled=yes
 
