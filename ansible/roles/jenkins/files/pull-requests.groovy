@@ -26,6 +26,9 @@ Configuration generated automatically, do not edit!
 
   steps {
     shell('''\
+checkbashisms -n clean.sh
+checkbashisms -n build.sh
+checkbashisms -n version-gen.sh
 ./clean.sh
 ./build.sh
 ./configure
