@@ -3,19 +3,12 @@ def defaultConfigureOpts = [
     'CFLAGS="$(dpkg-buildflags --get CFLAGS) -Wall -Wno-error=deprecated-declarations"',
     'CPPLAGS="$(dpkg-buildflags --get CPPFLAGS) -DLT_LAZY_OR_NOW=\'RTLD_LAZY|RTLD_GLOBAL\'"',
     'LDFLAGS="$(dpkg-buildflags --get LDFLAGS)"',
-    'JAVAC="/usr/lib/jvm/default-java/bin/javac"',
-    'JAR="/usr/lib/jvm/default-java/bin/jar"',
-    'JAVA_CPPFLAGS="/usr/lib/jvm/default-java/include"',
-    'JAVA_LDFLAGS="-L/usr/lib/jvm/default-java/jre/lib/$(/usr/share/javahelper/java-arch.sh)/server -Wl,-rpath -Wl,/usr/lib/jvm/default-java/jre/lib/$(/usr/share/javahelper/java-arch.sh)/server"',
     '--enable-debug',
   ].join(' '),
 
   redhat: [ // default build flags & options use when building .rpm packages
     'CFLAGS="$(rpm --eval \'%optflags\')"',
     'CPPFLAGS="-DLT_LAZY_OR_NOW=\'RTLD_LAZY|RTLD_GLOBAL\'"',
-    'JAVAC="$(rpm --eval \'%java_home\')/bin/javac"',
-    'JAR="$(rpm --eval \'%java_home\')/bin/jar"',
-    '--with-java="$(rpm --eval \'%java_home\')"',
     '--enable-debug',
   ].join(' '),
 
