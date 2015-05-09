@@ -254,7 +254,7 @@ buildEnvironments.each { distro, options ->
       def jobName = "build-on-${distro}-${arch}-with-${buildName}"
 
       // The following parameters are passed down from upstream to each of the
-      // jobs: PR, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
+      // jobs: PULL_REQUEST, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
       job(jobName) {
         displayName("build on ${distro}-${arch} (${buildDescription})")
         description("""
@@ -276,12 +276,9 @@ Configuration generated automatically, do not edit!
           shell('''\
 test -f "$TARBALL"
 test -n "$COLLECTD_BUILD"
-test -n "$PR"
+test -n "$PULL_REQUEST"
 
-echo "### About to build ${COLLECTD_BUILD} from https://github.com/collectd/collectd/pull/${PR} ###"
-
-test -f /usr/bin/apt-get && apt-get -y update && apt-get -y install libcap-dev
-test -f /usr/bin/yum && yum -y install libcap-devel
+echo "### About to build ${COLLECTD_BUILD} from https://github.com/collectd/collectd/pull/${PULL_REQUEST} ###"
 
 tar -xzvf $TARBALL
 cd collectd-${COLLECTD_BUILD}

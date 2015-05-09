@@ -1,6 +1,7 @@
 jenkins_plugins: # version: 0 means latest version available
   - { plugin: job-dsl, version: 0 }
   - { plugin: git, version: 0 }
+  - { plugin: github, version: 0 }
   - { plugin: github-oauth, version: 0 }
   - { plugin: copyartifact, version: 0 }
   - { plugin: jenkins-multijob-plugin, version: 0 }
