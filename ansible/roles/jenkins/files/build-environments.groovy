@@ -224,7 +224,7 @@ buildEnvironments = [
         archs: ['amd64'],
         buildName: 'default-toolchain',
         buildDescription: 'distro\'s default toolchain',
-        buildCommand: "./configure ${defaultConfigureOpts.freebsd} && make --keep-going V=1; make --keep-going check",
+        buildCommand: "./configure ${defaultConfigureOpts.freebsd} && make -k V=1; make -k check",
         setupTask: "${defaultSetupTask.freebsd}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
       ],
