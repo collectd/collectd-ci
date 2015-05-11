@@ -7,7 +7,7 @@
     creates: /var/lib/jenkins/plugins/{{item.plugin}}
   notify:
     - restart jenkins
-    - wait for jenkins to reboot
+    - waiting for jenkins to reboot
   with_items:
     jenkins_plugins
 
