@@ -11,6 +11,8 @@ Configuration generated automatically, do not edit!
 """)
     blockOnDownstreamProjects()
 
+    label('master')
+
     scm {
       git {
         remote {
@@ -52,9 +54,12 @@ Configuration generated automatically, do not edit!
 """)
     runSequentially(true)
 
+    label('master')
+
     axes {
       text('distro', 'precise', 'trusty', 'squeeze', 'wheezy', 'jessie')
       text('arch', 'i386', 'amd64')
+      label('buildhost', 'master')
     }
 
     steps {
@@ -79,8 +84,11 @@ Configuration generated automatically, do not edit!
 """)
     runSequentially(true)
 
+    label('master')
+
     axes {
       text('distro', 'epel-5-i386', 'epel-5-x86_64', 'epel-6-i386', 'epel-6-x86_64', 'epel-7-x86_64')
+      label('buildhost', 'master')
     }
 
     steps {
