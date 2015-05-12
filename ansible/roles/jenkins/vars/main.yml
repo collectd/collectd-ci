@@ -7,6 +7,7 @@ jenkins_plugins: # version: 0 means latest version available
   - { plugin: jenkins-multijob-plugin, version: 0 }
   - { plugin: envinject, version: 0 }
   - { plugin: parameterized-trigger, version: 0 }
+  - { plugin: throttle-concurrents, version: 0 }
   - { plugin: libvirt-slave, version: 0 }
   - { plugin: digitalocean-plugin, version: 0 }
   - { plugin: console-tail, version: 0 }

@@ -31,6 +31,12 @@
     - restart jenkins
     - waiting for jenkins to reboot
 
+- name: configure concurrent jobs policy
+  copy: src=hudson.plugins.throttleconcurrents.ThrottleJobProperty.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  notify:
+    - restart jenkins
+    - waiting for jenkins to reboot
+
 - name: store jenkins API credentials
   template: src=netrc.j2 dest=/root/.netrc owner=root group=root mode=0600
   when: jenkins_user is defined

@@ -56,6 +56,22 @@ Configuration generated automatically, do not edit!
 
     label('master')
 
+    configure { project ->
+      project / 'properties' << 'hudson.plugins.throttleconcurrents.ThrottleJobProperty' {
+        maxConcurrentPerNode 1
+        maxConcurrentTotal 1
+        throttleEnabled true
+        throttleOption 'category'
+      }
+      project / 'properties' / 'hudson.plugins.throttleconcurrents.ThrottleJobProperty' << 'categories' {
+        string 'pbuilder'
+      }
+      project / 'properties' / 'hudson.plugins.throttleconcurrents.ThrottleJobProperty' << 'matrixOptions' {
+        throttleMatrixBuilds true
+        throttleMatrixConfigurations false
+      }
+    }
+
     axes {
       text('distro', 'precise', 'trusty', 'squeeze', 'wheezy', 'jessie')
       text('arch', 'i386', 'amd64')
@@ -85,6 +101,22 @@ Configuration generated automatically, do not edit!
     runSequentially(true)
 
     label('master')
+
+    configure { project ->
+      project / 'properties' << 'hudson.plugins.throttleconcurrents.ThrottleJobProperty' {
+        maxConcurrentPerNode 1
+        maxConcurrentTotal 1
+        throttleEnabled true
+        throttleOption 'category'
+      }
+      project / 'properties' / 'hudson.plugins.throttleconcurrents.ThrottleJobProperty' << 'categories' {
+        string 'mock'
+      }
+      project / 'properties' / 'hudson.plugins.throttleconcurrents.ThrottleJobProperty' << 'matrixOptions' {
+        throttleMatrixBuilds true
+        throttleMatrixConfigurations false
+      }
+    }
 
     axes {
       text('distro', 'epel-5-i386', 'epel-5-x86_64', 'epel-6-i386', 'epel-6-x86_64', 'epel-7-x86_64')
