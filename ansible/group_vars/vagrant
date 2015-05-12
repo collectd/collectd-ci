@@ -1,4 +1,6 @@
 {
   "exoscale_key": "xxx",
-  "exoscale_secret": "xxx"
+  "exoscale_secret": "xxx",
+  "skip_pbuilder_cache": true,
+  "skip_mock_cache": true
 }

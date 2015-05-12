@@ -32,6 +32,7 @@
   shell: DIST={{item.dist}} ARCH={{item.arch}} cowbuilder --create --distribution {{item.dist}} --architecture {{item.arch}} --basepath /var/cache/pbuilder/base-{{item.dist}}-{{item.arch}}.cow
   args:
     creates: /var/cache/pbuilder/base-{{item.dist}}-{{item.arch}}.cow
+  when: skip_pbuilder_cache is not defined
   with_items:
     - { dist: precise, arch: i386 }
     - { dist: precise, arch: amd64 }

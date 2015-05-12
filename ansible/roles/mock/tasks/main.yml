@@ -20,6 +20,7 @@
   command: sudo -u mock /usr/bin/mock -r {{item}} --init
   args:
     creates: /var/cache/mock/{{item}}
+  when: skip_mock_cache is not defined
   with_items:
     - epel-5-i386
     - epel-5-x86_64
