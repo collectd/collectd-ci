@@ -45,8 +45,13 @@ Configuration generated automatically, do not edit!
           refspec('+refs/pull/*/head:refs/remotes/origin/pr/*')
           github("${githubOrg}/collectd")
         }
+        remote {
+          name('target')
+          url("https://github.com/${githubOrg}/collectd.git")
+          refspec('+refs/heads/*:refs/remotes/target/*')
+        }
         branch("${params.branchRef}")
-        mergeOptions('origin', 'master')
+        mergeOptions('target', 'master')
       }
     }
 
@@ -203,8 +208,13 @@ Configuration generated automatically, do not edit!
         url("https://github.com/${githubOrg}/collectd.git")
         refspec('+refs/pull/*/head:refs/remotes/origin/pr/*')
       }
-      branch('${BUILD_GIT_COMMIT}')
-      mergeOptions('origin', 'master')
+      remote {
+        name('target')
+        url("https://github.com/${githubOrg}/collectd.git")
+        refspec('+refs/heads/*:refs/remotes/target/*')
+      }
+      branch('${BUILD_GIT_BRANCH}')
+      mergeOptions('target', 'master')
     }
   }
 
