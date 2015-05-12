@@ -6,6 +6,7 @@
   with_items:
     - mock
     - pigz
+    - python-lzma
 
 - name: mock config files
   copy: src=mock/ dest=/etc/mock/
