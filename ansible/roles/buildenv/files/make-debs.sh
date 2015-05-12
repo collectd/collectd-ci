@@ -29,7 +29,7 @@ test -n "$GIT_BRANCH"
 test -n "$TARBALL"
 test -f "${WORKSPACE}/${TARBALL}"
 
-REPO="/usr/src/pkg-debian"
+REPO="$WORKSPACE/pkg-debian"
 BRANCH=$(basename $GIT_BRANCH)
 PKGDIR="/srv/build_artifacts/deb"
 

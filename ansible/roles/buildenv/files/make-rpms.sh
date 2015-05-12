@@ -10,7 +10,7 @@ test -n "$1"
 case "$1" in
   epel-5-i386|epel-5-x86_64|epel-6-i386|epel-6-x86_64|epel-7-x86_64)
     DIST="$1"
-    RPMBUILD="/var/lib/jenkins/rpmbuild"
+    RPMBUILD="${WORKSPACE}/rpmbuild"
   ;;
 
   *)
@@ -43,7 +43,8 @@ cp -f "${WORKSPACE}/collectd.spec" "$RPMBUILD/SPECS/"
 
 sed -ri "s/^(Version:\s+).+/\1$COLLECTD_BUILD/" "$RPMBUILD/SPECS/collectd.spec"
 
-rpmbuild -bs "$RPMBUILD/SPECS/collectd.spec"
+echo "%_topdir $RPMBUILD/" > "$WORKSPACE/.rpmmacros"
+HOME="$WORKSPACE" rpmbuild -bs "$RPMBUILD/SPECS/collectd.spec"
 
 RESULTDIR="$PKGDIR/$BRANCH/$DIST"
 
