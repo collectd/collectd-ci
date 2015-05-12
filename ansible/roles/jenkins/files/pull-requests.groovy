@@ -52,6 +52,12 @@ Configuration generated automatically, do not edit!
         }
         branch("${params.branchRef}")
         mergeOptions('target', 'master')
+
+        if (jobId == 'github_trigger') {
+          strategy {
+            ancestry(1, '')
+          }
+        }
       }
     }
 
