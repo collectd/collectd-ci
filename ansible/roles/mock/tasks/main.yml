@@ -1,6 +1,3 @@
-- name: apt prefs for mock
-  copy: src=apt_prefs dest=/etc/apt/preferences.d/mock
-
 - name: install mock package and dependencies
   apt: name={{ item }} state=present
   with_items:

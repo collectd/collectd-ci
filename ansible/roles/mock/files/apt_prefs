@@ -1,3 +1,0 @@
-Package: mock yum yum-utils createrepo
-Pin: release a=wheezy-backports
-Pin-Priority: 1010

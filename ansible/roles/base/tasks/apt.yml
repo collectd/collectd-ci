@@ -2,16 +2,16 @@
   file: path=/etc/apt/sources.list state=absent
 
 - name: apt main repo
-  apt_repository: repo='deb http://http.debian.net/debian wheezy main contrib non-free' state=present
+  apt_repository: repo='deb http://http.debian.net/debian jessie main contrib non-free' state=present
 
 - name: apt updates repo
-  apt_repository: repo='deb http://http.debian.net/debian wheezy-updates main contrib non-free' state=present
+  apt_repository: repo='deb http://http.debian.net/debian jessie-updates main contrib non-free' state=present
 
 - name: apt backports repo
-  apt_repository: repo='deb http://security.debian.org/ wheezy/updates main contrib non-free' state=present
+  apt_repository: repo='deb http://security.debian.org/ jessie/updates main contrib non-free' state=present
 
 - name: apt security repo
-  apt_repository: repo='deb http://http.debian.net/debian wheezy-backports main contrib non-free' state=present
+  apt_repository: repo='deb http://http.debian.net/debian jessie-backports main contrib non-free' state=present
 
 - name: backports prefs
   copy: src=backports.pref dest=/etc/apt/preferences.d/

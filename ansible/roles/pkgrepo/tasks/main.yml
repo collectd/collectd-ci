@@ -8,11 +8,3 @@
 
 - name: s3cmd configuration
   template: src=s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600
-
-- name: patch for broken createrepo
-  copy: src=createrepo.patch dest=/usr/src
-
-- name: apply fix for debbug#731147
-  shell: patch -p1 -d / -b < /usr/src/createrepo.patch
-  args:
-    creates: /usr/share/createrepo/worker.py.orig

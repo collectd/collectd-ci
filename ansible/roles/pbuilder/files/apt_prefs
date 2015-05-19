@@ -5,7 +5,3 @@ Pin-Priority: -1
 Package: ubuntu-keyring
 Pin: origin "archive.ubuntu.com"
 Pin-Priority: 1010
-
-Package: debootstrap pbuilder cowbuilder cowdancer git-buildpackage
-Pin: release a=wheezy-backports
-Pin-Priority: 1010
