@@ -6,21 +6,21 @@ if [ "x$PBCURRENTCOMMANDLINEOPERATION" != "xbuild" ]; then
       DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/ubuntu-archive-keyring.gpg' )
       ;;
     squeeze)
-      MIRRORSITE="http://http.debian.net/debian"
+      MIRRORSITE="http://httpredir.debian.org/debian"
       COMPONENTS="main contrib non-free"
-      OTHERMIRROR="deb http://http.debian.net/debian-backports squeeze-backports main contrib non-free"
+      OTHERMIRROR="deb http://httpredir.debian.org/debian-backports squeeze-backports main contrib non-free"
       DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/debian-archive-keyring.gpg' )
       ;;
     wheezy)
-      MIRRORSITE="http://http.debian.net/debian"
+      MIRRORSITE="http://httpredir.debian.org/debian"
       COMPONENTS="main contrib non-free"
-      OTHERMIRROR="deb http://http.debian.net/debian wheezy-backports main contrib non-free"
+      OTHERMIRROR="deb http://httpredir.debian.org/debian wheezy-backports main contrib non-free"
       DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/debian-archive-keyring.gpg' )
       ;;
     jessie)
-      MIRRORSITE="http://http.debian.net/debian"
+      MIRRORSITE="http://httpredir.debian.org/debian"
       COMPONENTS="main contrib non-free"
-      #OTHERMIRROR="deb http://http.debian.net/debian jessie-backports main contrib non-free" # no backports yet
+      #OTHERMIRROR="deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" # no backports yet
       DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/debian-archive-keyring.gpg' )
       ;;
     *)
