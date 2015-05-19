@@ -20,7 +20,7 @@ if [ "x$PBCURRENTCOMMANDLINEOPERATION" != "xbuild" ]; then
     jessie)
       MIRRORSITE="http://httpredir.debian.org/debian"
       COMPONENTS="main contrib non-free"
-      #OTHERMIRROR="deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" # no backports yet
+      OTHERMIRROR="deb http://httpredir.debian.org/debian jessie-backports main contrib non-free"
       DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/debian-archive-keyring.gpg' )
       ;;
     *)
