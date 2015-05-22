@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <numExecutors>4</numExecutors>
+  <label>master</label>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured" />
+  <securityRealm class="hudson.security.SecurityRealm$None" />
+  <clouds>
+    <com.dubture.jenkins.digitalocean.Cloud>
+      <name>digitalocean</name>
+      <instanceCap>30</instanceCap>
+      <apiKey>abc123</apiKey>
+      <clientId>def456</clientId>
+      <sshKeyId>789</sshKeyId>
+      <privateKey>-----BEGIN RSA PRIVATE KEY-----
+aGVsbG8K
+-----END RSA PRIVATE KEY-----</privateKey>
+      <templates />
+    </com.dubture.jenkins.digitalocean.Cloud>
+  </clouds>
+</hudson>
