@@ -45,13 +45,7 @@ Configuration generated automatically, do not edit!
           refspec('+refs/pull/*/head:refs/remotes/origin/pr/*')
           github("${githubOrg}/collectd")
         }
-        remote {
-          name('target')
-          url("https://github.com/${githubOrg}/collectd.git")
-          refspec('+refs/heads/*:refs/remotes/target/*')
-        }
         branch("${params.branchRef}")
-        mergeOptions('target', 'master')
 
         if (jobId == 'github_trigger') {
           strategy {
@@ -220,6 +214,7 @@ Configuration generated automatically, do not edit!
         refspec('+refs/heads/*:refs/remotes/target/*')
       }
       branch('${BUILD_GIT_BRANCH}')
+      wipeOutWorkspace(true)
       mergeOptions('target', 'master')
     }
   }
