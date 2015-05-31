@@ -1,9 +1,3 @@
-- name: install openjdk7
-  apt: name=openjdk-7-jre-headless state=present
-
-- name: correct java version selected
-  alternatives: name=java path=/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
-
 - name: jenkins apt key
   apt_key: id=9B7D32F2D50582E6 url=http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key state=present
 

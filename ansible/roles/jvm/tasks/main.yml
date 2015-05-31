@@ -1,0 +1,5 @@
+- name: install openjdk7
+  apt: name=openjdk-7-jre-headless state=present
+
+- name: correct java version selected
+  alternatives: name=java path=/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
