@@ -3,8 +3,7 @@
   with_items:
     - createrepo
     - dpkg-dev
-    - s3cmd
     - python-magic
 
-- name: s3cmd configuration
-  template: src=s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600
+- name: package upload s3cmd configuration
+  template: src=roles/s3/templates/s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600
