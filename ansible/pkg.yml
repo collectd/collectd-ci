@@ -1,12 +1,9 @@
 ---
-- hosts: jenkins
+- hosts: pkg
   gather_facts: no
   roles:
     - base
-    - buildenv
-    - mock
-    - pbuilder
     - s3
     - jvm
     - nginx
-    - jenkins
+    - pkgrepo
