@@ -1,0 +1,10 @@
+- name: install nginx
+  apt: name=nginx-light state=present
+
+- name: remove default nginx config
+  file: name=/etc/nginx/sites-enabled/default state=absent
+  notify:
+    - reload nginx
+
+- name: run nginx service
+  service: name=nginx state=started enabled=yes
