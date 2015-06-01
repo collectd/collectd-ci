@@ -11,7 +11,7 @@
   apt: name=jenkins state=present
 
 - name: add jenkins user to various groups
-  user: name=jenkins groups=mock,libvirt,src state=present
+  user: name=jenkins groups=mock,src state=present
   notify:
     - restart jenkins
     - waiting for jenkins to reboot
