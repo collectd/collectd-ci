@@ -86,6 +86,10 @@ Configuration generated automatically, do not edit!
       shell('/usr/local/bin/make-debs.sh $distro $arch')
       shell('/usr/local/bin/s3-apt-repo.sh')
     }
+
+    publishers {
+      downstream('sync-package-repos')
+    }
   }
 
   matrixJob("make-rpm-pkgs-${branchName}") {
@@ -131,5 +135,22 @@ Configuration generated automatically, do not edit!
       shell('/usr/local/bin/make-rpms.sh $distro')
       shell('/usr/local/bin/s3-yum-repo.sh')
     }
+
+    publishers {
+      downstream('sync-package-repos')
+    }
+  }
+}
+
+job('sync-package-repos') {
+  description("""
+This job pulls down packages archived on S3, triggered when some upstream package-building task finishes.
+
+Configuration generated automatically, do not edit!
+""")
+  concurrentBuild(false)
+  label('pkg')
+  steps {
+    shell('s3cmd --delete-removed sync s3://collectd/ /srv/repos/')
   }
 }
