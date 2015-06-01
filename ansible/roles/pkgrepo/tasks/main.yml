@@ -1,9 +1,0 @@
-- name: install misc repo utils
-  apt: name={{ item }} state=present
-  with_items:
-    - createrepo
-    - dpkg-dev
-    - python-magic
-
-- name: package upload s3cmd configuration
-  template: src=roles/s3/templates/s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600

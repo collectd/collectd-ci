@@ -1,3 +1,6 @@
+- name: package upload s3cmd configuration
+  template: src=roles/s3/templates/s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600
+
 - name: install jenkins Job_DSL_seed config
   copy: src=Job_DSL_seed_config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
 
