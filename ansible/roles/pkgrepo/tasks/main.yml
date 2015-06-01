@@ -1,0 +1,18 @@
+- name: nginx config
+  copy: src=pkg.ci.collectd.org.conf dest=/etc/nginx/sites-enabled/ owner=root group=root mode=0644
+  notify:
+    - reload nginx
+
+- name: create collectd-ci user
+  user: name=collectd-ci state=present
+
+- name: jenkins slave ssh pubkey
+  authorized_key: user=collectd-ci key="{{item}}"
+  with_file:
+    - roles/jenkins/files/slave_sshkey/id_rsa.pub
+
+- name: package download s3cmd configuration
+  template: src=roles/s3/templates/s3cfg.j2 dest=/home/collectd-ci/.s3cfg owner=collectd-ci group=collectd-ci mode=0600
+
+- name: package repos root dir
+  file: path=/srv/repos/ state=directory owner=collectd-ci group=collectd-ci mode=0775
