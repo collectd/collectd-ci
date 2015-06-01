@@ -12,3 +12,10 @@ jenkins_plugins: # version: 0 means latest version available
   - { plugin: digitalocean-plugin, version: 0 }
   - { plugin: console-tail, version: 0 }
   - { plugin: greenballs, version: 0 }
+
+credential_uuid: 1e2c4777-cc8e-438b-81e2-a42134625dd0
+credential_ssh_username: collectd-ci
+slave_fqdn: pkg.ci.collectd.org
+slave_label: pkg
+slave_name: pkg
+slave_home: /home/collectd-ci

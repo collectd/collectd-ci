@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<slave>
+  <name>{{slave_name}}</name>
+  <description></description>
+  <remoteFS>{{slave_home}}</remoteFS>
+  <numExecutors>1</numExecutors>
+  <mode>EXCLUSIVE</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Demand">
+    <inDemandDelay>0</inDemandDelay>
+    <idleDelay>10</idleDelay>
+  </retentionStrategy>
+  <launcher class="hudson.plugins.sshslaves.SSHLauncher">
+    <host>{{slave_fqdn}}</host>
+    <port>22</port>
+    <credentialsId>{{credential_uuid}}</credentialsId>
+    <launchTimeoutSeconds>600</launchTimeoutSeconds>
+    <maxNumRetries>0</maxNumRetries>
+    <retryWaitTime>60</retryWaitTime>
+  </launcher>
+  <label>{{slave_label}}</label>
+  <nodeProperties/>
+</slave>

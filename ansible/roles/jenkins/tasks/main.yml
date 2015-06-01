@@ -57,5 +57,8 @@
     - public_keys/mfournier
     - public_keys/skottler
 
+- include: slaves.yml
+  when: slave_sshkey_passphrase is defined
+
 - include: plugins.yml
 - include: jobs.yml

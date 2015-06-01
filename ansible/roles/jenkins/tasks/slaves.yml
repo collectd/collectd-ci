@@ -1,0 +1,21 @@
+- name: install slave communication private ssh key
+  copy: src=slave_sshkey/id_rsa dest=/var/lib/jenkins/.ssh/id_rsa owner=jenkins group=jenkins mode=0600
+
+- name: jenkins credentials setup
+  template: src=credentials.xml.j2 dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  notify:
+    - restart jenkins
+    - waiting for jenkins to reboot
+
+- name: slaves config dir
+  file: path=/var/lib/jenkins/nodes/ state=directory owner=jenkins group=jenkins mode=0755
+
+- name: pkg slave dir
+  file: path=/var/lib/jenkins/nodes/pkg/ state=directory owner=jenkins group=jenkins mode=0755
+
+- name: pkg slave config
+  template: src=slave.config.xml.j2 dest=/var/lib/jenkins/nodes/pkg/config.xml owner=jenkins group=jenkins mode=0644
+  notify:
+    - restart jenkins
+    - waiting for jenkins to reboot
+
