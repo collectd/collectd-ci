@@ -76,7 +76,7 @@ rm -fr $GIT_PBUILDER_OUTPUT_DIR
 mkdir -p $GIT_PBUILDER_OUTPUT_DIR
 
 sudo DIST=$DIST ARCH=$ARCH cowbuilder --update --distribution $DIST --architecture $ARCH --basepath /var/cache/pbuilder/base-$DIST-$ARCH.cow
-git-buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-branch=$DEBIAN_BRANCH --git-pbuilder-options="--aptcache /var/cache/pbuilder/aptcache/$DIST"
+gbp buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-branch=$DEBIAN_BRANCH --git-pbuilder-options="--aptcache /var/cache/pbuilder/aptcache/$DIST"
 
 cat > "${WORKSPACE}/s3repo.sh" << EOF
 ARCH=$ARCH
