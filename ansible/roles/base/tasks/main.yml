@@ -11,3 +11,12 @@
     - screen
     - sudo
     - wget
+
+
+- name: root user ssh authorized_keys
+  authorized_key: user=root
+                  key="{{item}}"
+  with_file:
+    - public_keys/octo
+    - public_keys/mfournier
+
