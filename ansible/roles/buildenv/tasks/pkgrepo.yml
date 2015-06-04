@@ -3,4 +3,5 @@
   with_items:
     - createrepo
     - dpkg-dev
+    - apt-utils
     - python-magic

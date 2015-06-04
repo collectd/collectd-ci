@@ -20,6 +20,8 @@ else
   createrepo "$REPO"
 fi
 
+gpg --detach-sign --armor --batch --default-key ci@collectd.org "$REPO/repodata/repomd.xml"
+
 test -f ~/.s3cfg
 
 s3cmd --acl-public --delete-removed --no-progress sync "$REPO/" "s3://collectd/rpm/$BRANCH/$DIST/"

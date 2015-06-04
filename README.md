@@ -26,7 +26,9 @@ Add the following to `/etc/yum.repos.d/collectd-ci.repo`:
 name=collectd CI
 baseurl=http://pkg.ci.collectd.org/rpm/<branch>/epel-<rel>-$basearch
 enabled=1
-gpgcheck=0
+gpgkey=http://pkg.ci.collectd.org/pubkey.asc
+gpgcheck=1
+repo_gpgcheck=1
 ```
 
 Replace `<branch>` with one of the branches mentioned above. Replace `<rel>`
@@ -40,7 +42,13 @@ Both i386 and x86\_64 architecture are supported, except for EL7 (no i386).
 
 #### Debian/Ubuntu-LTS
 
-Add the following to `/etc/apt/sources.list.d/collectd-ci.list`.
+Import the repository signing key:
+
+```
+curl http://pkg.ci.collectd.org/pubkey.asc | apt-key add -
+```
+
+Then add the following to `/etc/apt/sources.list.d/collectd-ci.list`.
 
 ```
 deb http://pkg.ci.collectd.org/deb/ <codename> <branch>

@@ -85,6 +85,7 @@ Configuration generated automatically, do not edit!
 
       shell('/usr/local/bin/make-debs.sh $distro $arch')
       shell('/usr/local/bin/s3-apt-repo.sh')
+      shell('/usr/local/bin/update-apt-release.sh')
     }
 
     publishers {
@@ -151,6 +152,6 @@ Configuration generated automatically, do not edit!
   concurrentBuild(false)
   label('pkg')
   steps {
-    shell('s3cmd --delete-removed sync s3://collectd/ /srv/repos/')
+    shell('s3cmd --delete-removed --exclude pubkey.asc sync s3://collectd/ /srv/repos/')
   }
 }

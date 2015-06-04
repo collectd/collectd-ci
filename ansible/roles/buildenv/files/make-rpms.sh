@@ -53,6 +53,8 @@ mkdir -p "$RESULTDIR"
 
 mock --verbose --cleanup-after --rpmbuild_timeout=600 -r "$DIST" --rebuild $RPMBUILD/SRPMS/collectd-${COLLECTD_BUILD}-*.src.rpm --resultdir="$RESULTDIR"
 
+rpm --addsign $RESULTDIR/*.rpm
+
 cat > "${WORKSPACE}/s3repo.sh" << EOF
 BRANCH=$BRANCH
 COLLECTD_BUILD=$COLLECTD_BUILD

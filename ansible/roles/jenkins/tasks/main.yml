@@ -19,6 +19,13 @@
 - name: delegate some privileges to jenkins user
   copy: src=jenkins_sudo dest=/etc/sudoers.d/ mode=0440 owner=root group=root
 
+- name: package & repo signing key
+  copy: src=gnupg/ dest=/var/lib/jenkins/.gnupg/ owner=jenkins group=jenkins mode=0600
+  when: skip_pbuilder_cache is not defined and skip_mock_cache is not defined
+
+- name: select rpm signing key
+  copy: src=rpmmacros dest=/var/lib/jenkins/.rpmmacros owner=jenkins group=jenkins mode=0644
+
 - name: main jenkins config
   copy: src=config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
   notify:

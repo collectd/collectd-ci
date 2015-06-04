@@ -6,3 +6,4 @@
     - make-debs.sh
     - s3-yum-repo.sh
     - s3-apt-repo.sh
+    - update-apt-release.sh

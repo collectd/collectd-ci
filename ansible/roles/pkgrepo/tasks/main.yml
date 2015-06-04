@@ -16,3 +16,6 @@
 
 - name: package repos root dir
   file: path=/srv/repos/ state=directory owner=collectd-ci group=collectd-ci mode=0775
+
+- name: publish repo signing key
+  copy: src=pubkey.asc dest=/srv/repos/ owner=collectd-ci group=collectd-ci mode=0644
