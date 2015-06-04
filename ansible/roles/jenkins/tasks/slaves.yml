@@ -2,7 +2,7 @@
   copy: src=slave_sshkey/id_rsa dest=/var/lib/jenkins/.ssh/id_rsa owner=jenkins group=jenkins mode=0600
 
 - name: jenkins credentials setup
-  template: src=credentials.xml.j2 dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  template: src=credentials.xml.j2 dest=/var/lib/jenkins/credentials.xml owner=jenkins group=jenkins mode=0644
   notify:
     - restart jenkins
     - waiting for jenkins to reboot
