@@ -24,7 +24,7 @@ Add the following to `/etc/yum.repos.d/collectd-ci.repo`:
 ```
 [collectd-ci]
 name=collectd CI
-baseurl=http://sos.exo.io/collectd/rpm/<branch>/epel-<rel>-$basearch
+baseurl=http://pkg.ci.collectd.org/rpm/<branch>/epel-<rel>-$basearch
 enabled=1
 gpgcheck=0
 ```
@@ -43,7 +43,7 @@ Both i386 and x86\_64 architecture are supported, except for EL7 (no i386).
 Add the following to `/etc/apt/sources.list.d/collectd-ci.list`.
 
 ```
-deb http://sos.exo.io/collectd/deb/ <codename> <branch>
+deb http://pkg.ci.collectd.org/deb/ <codename> <branch>
 ```
 
 Replace `<branch>` with one of the branches mentioned above. Replace
