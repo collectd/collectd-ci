@@ -10,8 +10,11 @@
     - rsync
     - screen
     - sudo
+    - unattended-upgrades
     - wget
 
+- name: configure unattended upgrades
+  copy: src=50unattended-upgrades dest=/etc/apt/apt.conf.d/ owner=root group=root mode=0644
 
 - name: root user ssh authorized_keys
   authorized_key: user=root
@@ -19,4 +22,3 @@
   with_file:
     - public_keys/octo
     - public_keys/mfournier
-
