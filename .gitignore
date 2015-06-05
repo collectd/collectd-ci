@@ -1,0 +1,5 @@
+ansible/roles/jenkins/files/slave_sshkey/
+ansible/group_vars/prod
+ansible/roles/jenkins/files/gnupg/
+ansible/roles/jenkins/files/ssl/
+.vagrant/
