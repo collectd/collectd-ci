@@ -1,5 +1,5 @@
 ---
-- hosts: jenkins
+- hosts: jenkins:vagrant
   gather_facts: no
   roles:
     - base

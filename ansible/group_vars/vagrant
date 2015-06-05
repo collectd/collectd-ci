@@ -1,6 +1,14 @@
 {
   "exoscale_key": "xxx",
   "exoscale_secret": "xxx",
+  "digitalocean_v1_apikey": "xxx",
+  "digitalocean_v1_clientid": "xxx",
+  "digitalocean_v2_token": "xxx",
+  "digitalocean_sshkeyid": "123456",
+  "digitalocean_sshprivatekey": "aGVsbG8gd29ybGQK",
+  "slave_sshkey_passphrase": "aGVsbG8gd29ybGQK",
+  "jenkins_main_email": "jenkins@localhost",
+  "jenkins_main_url": "http://127.0.0.1:8088",
   "skip_pbuilder_cache": true,
   "skip_mock_cache": true
 }
