@@ -1,0 +1,14 @@
+- name: nginx config
+  copy: src=ci.collectd.org.conf dest=/etc/nginx/sites-enabled/ owner=root group=root mode=0644
+  notify:
+    - reload nginx
+
+- name: https server key
+  copy: src=ssl/collectd-ci.key dest=/etc/ssl/private/ mode=0600 owner=root group=root
+  notify:
+    - reload nginx
+
+- name: https server cert
+  copy: src=ssl/collectd-ci.pem dest=/etc/ssl/certs/ mode=0600 owner=root group=root
+  notify:
+    - reload nginx

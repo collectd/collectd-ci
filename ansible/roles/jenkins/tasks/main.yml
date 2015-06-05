@@ -76,3 +76,4 @@
 
 - include: plugins.yml
 - include: jobs.yml
+- include: webserver.yml
