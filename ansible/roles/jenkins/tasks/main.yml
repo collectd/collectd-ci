@@ -44,6 +44,13 @@
     - restart jenkins
     - waiting for jenkins to reboot
 
+- name: configure jenkins URL and email
+  template: src=jenkins.model.JenkinsLocationConfiguration.xml.j2 dest=/var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml owner=jenkins group=jenkins mode=0644
+  when: jenkins_main_url is defined
+  notify:
+    - restart jenkins
+    - waiting for jenkins to reboot
+
 - name: store jenkins API credentials
   template: src=netrc.j2 dest=/root/.netrc owner=root group=root mode=0600
   when: jenkins_user is defined
