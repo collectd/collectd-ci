@@ -2,7 +2,7 @@
   template: src=roles/s3/templates/s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600
 
 - name: install jenkins Job_DSL_seed config
-  copy: src=Job_DSL_seed_config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  copy: src=jenkins/Job_DSL_seed_config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
 
 - name: create Job_DSL_seed job
   shell: 'curl -vn -XPOST -H "Content-Type: application/xml" -d @/var/lib/jenkins/Job_DSL_seed_config.xml "http://localhost:8080/createItem?name=Job_DSL_seed"'
@@ -15,7 +15,7 @@
   wait_for: path=/var/lib/jenkins/jobs/Job_DSL_seed/
 
 - name: install jenkins job descriptions
-  copy: src={{item}} dest=/var/lib/jenkins/jobs/Job_DSL_seed/workspace/ owner=jenkins group=jenkins mode=0644
+  copy: src=jobs/{{item}} dest=/var/lib/jenkins/jobs/Job_DSL_seed/workspace/ owner=jenkins group=jenkins mode=0644
   with_items:
     - packages.groovy
     - build-environments.groovy

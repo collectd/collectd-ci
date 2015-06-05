@@ -27,19 +27,19 @@
   copy: src=rpmmacros dest=/var/lib/jenkins/.rpmmacros owner=jenkins group=jenkins mode=0644
 
 - name: main jenkins config
-  copy: src=config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  copy: src=jenkins/config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
   notify:
     - restart jenkins
     - waiting for jenkins to reboot
 
 - name: set fixed SSH port
-  copy: src=org.jenkinsci.main.modules.sshd.SSHD.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  copy: src=jenkins/org.jenkinsci.main.modules.sshd.SSHD.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
   notify:
     - restart jenkins
     - waiting for jenkins to reboot
 
 - name: configure concurrent jobs policy
-  copy: src=hudson.plugins.throttleconcurrents.ThrottleJobProperty.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  copy: src=jenkins/hudson.plugins.throttleconcurrents.ThrottleJobProperty.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
   notify:
     - restart jenkins
     - waiting for jenkins to reboot
