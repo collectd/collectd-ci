@@ -1,4 +1,5 @@
 def githubOrg = 'collectd'
+def setupGithubHooks = SETUP_GITHUB_HOOKS // this is the env. var defined in Job_DSL_seed_config.xml
 
 def testPRJobs = [
   manual_trigger: [
@@ -77,8 +78,10 @@ Configuration generated automatically, do not edit!
       PULL_REQUEST:         '$PULL_REQUEST',
     ]
 
-    configure { project ->
-      project / builders / 'com.cloudbees.jenkins.GitHubSetCommitStatusBuilder'
+    if (setupGithubHooks == 'true') {
+      configure { project ->
+        project / builders / 'com.cloudbees.jenkins.GitHubSetCommitStatusBuilder'
+      }
     }
 
     steps {
@@ -170,7 +173,9 @@ Configuration generated automatically, do not edit!
     }
 
     publishers {
-      githubCommitNotifier()
+      if (setupGithubHooks == 'true') {
+        githubCommitNotifier()
+      }
       downstreamParameterized {
         trigger('build-on-jessie-amd64-with-clang') {
           predefinedProps(downstreamProperties)

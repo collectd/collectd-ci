@@ -2,7 +2,7 @@
   template: src=roles/s3/templates/s3cfg.j2 dest=/var/lib/jenkins/.s3cfg owner=jenkins group=jenkins mode=0600
 
 - name: install jenkins Job_DSL_seed config
-  copy: src=jenkins/Job_DSL_seed_config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  template: src=Job_DSL_seed_config.xml.j2 dest=/var/lib/jenkins/Job_DSL_seed_config.xml owner=jenkins group=jenkins mode=0644
 
 - name: create Job_DSL_seed job
   shell: 'curl -vn -XPOST -H "Content-Type: application/xml" -d @/var/lib/jenkins/Job_DSL_seed_config.xml "http://localhost:8080/createItem?name=Job_DSL_seed"'

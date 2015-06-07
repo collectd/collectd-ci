@@ -10,5 +10,6 @@
   "jenkins_main_email": "jenkins@localhost",
   "jenkins_main_url": "http://127.0.0.1:8088",
   "skip_pbuilder_cache": true,
-  "skip_mock_cache": true
+  "skip_mock_cache": true,
+  "setup_github_hooks": "false"
 }
