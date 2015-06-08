@@ -79,8 +79,11 @@ Configuration generated automatically, do not edit!
     }
 
     steps {
-      copyArtifacts("make-dist-tarball-${branchName}", 'collectd*.tar.bz2, env.sh') {
-        upstreamBuild(true)
+      copyArtifacts("packages-prepare-tarball-${branchName}") {
+        includePatterns('collectd*.tar.bz2', 'env.sh')
+        buildSelector {
+          upstreamBuild(true)
+        }
       }
 
       shell('/usr/local/bin/make-debs.sh $distro $arch')
@@ -129,8 +132,11 @@ Configuration generated automatically, do not edit!
     }
 
     steps {
-      copyArtifacts("make-dist-tarball-${branchName}", 'collectd*.tar.bz2, env.sh, collectd.spec') {
-        upstreamBuild(true)
+      copyArtifacts("packages-prepare-tarball-${branchName}") {
+        includePatterns('collectd*.tar.bz2', 'env.sh', 'collectd.spec')
+        buildSelector {
+          upstreamBuild(true)
+        }
       }
 
       shell('/usr/local/bin/make-rpms.sh $distro')

@@ -262,8 +262,11 @@ Configuration generated automatically, do not edit!
             shell(setupTask)
           }
 
-          copyArtifacts('make-pr-tarball', '$TARBALL') {
-            buildNumber('$TARBALL_BUILD_NUMBER')
+          copyArtifacts('pull-requests-prepare-tarball') {
+            includePatterns('$TARBALL')
+            buildSelector {
+              buildNumber('$TARBALL_BUILD_NUMBER')
+            }
           }
 
           shell('''\
