@@ -27,7 +27,7 @@
   copy: src=rpmmacros dest=/var/lib/jenkins/.rpmmacros owner=jenkins group=jenkins mode=0644
 
 - name: main jenkins config
-  copy: src=jenkins/config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644
+  copy: src=jenkins/config.xml dest=/var/lib/jenkins/ owner=jenkins group=jenkins mode=0644 force=no
   notify:
     - restart jenkins
     - waiting for jenkins to reboot
