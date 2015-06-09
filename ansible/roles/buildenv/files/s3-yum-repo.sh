@@ -9,6 +9,7 @@ test "x$(id -un)" = "xjenkins"
 test -n "$PKGDIR"
 test -n "$BRANCH"
 test -n "$DIST"
+test -n "$COLLECTD_BUILD"
 
 REPO="$PKGDIR/$BRANCH/$DIST"
 
@@ -21,6 +22,14 @@ else
 fi
 
 gpg --detach-sign --armor --batch --default-key ci@collectd.org "$REPO/repodata/repomd.xml"
+
+cat << EOF > "$REPO/status.json"
+{
+  "branch": "${BRANCH}",
+  "dist": "${DIST}",
+  "collectd_build": "${COLLECTD_BUILD}"
+}
+EOF
 
 test -f ~/.s3cfg
 

@@ -159,6 +159,10 @@ Configuration generated automatically, do not edit!
   concurrentBuild(false)
   label('pkg')
   steps {
-    shell('s3cmd --delete-removed --exclude pubkey.asc sync s3://collectd/ /srv/repos/')
+    shell('''
+s3cmd --delete-removed --exclude pubkey.asc sync s3://collectd/ /srv/repos/
+find /srv/repos/deb/ /srv/repos/rpm/ -name status.json | xargs jq --slurp . > /srv/repos/status.new
+mv /srv/repos/status.new /srv/repos/status.json
+''')
   }
 }

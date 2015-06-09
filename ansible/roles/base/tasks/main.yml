@@ -5,6 +5,7 @@
   with_items:
     - curl
     - git
+    - jq
     - net-tools
     - procps
     - rsync
