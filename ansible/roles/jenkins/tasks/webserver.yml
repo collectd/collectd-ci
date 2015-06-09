@@ -4,11 +4,11 @@
     - reload nginx
 
 - name: https server key
-  copy: src=ssl/collectd-ci.key dest=/etc/ssl/private/ mode=0600 owner=root group=root
+  copy: src=ssl/ci.collectd.org.key dest=/etc/ssl/private/ mode=0600 owner=root group=root
   notify:
     - reload nginx
 
 - name: https server cert
-  copy: src=ssl/collectd-ci.pem dest=/etc/ssl/certs/ mode=0600 owner=root group=root
+  copy: src=ssl/ci.collectd.org-bundle.crt dest=/etc/ssl/certs/ mode=0600 owner=root group=root
   notify:
     - reload nginx
