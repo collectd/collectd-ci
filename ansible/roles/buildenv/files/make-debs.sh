@@ -42,8 +42,8 @@ git checkout -f master
 git fetch --all --quiet
 
 if ! git show upstream > /dev/null 2>&1; then
-  git config --global user.name "Jenkins"
-  git config --global user.email "jenkins@buildenv"
+  git config --local user.name "Jenkins"
+  git config --local user.email "jenkins@buildenv"
 
   git symbolic-ref HEAD refs/heads/upstream
   git rm --cached -r .
