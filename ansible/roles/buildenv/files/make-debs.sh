@@ -82,6 +82,8 @@ gbp buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-b
 
 debsign -k$DEBEMAIL "${GIT_PBUILDER_OUTPUT_DIR}/collectd_${PKG_VERSION}_${ARCH}.changes"
 
+cp ${WORKSPACE}/collectd_${PKG_VERSION}_*.build "$GIT_PBUILDER_OUTPUT_DIR"
+
 cat > "${WORKSPACE}/s3repo.sh" << EOF
 ARCH=$ARCH
 BRANCH=$BRANCH
