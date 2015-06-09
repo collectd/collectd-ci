@@ -17,8 +17,8 @@ def testPRJobs = [
 
 testPRJobs.each { jobId, params ->
 
-  multiJob("test-pull-requests-${jobId}") {
-    displayName("test github pull-requests on various environements (${params.triggerType})")
+  multiJob("pull-requests-${jobId}-aggregation") {
+    displayName("aggregate github pull-request testing (${params.triggerType})")
     description("""
 This multi-step job aggregates various independent tasks, allowing to compute a global build status from them and report this back to github.
 
@@ -86,7 +86,7 @@ Configuration generated automatically, do not edit!
 
     steps {
       phase('prepare release tarball', 'SUCCESSFUL') {
-        job('make-pr-tarball') {
+        job('pull-requests-prepare-tarball') {
           props([
             BUILD_GIT_BRANCH: '$BUILD_GIT_BRANCH',
             BUILD_GIT_COMMIT: '$BUILD_GIT_COMMIT',
@@ -95,77 +95,77 @@ Configuration generated automatically, do not edit!
       }
 
       environmentVariables {
-        propertiesFile('/var/lib/jenkins/jobs/make-pr-tarball/workspace/env-${BUILD_GIT_COMMIT}.sh')
+        propertiesFile('/var/lib/jenkins/jobs/pull-requests-prepare-tarball/workspace/env-${BUILD_GIT_COMMIT}.sh')
       }
 
       // NB: unforunately "phase" blocks don't support groovy iterators, so this
       // forces us to file all the jobs manually here.
       phase('touchstone (won\'t continue further down if this step fails)', 'SUCCESSFUL') {
-        job('build-on-jessie-amd64-with-default-toolchain') {
+        job('pull-requests-build-on-jessie-amd64-with-default-toolchain') {
           props(downstreamProperties)
         }
       }
 
       phase('mandatory (platforms for which packages are built)', 'SUCCESSFUL') {
-        job('build-on-jessie-i386-with-default-toolchain') {
+        job('pull-requests-build-on-jessie-i386-with-default-toolchain') {
           props(downstreamProperties)
         }
-        job('build-on-trusty-amd64-with-default-toolchain') {
+        job('pull-requests-build-on-trusty-amd64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-trusty-i386-with-default-toolchain') {
+        job('pull-requests-build-on-trusty-i386-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-precise-amd64-with-default-toolchain') {
+        job('pull-requests-build-on-precise-amd64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-precise-i386-with-default-toolchain') {
+        job('pull-requests-build-on-precise-i386-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-wheezy-amd64-with-default-toolchain') {
+        job('pull-requests-build-on-wheezy-amd64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-wheezy-i386-with-default-toolchain') {
+        job('pull-requests-build-on-wheezy-i386-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-squeeze-amd64-with-default-toolchain') {
+        job('pull-requests-build-on-squeeze-amd64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-squeeze-i386-with-default-toolchain') {
+        job('pull-requests-build-on-squeeze-i386-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-epel7-x86_64-with-default-toolchain') {
+        job('pull-requests-build-on-epel7-x86_64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-epel6-x86_64-with-default-toolchain') {
+        job('pull-requests-build-on-epel6-x86_64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-epel6-i386-with-default-toolchain') {
+        job('pull-requests-build-on-epel6-i386-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-epel5-x86_64-with-default-toolchain') {
+        job('pull-requests-build-on-epel5-x86_64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('build-on-epel5-i386-with-default-toolchain') {
+        job('pull-requests-build-on-epel5-i386-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
       }
 
       phase('supported (platforms known to work that new patches shouldn\'t break)', 'SUCCESSFUL') {
-        job('build-on-freebsd10-amd64-with-default-toolchain') {
+        job('pull-requests-build-on-freebsd10-amd64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
@@ -177,16 +177,16 @@ Configuration generated automatically, do not edit!
         githubCommitNotifier()
       }
       downstreamParameterized {
-        trigger('build-on-jessie-amd64-with-clang') {
+        trigger('pull-requests-build-on-jessie-amd64-with-clang') {
           predefinedProps(downstreamProperties)
         }
-        trigger('build-on-jessie-i386-with-clang') {
+        trigger('pull-requests-build-on-jessie-i386-with-clang') {
           predefinedProps(downstreamProperties)
         }
-        trigger('build-on-jessie-amd64-with-clang-strict') {
+        trigger('pull-requests-build-on-jessie-amd64-with-clang-strict') {
           predefinedProps(downstreamProperties)
         }
-        trigger('build-on-jessie-amd64-with-scan-build') {
+        trigger('pull-requests-build-on-jessie-amd64-with-scan-build') {
           predefinedProps(downstreamProperties)
         }
       }
@@ -194,8 +194,8 @@ Configuration generated automatically, do not edit!
   }
 }
 
-job('make-pr-tarball') {
-  displayName('prepare tarball for pull-request testing')
+job('pull-requests-prepare-tarball') {
+  displayName('initialise pull-request testing')
   description("""
 This job:
  * merges the pull-request with the master branch

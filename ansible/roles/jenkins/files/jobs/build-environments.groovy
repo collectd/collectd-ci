@@ -244,14 +244,14 @@ buildEnvironments.each { distro, options ->
 
     it.archs.each {
       def arch = "${it}"
-      def jobName = "build-on-${distro}-${arch}-with-${buildName}"
+      def jobName = "pull-requests-build-on-${distro}-${arch}-with-${buildName}"
 
       // The following parameters are passed down from upstream to each of the
       // jobs: PULL_REQUEST, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
       job(jobName) {
-        displayName("build on ${distro}-${arch} (${buildDescription})")
+        displayName("build pull-request on ${distro}-${arch} (${buildDescription})")
         description("""
-This job builds the tarball passed down from the 'make-pr-tarball' job on the '${distro}-${arch}' platform, with various build parameters and optional setup/teardown tasks.
+This job builds the tarball passed down from the 'pull-requests-prepare-tarball' job on the '${distro}-${arch}' platform, with various build parameters and optional setup/teardown tasks.
 
 Configuration generated automatically, do not edit!
 """)
