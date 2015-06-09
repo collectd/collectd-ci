@@ -2,6 +2,7 @@
 <hudson>
   <numExecutors>4</numExecutors>
   <label>master</label>
+  <primaryView>packages</primaryView>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured" />
   <securityRealm class="hudson.security.SecurityRealm$None" />
