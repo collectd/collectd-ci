@@ -220,12 +220,18 @@ Configuration generated automatically, do not edit!
       }
       branch('${BUILD_GIT_BRANCH}')
       wipeOutWorkspace(true)
-      mergeOptions('target', 'master')
     }
   }
 
   steps {
     shell('''\
+git config --local core.sparsecheckout true
+git config --local user.email "ci@collectd.org"
+git config --local user.name "Jenkins"
+git checkout -f target/master
+git merge --ff --no-edit --log $BUILD_GIT_BRANCH || (git diff && exit 1)
+git show --stat HEAD
+
 checkbashisms -n clean.sh
 checkbashisms -n build.sh
 checkbashisms -n version-gen.sh
