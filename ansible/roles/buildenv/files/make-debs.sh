@@ -52,7 +52,7 @@ if ! git show upstream > /dev/null 2>&1; then
 fi
 
 if [ $(git tag -l upstream/$COLLECTD_BUILD | wc -l) -eq "0" ]; then
-  gbp import-orig -u $COLLECTD_BUILD --no-merge "${WORKSPACE}/${TARBALL}"
+  gbp import-orig --no-interactive --no-merge "${WORKSPACE}/${TARBALL}"
 fi
 
 git checkout -f "origin/nightlies/${BRANCH}/${DIST}"
@@ -68,6 +68,7 @@ git rm debian/patches/*.dpatch
 echo > debian/patches/00list
 git add debian/patches/00list
 git commit -m "remove dpatches"
+
 dch -D unstable -v $PKG_VERSION "nightly build"
 git add debian/changelog
 git commit -m "automatic changelog update"
@@ -78,7 +79,7 @@ rm -fr $GIT_PBUILDER_OUTPUT_DIR
 mkdir -p $GIT_PBUILDER_OUTPUT_DIR
 
 sudo DIST=$DIST ARCH=$ARCH cowbuilder --update --distribution $DIST --architecture $ARCH --basepath /var/cache/pbuilder/base-$DIST-$ARCH.cow
-gbp buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-branch=$DEBIAN_BRANCH --git-pbuilder-options="--aptcache /var/cache/pbuilder/aptcache/$DIST"
+gbp buildpackage --git-pbuilder --git-dist=$DIST --git-arch=$ARCH --git-debian-branch=$DEBIAN_BRANCH --git-pbuilder-options="--aptcache /var/cache/pbuilder/aptcache/$DIST" --git-no-create-orig --git-tarball-dir="$WORKSPACE"
 
 debsign -k$DEBEMAIL "${GIT_PBUILDER_OUTPUT_DIR}/collectd_${PKG_VERSION}_${ARCH}.changes"
 
