@@ -42,6 +42,7 @@ cp -f "${WORKSPACE}/${TARBALL}" "$RPMBUILD/SOURCES/"
 cp -f "${WORKSPACE}/collectd.spec" "$RPMBUILD/SPECS/"
 
 sed -ri "s/^(Version:\s+).+/\1$COLLECTD_BUILD/" "$RPMBUILD/SPECS/collectd.spec"
+sed -ri "s/^(Source:\s+).+/\1$TARBALL/" "$RPMBUILD/SPECS/collectd.spec"
 
 echo "%_topdir $RPMBUILD/" > "$WORKSPACE/.rpmmacros"
 HOME="$WORKSPACE" rpmbuild -bs "$RPMBUILD/SPECS/collectd.spec"

@@ -33,7 +33,7 @@ Configuration generated automatically, do not edit!
 
     publishers {
       archiveArtifacts {
-        pattern('collectd*.tar.bz2')
+        pattern('collectd*.tar.gz')
         pattern('env.sh')
         pattern('collectd.spec')
       }
@@ -80,7 +80,7 @@ Configuration generated automatically, do not edit!
 
     steps {
       copyArtifacts("packages-prepare-tarball-${branchName}") {
-        includePatterns('collectd*.tar.bz2', 'env.sh')
+        includePatterns('collectd*.tar.gz', 'env.sh')
         buildSelector {
           upstreamBuild(true)
         }
@@ -133,7 +133,7 @@ Configuration generated automatically, do not edit!
 
     steps {
       copyArtifacts("packages-prepare-tarball-${branchName}") {
-        includePatterns('collectd*.tar.bz2', 'env.sh', 'collectd.spec')
+        includePatterns('collectd*.tar.gz', 'env.sh', 'collectd.spec')
         buildSelector {
           upstreamBuild(true)
         }
