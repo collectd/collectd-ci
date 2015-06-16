@@ -3,7 +3,7 @@ branches.each {
   def branchName = "${it}"
 
   job("packages-prepare-tarball-${branchName}") {
-    displayName("initialise deb/rpm packages build (${branchName} branch)")
+    displayName("Prepare tarball (${branchName} branch)")
     description("""
 This job generates a release tarball out of the '${branchName}' branch and archives it for downstream consumption.
 
