@@ -169,6 +169,10 @@ Configuration generated automatically, do not edit!
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
+        job('pull-requests-build-on-jessie-amd64-with-clang') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
       }
     }
 
@@ -177,12 +181,6 @@ Configuration generated automatically, do not edit!
         githubCommitNotifier()
       }
       downstreamParameterized {
-        trigger('pull-requests-build-on-jessie-amd64-with-clang') {
-          predefinedProps(downstreamProperties)
-        }
-        trigger('pull-requests-build-on-jessie-i386-with-clang') {
-          predefinedProps(downstreamProperties)
-        }
         trigger('pull-requests-build-on-jessie-amd64-with-clang-strict') {
           predefinedProps(downstreamProperties)
         }

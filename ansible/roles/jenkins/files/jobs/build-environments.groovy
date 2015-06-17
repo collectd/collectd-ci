@@ -104,7 +104,7 @@ buildEnvironments = [
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
       ],
       [
-        archs: ['i386', 'amd64'],
+        archs: ['amd64'],
         buildName: 'clang',
         buildDescription: 'CC="clang -Wall -Werror"',
         buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror" V=1; make --keep-going check',
