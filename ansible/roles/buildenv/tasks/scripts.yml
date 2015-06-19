@@ -7,3 +7,4 @@
     - s3-yum-repo.sh
     - s3-apt-repo.sh
     - update-apt-release.sh
+    - pull-requests-prepare-tarball.sh

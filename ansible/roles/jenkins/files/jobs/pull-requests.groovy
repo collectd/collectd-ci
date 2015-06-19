@@ -222,36 +222,7 @@ Configuration generated automatically, do not edit!
   }
 
   steps {
-    shell('''\
-git config --local core.sparsecheckout true
-git config --local user.email "ci@collectd.org"
-git config --local user.name "Jenkins"
-git checkout -f target/master
-git merge --ff --no-edit --log $BUILD_GIT_BRANCH || (git diff && exit 1)
-git show --stat HEAD
-
-checkbashisms -n clean.sh
-checkbashisms -n build.sh
-checkbashisms -n version-gen.sh
-./clean.sh
-./build.sh
-./configure
-make dist-gzip
-
-COLLECTD_BUILD="$(./version-gen.sh)"
-TARBALL="collectd-$COLLECTD_BUILD.tar.gz"
-PULL_REQUEST="$(basename $BUILD_GIT_BRANCH)"
-test -f "$TARBALL"
-test -n "$BUILD_NUMBER"
-test -n "$PULL_REQUEST"
-
-cat << EOF > "env-${BUILD_GIT_COMMIT}.sh"
-COLLECTD_BUILD=$COLLECTD_BUILD
-TARBALL=$TARBALL
-TARBALL_BUILD_NUMBER=$BUILD_NUMBER
-PULL_REQUEST=$PULL_REQUEST
-EOF
-''')
+    shell('/usr/local/bin/pull-requests-prepare-tarball.sh')
   }
 
   publishers {
