@@ -232,63 +232,64 @@ buildEnvironments = [
   ],
 ]
 
-buildEnvironments.each { distro, options ->
+['pull-requests'].each {
+  def task = "${it}"
 
-  options.buildJobs.each {
-    def buildName = it?.buildName
-    def buildDescription = it?.buildDescription
-    def buildCommand = it?.buildCommand
-    def setupTask = it?.setupTask
-    def teardownTask = it?.teardownTask
-    def artifacts = it?.artifacts
+  buildEnvironments.each { distro, options ->
 
-    it.archs.each {
-      def arch = "${it}"
-      def jobName = "pull-requests-build-on-${distro}-${arch}-with-${buildName}"
+    options.buildJobs.each {
+      def buildName = it?.buildName
+      def buildDescription = it?.buildDescription
+      def buildCommand = it?.buildCommand
+      def setupTask = it?.setupTask
+      def teardownTask = it?.teardownTask
+      def artifacts = it?.artifacts
 
-      // The following parameters are passed down from upstream to each of the
-      // jobs: PULL_REQUEST, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
-      job(jobName) {
-        displayName("Build pull-request on ${distro}-${arch} (${buildDescription})")
-        description("""
-This job builds the tarball passed down from the 'pull-requests-prepare-tarball' job on the '${distro}-${arch}' platform, with various build parameters and optional setup/teardown tasks.
+      it.archs.each {
+        def arch = "${it}"
+        def jobName = "${task}-build-on-${distro}-${arch}-with-${buildName}"
+
+        // The following parameters are passed down from upstream to each of the
+        // jobs: PULL_REQUEST, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
+        job(jobName) {
+          displayName("Build ${task} on ${distro}-${arch} (${buildDescription})")
+          description("""
+This job builds the tarball passed down from the '${task}-prepare-tarball' job on the '${distro}-${arch}' platform, with various build parameters and optional setup/teardown tasks.
 
 Configuration generated automatically, do not edit!
 """)
-        label("${distro}-${arch}")
+          label("${distro}-${arch}")
 
-        steps {
-          if (setupTask != null) {
-            shell(setupTask)
-          }
-
-          copyArtifacts('pull-requests-prepare-tarball') {
-            includePatterns('$TARBALL')
-            buildSelector {
-              buildNumber('$TARBALL_BUILD_NUMBER')
+          steps {
+            if (setupTask != null) {
+              shell(setupTask)
             }
-          }
 
-          shell('''\
+            copyArtifacts("${task}-prepare-tarball") {
+              includePatterns('$TARBALL')
+              buildSelector {
+                buildNumber('$TARBALL_BUILD_NUMBER')
+              }
+            }
+
+            shell('''\
 test -f "$TARBALL"
 test -n "$COLLECTD_BUILD"
-test -n "$PULL_REQUEST"
-
-echo "### About to build ${COLLECTD_BUILD} from https://github.com/collectd/collectd/pull/${PULL_REQUEST} ###"
 
 tar -xzvf $TARBALL
 cd collectd-${COLLECTD_BUILD}
 ''' + "${buildCommand}")
 
-          if (teardownTask != null) {
-            shell(teardownTask)
+            if (teardownTask != null) {
+              shell(teardownTask)
+            }
           }
-        }
 
-        publishers {
-          if (artifacts != null) {
-            archiveArtifacts {
-              pattern(artifacts)
+          publishers {
+            if (artifacts != null) {
+              archiveArtifacts {
+                pattern(artifacts)
+              }
             }
           }
         }
