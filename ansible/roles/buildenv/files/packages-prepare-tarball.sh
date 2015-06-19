@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# usage: make-dist-archive.sh <revision>
+# usage: packages-prepare-tarball <revision>
 
 set -xe
 

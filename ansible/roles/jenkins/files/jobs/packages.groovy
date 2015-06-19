@@ -28,7 +28,7 @@ Configuration generated automatically, do not edit!
     }
 
     steps {
-      shell('/usr/local/bin/make-dist-archive.sh $GIT_COMMIT')
+      shell('/usr/local/bin/packages-prepare-tarball.sh $GIT_COMMIT')
     }
 
     publishers {
