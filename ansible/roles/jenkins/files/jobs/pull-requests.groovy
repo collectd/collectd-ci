@@ -18,7 +18,7 @@ def testPRJobs = [
 testPRJobs.each { jobId, params ->
 
   multiJob("pull-requests-${jobId}-aggregation") {
-    displayName("aggregate github pull-request testing (${params.triggerType})")
+    displayName("Aggregate pull-request tests (${params.triggerType})")
     description("""
 This multi-step job aggregates various independent tasks, allowing to compute a global build status from them and report this back to github.
 
@@ -193,7 +193,7 @@ Configuration generated automatically, do not edit!
 }
 
 job('pull-requests-prepare-tarball') {
-  displayName('initialise pull-request testing')
+  displayName('Prepare tarball for testing pull-requests')
   description("""
 This job:
  * merges the pull-request with the master branch

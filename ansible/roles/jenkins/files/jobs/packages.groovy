@@ -3,7 +3,7 @@ branches.each {
   def branchName = "${it}"
 
   job("packages-prepare-tarball-${branchName}") {
-    displayName("Prepare tarball (${branchName} branch)")
+    displayName("Prepare tarball for building packages (${branchName} branch)")
     description("""
 This job generates a release tarball out of the '${branchName}' branch and archives it for downstream consumption.
 
@@ -43,7 +43,7 @@ Configuration generated automatically, do not edit!
   }
 
   matrixJob("packages-make-deb-${branchName}") {
-    displayName("build packages for Debian/Ubuntu LTS (${branchName} branch)")
+    displayName("Build packages for Debian/Ubuntu LTS (${branchName} branch)")
     description("""
 This job:
  * extracts the tarball passed down from the 'packages-prepare-tarball-${branchName}' job
@@ -97,7 +97,7 @@ Configuration generated automatically, do not edit!
   }
 
   matrixJob("packages-make-rpm-${branchName}") {
-    displayName("build packages for CentOS/EPEL (${branchName} branch)")
+    displayName("Build packages for CentOS/EPEL (${branchName} branch)")
     description("""
 This job:
  * extracts the tarball passed down from the 'packages-prepare-tarball-${branchName}' job
@@ -150,7 +150,7 @@ Configuration generated automatically, do not edit!
 }
 
 job('packages-sync-repos') {
-  displayName("update packages repositories")
+  displayName("Update packages repositories")
   description("""
 This job pulls down packages archived on S3, triggered when some upstream package-building task finishes.
 

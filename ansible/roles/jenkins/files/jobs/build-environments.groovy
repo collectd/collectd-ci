@@ -249,7 +249,7 @@ buildEnvironments.each { distro, options ->
       // The following parameters are passed down from upstream to each of the
       // jobs: PULL_REQUEST, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
       job(jobName) {
-        displayName("build pull-request on ${distro}-${arch} (${buildDescription})")
+        displayName("Build pull-request on ${distro}-${arch} (${buildDescription})")
         description("""
 This job builds the tarball passed down from the 'pull-requests-prepare-tarball' job on the '${distro}-${arch}' platform, with various build parameters and optional setup/teardown tasks.
 
