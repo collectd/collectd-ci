@@ -11,13 +11,16 @@ test -n "$BUILD_GIT_BRANCH"
 git config --local core.sparsecheckout true
 git config --local user.email "ci@collectd.org"
 git config --local user.name "Jenkins"
+
+git reset --hard
+rm -f env-*.sh
+
 git checkout -f target/master
 git merge --ff --no-edit --log $BUILD_GIT_BRANCH || (git diff && exit 1)
 git show --stat HEAD
 
-checkbashisms -n clean.sh
-checkbashisms -n build.sh
-checkbashisms -n version-gen.sh
+for shellscript in *.sh; do checkbashisms -n $shellscript || exit 1; done
+
 ./clean.sh
 ./build.sh
 ./configure
