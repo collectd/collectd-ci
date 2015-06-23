@@ -96,7 +96,7 @@ Configuration generated automatically, do not edit!
       }
 
       environmentVariables {
-        propertiesFile('/var/lib/jenkins/jobs/pull-requests-prepare-tarball/workspace/env-${BUILD_GIT_COMMIT}.sh')
+        propertiesFile('${JENKINS_HOME}/jobs/pull-requests-prepare-tarball/workspace/env-${BUILD_GIT_COMMIT}.sh')
       }
 
       // NB: unforunately "phase" blocks don't support groovy iterators, so this
