@@ -265,7 +265,7 @@ Configuration generated automatically, do not edit!
               shell(setupTask)
             }
 
-            copyArtifacts("${task}-prepare-tarball") {
+            copyArtifacts('$UPSTREAM_JOB_NAME') {
               includePatterns('$TARBALL')
               buildSelector {
                 buildNumber('$TARBALL_BUILD_NUMBER')

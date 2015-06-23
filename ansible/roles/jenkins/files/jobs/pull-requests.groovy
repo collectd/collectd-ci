@@ -76,6 +76,7 @@ Configuration generated automatically, do not edit!
       TARBALL:              '$TARBALL',
       TARBALL_BUILD_NUMBER: '$TARBALL_BUILD_NUMBER',
       PULL_REQUEST:         '$PULL_REQUEST',
+      UPSTREAM_JOB_NAME:    'pull-requests-prepare-tarball',
     ]
 
     if (setupGithubHooks == 'true') {
