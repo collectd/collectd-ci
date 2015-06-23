@@ -223,6 +223,7 @@ Configuration generated automatically, do not edit!
   }
 
   steps {
+    shell('/usr/local/bin/cleanup-build-area.sh')
     shell('/usr/local/bin/pull-requests-prepare-tarball.sh')
   }
 

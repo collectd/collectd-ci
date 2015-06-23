@@ -9,7 +9,6 @@ test -n "$1"
 
 REF="$1"
 
-./clean.sh
 ./build.sh
 ./configure
 make dist-gzip

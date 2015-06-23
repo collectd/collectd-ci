@@ -1,6 +1,7 @@
 - name: install various build scripts
   copy: src={{item}} dest=/usr/local/bin/ mode=0755 owner=root
   with_items:
+    - cleanup-build-area.sh
     - packages-prepare-tarball.sh
     - make-rpms.sh
     - make-debs.sh
