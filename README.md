@@ -17,7 +17,11 @@ time new commits are added to the following branches:
 * ["collectd-5.4"](https://github.com/collectd/collectd/tree/collectd-5.4)
   (release branch including only bugfixes)
 
-#### RHEL/CentOS
+The status of these builds can be tracked in ["Jenkins"](https://ci.collectd.org/view/packages/).
+
+The package and repository signing key can be double-checked on ["Github"](https://raw.githubusercontent.com/collectd/collectd-ci/master/ansible/roles/pkgrepo/files/pubkey.asc) and on ["PGP keyservers"](http://pgp.mit.edu/pks/lookup?op=vindex&search=0x3994D24FB8543576).
+
+*RHEL/CentOS*
 
 Add the following to `/etc/yum.repos.d/collectd-ci.repo`:
 
@@ -40,7 +44,7 @@ with one of:
 
 Both i386 and x86\_64 architecture are supported, except for EL7 (no i386).
 
-#### Debian/Ubuntu-LTS
+*Debian/Ubuntu-LTS*
 
 Import the repository signing key:
 
@@ -65,9 +69,29 @@ Replace `<branch>` with one of the branches mentioned above. Replace
 
 Only i386 and amd64 architectures are supported.
 
-### Testing patches on various platforms
+### Github Pull Requests
 
-... work in progress ...
+Each pull-request is merged into the master branch, and then built on a range
+of platforms.
+
+The default compiler on each platform will be used, and where relevant, with
+the build options used when building packages for this platform. The support
+libraries used are those found by default on each platform.
+
+The status of these builds is visible on ["collectd's pull requests page"](https://github.com/collectd/collectd/pulls).
+
+### Master and release branches
+
+Each time a new patch is pushed to the master or release branches, it runs
+through various checks, which currently include:
+
+* checking for merge-conflicts with the release branches
+* ensuring the build system is able to able to make a release
+* building the code on various platforms (mostly the same checks as for
+  pull-requests)
+* generating static-analysis report(s)
+
+The status of these builds can be tracked in ["Jenkins"](https://ci.collectd.org/view/master/).
 
 ## Contributing
 
@@ -79,9 +103,9 @@ mailing-list](https://collectd.org/wiki/index.php/Mailing_list) or the
 Please report issues *using* collectd to the
 [main collectd repository](https://github.com/collectd/collectd/).
 
-Feel free to browse through this repo. The main build scripts and job
-descriptions are located in
-[ansible/roles/buildenv/files/](https://github.com/collectd/collectd-ci/tree/master/ansible/roles/buildenv/files).
+Feel free to browse through this repo. The build scripts are located in
+[ansible/roles/buildenv/files/](https://github.com/collectd/collectd-ci/tree/master/ansible/roles/buildenv/files)
+and the job descriptions are in [ansible/roles/jenkins/files/jobs](https://github.com/collectd/collectd-ci/tree/master/ansible/roles/jenkins/files/jobs). A `Vagrantfile` is provided to help getting a local Jenkins instance running.
 
 ## Thanks!
 
