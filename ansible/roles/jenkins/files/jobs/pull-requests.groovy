@@ -221,6 +221,13 @@ Configuration generated automatically, do not edit!
     }
   }
 
+  configure { project ->
+    project / 'properties' << 'hudson.plugins.copyartifact.CopyArtifactPermissionProperty' { }
+    project / 'properties' / 'hudson.plugins.copyartifact.CopyArtifactPermissionProperty' << 'projectNameList' {
+      string 'pull-requests-build-on-*'
+    }
+  }
+
   steps {
     shell('/usr/local/bin/cleanup-build-area.sh')
     shell('''# merge PR into master branch
