@@ -229,6 +229,7 @@ git checkout -f target/master
 git merge --ff --no-edit --log $BUILD_GIT_BRANCH || (git diff && exit 1)
 git show --stat HEAD
 ''')
+    shell('/usr/local/bin/check-bashisms.sh')
     shell('/usr/local/bin/prepare-tarball.sh')
   }
 

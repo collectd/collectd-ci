@@ -3,6 +3,7 @@
   with_items:
     - cleanup-build-area.sh
     - prepare-tarball.sh
+    - check-bashisms.sh
     - make-rpms.sh
     - make-debs.sh
     - s3-yum-repo.sh
