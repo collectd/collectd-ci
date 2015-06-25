@@ -20,6 +20,7 @@
     - packages.groovy
     - build-environments.groovy
     - pull-requests.groovy
+    - master.groovy
     - views.groovy
   notify:
     - run Job_DSL_seed

@@ -232,7 +232,7 @@ buildEnvironments = [
   ],
 ]
 
-['pull-requests'].each {
+['pull-requests', 'master'].each {
   def task = "${it}"
 
   buildEnvironments.each { distro, options ->

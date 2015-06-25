@@ -27,3 +27,18 @@ listView('pull requests') {
     lastBuildConsole()
   }
 }
+
+listView('master') {
+  jobs {
+    regex('master-.+')
+  }
+
+  columns {
+    name()
+    status()
+    lastSuccess()
+    lastFailure()
+    lastDuration()
+    lastBuildConsole()
+  }
+}
