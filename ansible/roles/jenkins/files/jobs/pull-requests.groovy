@@ -180,14 +180,6 @@ Configuration generated automatically, do not edit!
       if (setupGithubHooks == 'true') {
         githubCommitNotifier()
       }
-      downstreamParameterized {
-        trigger('pull-requests-build-on-jessie-amd64-with-clang-strict') {
-          predefinedProps(downstreamProperties)
-        }
-        trigger('pull-requests-build-on-jessie-amd64-with-scan-build') {
-          predefinedProps(downstreamProperties)
-        }
-      }
     }
   }
 }
