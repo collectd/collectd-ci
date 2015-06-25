@@ -17,11 +17,11 @@ time new commits are added to the following branches:
 * ["collectd-5.4"](https://github.com/collectd/collectd/tree/collectd-5.4)
   (release branch including only bugfixes)
 
-The status of these builds can be tracked in ["Jenkins"](https://ci.collectd.org/view/packages/).
+The status of these builds can be tracked in [Jenkins](https://ci.collectd.org/view/packages/).
 
-The package and repository signing key can be double-checked on ["Github"](https://raw.githubusercontent.com/collectd/collectd-ci/master/ansible/roles/pkgrepo/files/pubkey.asc) and on ["PGP keyservers"](http://pgp.mit.edu/pks/lookup?op=vindex&search=0x3994D24FB8543576).
+The package and repository signing key can be double-checked on [Github](https://raw.githubusercontent.com/collectd/collectd-ci/master/ansible/roles/pkgrepo/files/pubkey.asc) and on [PGP keyservers](http://pgp.mit.edu/pks/lookup?op=vindex&search=0x3994D24FB8543576).
 
-*RHEL/CentOS*
+**RHEL/CentOS**
 
 Add the following to `/etc/yum.repos.d/collectd-ci.repo`:
 
@@ -44,7 +44,7 @@ with one of:
 
 Both i386 and x86\_64 architecture are supported, except for EL7 (no i386).
 
-*Debian/Ubuntu-LTS*
+**Debian/Ubuntu-LTS**
 
 Import the repository signing key:
 
@@ -78,7 +78,7 @@ The default compiler on each platform will be used, and where relevant, with
 the build options used when building packages for this platform. The support
 libraries used are those found by default on each platform.
 
-The status of these builds is visible on ["collectd's pull requests page"](https://github.com/collectd/collectd/pulls).
+The status of these builds is visible on [collectd's pull requests page](https://github.com/collectd/collectd/pulls).
 
 ### Master and release branches
 
@@ -91,7 +91,7 @@ through various checks, which currently include:
   pull-requests)
 * generating static-analysis report(s)
 
-The status of these builds can be tracked in ["Jenkins"](https://ci.collectd.org/view/master/).
+The status of these builds can be tracked in [Jenkins](https://ci.collectd.org/view/master/).
 
 ## Contributing
 
