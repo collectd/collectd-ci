@@ -250,7 +250,7 @@ buildEnvironments = [
         def jobName = "${task}-build-on-${distro}-${arch}-with-${buildName}"
 
         // The following parameters are passed down from upstream to each of the
-        // jobs: PULL_REQUEST, COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
+        // jobs: COLLECTD_BUILD, TARBALL, TARBALL_BUILD_NUMBER
         job(jobName) {
           displayName("Build ${task} on ${distro}-${arch} (${buildDescription})")
           description("""

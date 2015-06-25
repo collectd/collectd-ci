@@ -9,6 +9,6 @@ git config --local user.email "ci@collectd.org"
 git config --local user.name "Jenkins"
 
 git reset --hard
-rm -f env-*.sh
+rm -f env-*.sh env.sh
 
 ./clean.sh

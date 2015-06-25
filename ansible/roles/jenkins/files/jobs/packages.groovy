@@ -27,9 +27,20 @@ Configuration generated automatically, do not edit!
       scm('@hourly')
     }
 
+    wrappers {
+      environmentVariables {
+        envs([
+          BUILD_GIT_BRANCH: '$GIT_BRANCH',
+          BUILD_GIT_COMMIT: '$GIT_COMMIT',
+        ])
+      }
+    }
+
     steps {
       shell('/usr/local/bin/cleanup-build-area.sh')
-      shell('/usr/local/bin/packages-prepare-tarball.sh $GIT_COMMIT')
+      shell('/usr/local/bin/prepare-tarball.sh')
+      shell('git show "${GIT_BRANCH}:contrib/redhat/collectd.spec" > collectd.spec')
+      shell('mv env-${BUILD_GIT_COMMIT}.sh env.sh')
     }
 
     publishers {

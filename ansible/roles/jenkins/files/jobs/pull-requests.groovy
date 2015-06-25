@@ -75,7 +75,6 @@ Configuration generated automatically, do not edit!
       COLLECTD_BUILD:       '$COLLECTD_BUILD',
       TARBALL:              '$TARBALL',
       TARBALL_BUILD_NUMBER: '$TARBALL_BUILD_NUMBER',
-      PULL_REQUEST:         '$PULL_REQUEST',
       UPSTREAM_JOB_NAME:    'pull-requests-prepare-tarball',
     ]
 
@@ -224,7 +223,13 @@ Configuration generated automatically, do not edit!
 
   steps {
     shell('/usr/local/bin/cleanup-build-area.sh')
-    shell('/usr/local/bin/pull-requests-prepare-tarball.sh')
+    shell('''# merge PR into master branch
+test -n "$BUILD_GIT_BRANCH"
+git checkout -f target/master
+git merge --ff --no-edit --log $BUILD_GIT_BRANCH || (git diff && exit 1)
+git show --stat HEAD
+''')
+    shell('/usr/local/bin/prepare-tarball.sh')
   }
 
   publishers {
