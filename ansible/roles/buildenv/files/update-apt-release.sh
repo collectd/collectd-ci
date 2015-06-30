@@ -10,12 +10,15 @@ test -n "$PKGDIR"
 test -n "$DIST"
 
 DISTDIR="$PKGDIR/dists/${DIST}"
-
 test -d "$DISTDIR"
+
+RELEASE="$(mktemp)"
+test -f "$RELEASE"
 
 rm -f "$DISTDIR/Release" "$DISTDIR/Release.gpg"
 
-apt-ftparchive release "$DISTDIR" > "$DISTDIR/Release"
+apt-ftparchive -o "APT::FTPArchive::Release::Origin=$DIST" release "$DISTDIR" > "$RELEASE"
+mv "$RELEASE" "$DISTDIR/Release"
 gpg --detach-sign --armor --batch --default-key ci@collectd.org --output "$DISTDIR/Release.gpg" "$DISTDIR/Release"
 
 test -f ~/.s3cfg
