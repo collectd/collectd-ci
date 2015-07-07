@@ -5,7 +5,7 @@
       "image": "ubuntu-12-04-x32",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-precise-i386"
+      "snapshot_name": "precise-i386"
     }
   ],
   "provisioners": [

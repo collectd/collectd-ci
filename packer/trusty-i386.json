@@ -5,7 +5,7 @@
       "image": "ubuntu-14-04-x32",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-trusty-i386"
+      "snapshot_name": "trusty-i386"
     }
   ],
   "provisioners": [

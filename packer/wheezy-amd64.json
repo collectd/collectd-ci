@@ -5,7 +5,7 @@
       "image": "debian-7-0-x64",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-wheezy-amd64"
+      "snapshot_name": "wheezy-amd64"
     }
   ],
   "provisioners": [

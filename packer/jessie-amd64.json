@@ -5,7 +5,7 @@
       "image": "debian-8-x64",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-jessie-amd64"
+      "snapshot_name": "jessie-amd64"
     }
   ],
   "provisioners": [

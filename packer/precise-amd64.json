@@ -5,7 +5,7 @@
       "image": "ubuntu-12-04-x64",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-precise-amd64"
+      "snapshot_name": "precise-amd64"
     }
   ],
   "provisioners": [

@@ -21,7 +21,7 @@ fi
 packer validate $TEMPLATE || exit 1
 
 if $(grep -q digitalocean $TEMPLATE); then
-  python ./delete_digitalocean_image.py "buildenv-${DISTRO}"
+  python ./delete_digitalocean_image.py "${DISTRO}"
 fi
 
 packer build $TEMPLATE

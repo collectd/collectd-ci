@@ -5,7 +5,7 @@
       "image": "ubuntu-14-04-x64",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-trusty-amd64"
+      "snapshot_name": "trusty-amd64"
     }
   ],
   "provisioners": [

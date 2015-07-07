@@ -5,7 +5,7 @@
       "image": "debian-8-x32",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-jessie-i386"
+      "snapshot_name": "jessie-i386"
     }
   ],
   "provisioners": [

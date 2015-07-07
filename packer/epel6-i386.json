@@ -5,7 +5,7 @@
       "image": "centos-6-5-x32",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "buildenv-epel6-i386"
+      "snapshot_name": "epel6-i386"
     }
   ],
   "provisioners": [
