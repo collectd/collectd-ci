@@ -2,7 +2,7 @@ def githubOrg = 'collectd'
 def setupGithubHooks = SETUP_GITHUB_HOOKS // this is the env. var defined in Job_DSL_seed_config.xml
 
 multiJob('master-aggregation') {
-  displayName("Aggregate master branch checks")
+  displayName("Aggregate master branch tests")
   description("""
 This job will run various checks against the master branch:
 
