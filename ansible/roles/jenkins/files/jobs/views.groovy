@@ -13,24 +13,9 @@ listView('packages') {
   }
 }
 
-listView('pull requests') {
+listView('tests') {
   jobs {
-    regex('pull-requests-.+')
-  }
-
-  columns {
-    name()
-    status()
-    lastSuccess()
-    lastFailure()
-    lastDuration()
-    lastBuildConsole()
-  }
-}
-
-listView('master') {
-  jobs {
-    regex('master-.+')
+    regex('.+-aggregation')
   }
 
   columns {

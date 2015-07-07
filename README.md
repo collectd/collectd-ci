@@ -91,7 +91,7 @@ through various checks, which currently include:
   pull-requests)
 * generating static-analysis report(s)
 
-The status of these builds can be tracked in [Jenkins](https://ci.collectd.org/view/master/).
+The status of these builds can be tracked in [Jenkins](https://ci.collectd.org/job/master-aggregation/).
 
 ## Contributing
 
