@@ -44,8 +44,8 @@ Configuration generated automatically, do not edit!
     }
 
     steps {
-      shell('/usr/local/bin/cleanup-build-area.sh')
-      shell('/usr/local/bin/prepare-tarball.sh')
+      shell('/var/lib/jenkins/scripts/cleanup-build-area.sh')
+      shell('/var/lib/jenkins/scripts/prepare-tarball.sh')
       shell('git show "${GIT_BRANCH}:contrib/redhat/collectd.spec" > collectd.spec')
       shell('mv env-${BUILD_GIT_COMMIT}.sh env.sh')
     }
@@ -105,9 +105,9 @@ Configuration generated automatically, do not edit!
         }
       }
 
-      shell('/usr/local/bin/make-debs.sh $distro $arch')
-      shell('/usr/local/bin/s3-apt-repo.sh')
-      shell('/usr/local/bin/update-apt-release.sh')
+      shell('/var/lib/jenkins/scripts/make-debs.sh $distro $arch')
+      shell('/var/lib/jenkins/scripts/s3-apt-repo.sh')
+      shell('/var/lib/jenkins/scripts/update-apt-release.sh')
     }
 
     publishers {
@@ -158,8 +158,8 @@ Configuration generated automatically, do not edit!
         }
       }
 
-      shell('/usr/local/bin/make-rpms.sh $distro')
-      shell('/usr/local/bin/s3-yum-repo.sh')
+      shell('/var/lib/jenkins/scripts/make-rpms.sh $distro')
+      shell('/var/lib/jenkins/scripts/s3-yum-repo.sh')
     }
 
     publishers {

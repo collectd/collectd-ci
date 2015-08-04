@@ -1,5 +1,8 @@
+- name: repository of scripts used in jobs
+  file: path=/var/lib/jenkins/scripts/ state=directory owner=jenkins group=jenkins mode=0755
+
 - name: install various build scripts
-  copy: src=scripts/{{item}} dest=/usr/local/bin/ mode=0755 owner=root
+  copy: src=scripts/{{item}} dest=/var/lib/jenkins/scripts/ mode=0755 owner=jenkins group=jenkins
   with_items:
     - cleanup-build-area.sh
     - prepare-tarball.sh
