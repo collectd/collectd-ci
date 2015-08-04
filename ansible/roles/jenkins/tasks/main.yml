@@ -82,5 +82,6 @@
   when: slave_sshkey_passphrase is defined
 
 - include: plugins.yml
+- include: scripts.yml
 - include: jobs.yml
 - include: webserver.yml
