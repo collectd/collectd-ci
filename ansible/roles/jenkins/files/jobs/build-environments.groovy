@@ -103,7 +103,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
       [
         archs: ['amd64'],
@@ -111,7 +111,7 @@ buildEnvironments = [
         buildDescription: 'CC="clang -Wall -Werror"',
         buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror" V=1; make --keep-going check',
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
       [
         archs: ['amd64'],
@@ -124,7 +124,7 @@ buildEnvironments = [
         buildName: 'scan-build',
         buildDescription: 'clang\'s scan-build static analyzer',
         buildCommand: 'scan-build --keep-going -o ./scan-build ./configure --enable-debug && scan-build --keep-going -o ./scan-build make V=1',
-        artifacts: 'collectd-${COLLECTD_BUILD}/scan-build/**',
+        artifacts: ['collectd-${COLLECTD_BUILD}/scan-build/**'],
       ],
     ],
   ],
@@ -138,7 +138,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.wheezy}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -152,7 +152,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.squeeze}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -166,7 +166,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.trusty}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -180,7 +180,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.precise}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -194,7 +194,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel7}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -208,7 +208,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel6}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -222,7 +222,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel5}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -236,7 +236,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.freebsd} && make -k V=1; make -k check",
         setupTask: "${defaultSetupTask.freebsd}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
-        artifacts: 'collectd-${COLLECTD_BUILD}/**/test_*.log',
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
       ],
     ],
   ],
@@ -298,7 +298,9 @@ cd collectd-${COLLECTD_BUILD}
           publishers {
             if (artifacts != null) {
               archiveArtifacts {
-                pattern(artifacts)
+                artifacts.each {
+                  pattern("${it}")
+                }
               }
             }
           }
