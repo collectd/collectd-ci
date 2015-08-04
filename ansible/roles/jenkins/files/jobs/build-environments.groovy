@@ -98,6 +98,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
       [
         archs: ['amd64'],
@@ -106,12 +107,14 @@ buildEnvironments = [
         buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror" V=1; make --keep-going check',
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['Clang (LLVM based)'],
       ],
       [
         archs: ['amd64'],
         buildName: 'clang-strict',
         buildDescription: 'CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code"',
         buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code" V=1 || exit 0; make --keep-going check || exit 0',
+        warning: ['Clang (LLVM based)'],
       ],
       [
         archs: ['amd64'],
@@ -133,6 +136,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.wheezy}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
   ],
@@ -147,6 +151,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.squeeze}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
   ],
@@ -161,6 +166,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.trusty}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
   ],
@@ -175,6 +181,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.precise}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
   ],
@@ -189,6 +196,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel7}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
   ],
@@ -203,6 +211,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel6}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
   ],
@@ -217,6 +226,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel5}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
   ],
@@ -231,6 +241,7 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.freebsd}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'pkg-query.txt'],
+        warning: ['Clang (LLVM based)'],
       ],
     ],
   ],
@@ -248,6 +259,7 @@ buildEnvironments = [
       def setupTask = it?.setupTask
       def teardownTask = it?.teardownTask
       def artifacts = it?.artifacts
+      def warning = it?.warning
 
       it.archs.each {
         def arch = "${it}"
@@ -296,6 +308,10 @@ cd collectd-${COLLECTD_BUILD}
                   pattern("${it}")
                 }
               }
+            }
+
+            if (warning != null) {
+              warnings (warning)
             }
           }
         }
