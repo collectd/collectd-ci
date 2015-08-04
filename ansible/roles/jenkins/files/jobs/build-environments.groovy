@@ -33,16 +33,13 @@ def defaultConfigureOpts = [
 
 def defaultSetupTask = [
   debian: '''
-echo "### Installed packages: ###"
-dpkg -l
+dpkg -l > dpkg-l.txt
 ''',
   redhat: '''
-echo "### Installed packages: ###"
-rpm -qa | sort
+rpm -qa | sort > rpm-qa.txt
 ''',
   freebsd: '''
-echo "### Installed packages: ###"
-pkg query %n-%v
+pkg query %n-%v > pkg-query.txt
 ''',
 ]
 
@@ -50,9 +47,6 @@ def defaultTeardownTask = '''
 set +x
 
 SRCDIR="collectd-${COLLECTD_BUILD}/src"
-
-echo "### Generated src/config.h: ###"
-cat ${SRCDIR}/config.h
 
 echo "### Checking whether all known working plugins on this platform have been built ###"
 STATUS=0
@@ -103,7 +97,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
       ],
       [
         archs: ['amd64'],
@@ -111,7 +105,7 @@ buildEnvironments = [
         buildDescription: 'CC="clang -Wall -Werror"',
         buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror" V=1; make --keep-going check',
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
       ],
       [
         archs: ['amd64'],
@@ -138,7 +132,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.wheezy}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
       ],
     ],
   ],
@@ -152,7 +146,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.squeeze}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
       ],
     ],
   ],
@@ -166,7 +160,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.trusty}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
       ],
     ],
   ],
@@ -180,7 +174,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.precise}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
       ],
     ],
   ],
@@ -194,7 +188,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel7}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
       ],
     ],
   ],
@@ -208,7 +202,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel6}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
       ],
     ],
   ],
@@ -222,7 +216,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel5}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
       ],
     ],
   ],
@@ -236,7 +230,7 @@ buildEnvironments = [
         buildCommand: "./configure ${defaultConfigureOpts.freebsd} && make -k V=1; make -k check",
         setupTask: "${defaultSetupTask.freebsd}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
-        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log'],
+        artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'pkg-query.txt'],
       ],
     ],
   ],
