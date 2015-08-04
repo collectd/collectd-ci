@@ -58,7 +58,7 @@ Configuration generated automatically, do not edit!
   }
 
   steps {
-    shell('/usr/local/bin/cleanup-build-area.sh')
+    shell('/var/lib/jenkins/scripts/cleanup-build-area.sh')
     shell('''# merge the 2 last release branches into master
 test -n "$BUILD_NUMBER"
 git branch "build-${BUILD_NUMBER}" origin/master
@@ -71,8 +71,8 @@ done
 
 git show --stat HEAD
 ''')
-    shell('/usr/local/bin/check-bashisms.sh')
-    shell('/usr/local/bin/prepare-tarball.sh')
+    shell('/var/lib/jenkins/scripts/check-bashisms.sh')
+    shell('/var/lib/jenkins/scripts/prepare-tarball.sh')
 
     environmentVariables {
       propertiesFile('${WORKSPACE}/env-${BUILD_GIT_COMMIT}.sh')
@@ -174,6 +174,10 @@ git show --stat HEAD
         props(downstreamProperties)
       }
       job('master-build-on-jessie-amd64-with-scan-build') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-freebsd10-amd64-with-scan-build') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }

@@ -1,5 +1,4 @@
 - include: autotools.yml
-- include: scripts.yml
 - include: pkgrepo.yml
 
 - name: enforce permissions and ownership on /usr/src

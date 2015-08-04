@@ -221,15 +221,15 @@ Configuration generated automatically, do not edit!
   }
 
   steps {
-    shell('/usr/local/bin/cleanup-build-area.sh')
+    shell('/var/lib/jenkins/scripts/cleanup-build-area.sh')
     shell('''# merge PR into master branch
 test -n "$BUILD_GIT_BRANCH"
 git checkout -f target/master
 git merge --ff --no-edit --log $BUILD_GIT_BRANCH || (git diff && exit 1)
 git show --stat HEAD
 ''')
-    shell('/usr/local/bin/check-bashisms.sh')
-    shell('/usr/local/bin/prepare-tarball.sh')
+    shell('/var/lib/jenkins/scripts/check-bashisms.sh')
+    shell('/var/lib/jenkins/scripts/prepare-tarball.sh')
   }
 
   publishers {
