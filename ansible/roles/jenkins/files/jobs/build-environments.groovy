@@ -243,13 +243,6 @@ buildEnvironments = [
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'pkg-query.txt'],
         warning: ['Clang (LLVM based)'],
       ],
-      [
-        archs: ['amd64'],
-        buildName: 'scan-build',
-        buildDescription: 'clang\'s scan-build static analyzer',
-        buildCommand: 'scan-build --keep-going -o ./scan-build ./configure --enable-debug && scan-build --keep-going -o ./scan-build make V=1',
-        artifacts: ['collectd-${COLLECTD_BUILD}/scan-build/**'],
-      ],
     ],
   ],
 ]

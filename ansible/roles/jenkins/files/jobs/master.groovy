@@ -177,10 +177,6 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
-      job('master-build-on-freebsd10-amd64-with-scan-build') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
     }
   }
 }
