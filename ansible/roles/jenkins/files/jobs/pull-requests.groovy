@@ -79,8 +79,10 @@ Configuration generated automatically, do not edit!
     ]
 
     if (setupGithubHooks == 'true') {
-      configure { project ->
-        project / builders / 'com.cloudbees.jenkins.GitHubSetCommitStatusBuilder'
+      if (jobId == 'github_trigger') {
+        configure { project ->
+          project / builders / 'com.cloudbees.jenkins.GitHubSetCommitStatusBuilder'
+        }
       }
     }
 
@@ -178,7 +180,9 @@ Configuration generated automatically, do not edit!
 
     publishers {
       if (setupGithubHooks == 'true') {
-        githubCommitNotifier()
+        if (jobId == 'github_trigger') {
+          githubCommitNotifier()
+        }
       }
     }
   }
