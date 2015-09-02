@@ -9,8 +9,8 @@ def testPRJobs = [
   ],
 
   github_trigger: [
-    triggerType: 'triggered by github hook',
-    shortDescr: 'This job gets triggered by github each time a pull-request is submitted/updated.',
+    triggerType: 'triggered by new commits on github',
+    shortDescr: 'This job checks hourly for new/updated pull-requests on github.',
     branchRef: 'origin/pr/*',
   ],
 ]
