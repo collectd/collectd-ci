@@ -58,7 +58,7 @@ Configuration generated automatically, do not edit!
 
     if (jobId == 'github_trigger') {
       triggers {
-        githubPush()
+        scm('@hourly')
       }
     }
 
