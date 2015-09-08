@@ -1,6 +1,7 @@
 def defaultConfigureOpts = [
   common: [
     '--enable-debug',
+    '--disable-dependency-tracking',
   ].join(' '),
 
   debian: [ // default build flags & options use when building .deb packages
