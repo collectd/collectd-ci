@@ -93,7 +93,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
+        buildDescription: "distro's default toolchain and dpkg build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
@@ -119,7 +119,7 @@ buildEnvironments = [
       [
         archs: ['amd64'],
         buildName: 'scan-build',
-        buildDescription: 'clang\'s scan-build static analyzer',
+        buildDescription: "clang's scan-build static analyzer",
         buildCommand: "scan-build --keep-going -o ./scan-build ./configure ${defaultConfigureOpts.common} && scan-build --keep-going -o ./scan-build make",
         artifacts: ['collectd-${COLLECTD_BUILD}/scan-build/**'],
       ],
@@ -131,7 +131,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
+        buildDescription: "distro's default toolchain and dpkg build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.wheezy}\"; ${defaultTeardownTask}",
@@ -146,7 +146,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
+        buildDescription: "distro's default toolchain and dpkg build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.squeeze}\"; ${defaultTeardownTask}",
@@ -161,7 +161,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
+        buildDescription: "distro's default toolchain and dpkg build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.trusty}\"; ${defaultTeardownTask}",
@@ -176,7 +176,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
+        buildDescription: "distro's default toolchain and dpkg build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.precise}\"; ${defaultTeardownTask}",
@@ -191,7 +191,7 @@ buildEnvironments = [
       [
         archs: ['x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and rpm build options',
+        buildDescription: "distro's default toolchain and rpm build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel7}\"; ${defaultTeardownTask}",
@@ -206,7 +206,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and rpm build options',
+        buildDescription: "distro's default toolchain and rpm build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel6}\"; ${defaultTeardownTask}",
@@ -221,7 +221,7 @@ buildEnvironments = [
       [
         archs: ['i386', 'x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and rpm build options',
+        buildDescription: "distro's default toolchain and rpm build options",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel5}\"; ${defaultTeardownTask}",
@@ -236,7 +236,7 @@ buildEnvironments = [
       [
         archs: ['amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
+        buildDescription: "distro's default toolchain",
         buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.freebsd} && make -k; make -k check",
         setupTask: "${defaultSetupTask.freebsd}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
