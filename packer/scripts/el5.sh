@@ -11,7 +11,7 @@ yum -y install sudo rsync
 yum -y install epel-release
 yum -y update
 
-yum -y install autoconf automake bison byacc cpp curl flex gcc gdb git glibc-devel libgcrypt-devel libtool libtool-ltdl-devel m4 make nc pkgconfig strace tar valgrind
+yum -y install autoconf automake bison byacc cpp curl flex gcc gdb git glibc-devel libgcrypt-devel libtool libtool-ltdl-devel m4 make nc pkgconfig redhat-rpm-config strace tar valgrind
 yum -y install OpenIPMI-devel curl-devel ganglia-devel gtk2-devel iptables-devel java-1.7.0-openjdk-devel java-devel jpackage-utils libcap-devel libdbi-devel libesmtp-devel libmemcached-devel libmnl-devel libnotify-devel liboping-devel libpcap-devel librabbitmq-devel libvirt-devel libxml2-devel lm_sensors-devel mysql-devel net-snmp-devel nut-devel openldap-devel postgresql-devel protobuf-c-devel python26-devel rrdtool-devel varnish-libs-devel openldap-devel
 
 yum -y clean all
