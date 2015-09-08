@@ -104,7 +104,7 @@ buildEnvironments = [
         archs: ['amd64'],
         buildName: 'clang',
         buildDescription: 'CC="clang -Wall -Werror"',
-        buildCommand: "./configure ${defaultConfigureOpts.common} CC=clang && make --keep-going CC='clang -Wall -Werror'; make --keep-going check",
+        buildCommand: "./configure ${defaultConfigureOpts.common} CC=clang CFLAGS='-Wall -Werror' && make --keep-going; make --keep-going check",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
         warning: ['Clang (LLVM based)'],
@@ -113,7 +113,7 @@ buildEnvironments = [
         archs: ['amd64'],
         buildName: 'clang-strict',
         buildDescription: 'CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code"',
-        buildCommand: "./configure ${defaultConfigureOpts.common} CC=clang && make --keep-going CC='clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code' || exit 0; make --keep-going check || exit 0",
+        buildCommand: "./configure ${defaultConfigureOpts.common} CC=clang CFLAGS='-Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code' && make --keep-going || exit 0; make --keep-going check || exit 0",
         warning: ['Clang (LLVM based)'],
       ],
       [
