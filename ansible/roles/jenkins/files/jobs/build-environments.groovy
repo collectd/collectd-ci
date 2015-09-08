@@ -7,13 +7,12 @@ def defaultConfigureOpts = [
 
   debian: [ // default build flags & options use when building .deb packages
     'CFLAGS="$(dpkg-buildflags --get CFLAGS) -Wall -Wno-error=deprecated-declarations"',
-    'CPPLAGS="$(dpkg-buildflags --get CPPFLAGS) -DLT_LAZY_OR_NOW=\'RTLD_LAZY|RTLD_GLOBAL\'"',
+    'CPPLAGS="$(dpkg-buildflags --get CPPFLAGS)"',
     'LDFLAGS="$(dpkg-buildflags --get LDFLAGS)"',
   ].join(' '),
 
   redhat: [ // default build flags & options use when building .rpm packages
     'CFLAGS="$(rpm --eval \'%optflags\')"',
-    'CPPFLAGS="-DLT_LAZY_OR_NOW=\'RTLD_LAZY|RTLD_GLOBAL\'"',
   ].join(' '),
 
   freebsd: [
