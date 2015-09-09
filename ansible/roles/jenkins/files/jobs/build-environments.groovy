@@ -1,15 +1,18 @@
 def defaultConfigureOpts = [
+  common: [
+    '--enable-debug',
+    '--disable-dependency-tracking',
+    '--disable-silent-rules',
+  ].join(' '),
+
   debian: [ // default build flags & options use when building .deb packages
     'CFLAGS="$(dpkg-buildflags --get CFLAGS) -Wall -Wno-error=deprecated-declarations"',
-    'CPPLAGS="$(dpkg-buildflags --get CPPFLAGS) -DLT_LAZY_OR_NOW=\'RTLD_LAZY|RTLD_GLOBAL\'"',
+    'CPPLAGS="$(dpkg-buildflags --get CPPFLAGS)"',
     'LDFLAGS="$(dpkg-buildflags --get LDFLAGS)"',
-    '--enable-debug',
   ].join(' '),
 
   redhat: [ // default build flags & options use when building .rpm packages
     'CFLAGS="$(rpm --eval \'%optflags\')"',
-    'CPPFLAGS="-DLT_LAZY_OR_NOW=\'RTLD_LAZY|RTLD_GLOBAL\'"',
-    '--enable-debug',
   ].join(' '),
 
   freebsd: [
@@ -25,7 +28,6 @@ def defaultConfigureOpts = [
     '--with-libyajl=/usr/local/',
     '--with-python=/usr/local/bin/python3.4',
     '--with-java=/usr/local/openjdk8',
-    '--enable-debug',
    ].join(' '),
 ]
 
@@ -34,7 +36,7 @@ def defaultSetupTask = [
 dpkg -l > dpkg-l.txt
 ''',
   redhat: '''
-rpm -qa | sort > rpm-qa.txt
+rpm -qa --nosignature --nodigest | sort > rpm-qa.txt
 ''',
   freebsd: '''
 pkg query %n-%v > pkg-query.txt
@@ -91,8 +93,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
-        buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and dpkg build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
@@ -102,7 +104,7 @@ buildEnvironments = [
         archs: ['amd64'],
         buildName: 'clang',
         buildDescription: 'CC="clang -Wall -Werror"',
-        buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror" V=1; make --keep-going check',
+        buildCommand: "./configure ${defaultConfigureOpts.common} CC=clang CFLAGS='-Wall -Werror' && make --keep-going; make --keep-going check",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
         warning: ['Clang (LLVM based)'],
@@ -111,14 +113,14 @@ buildEnvironments = [
         archs: ['amd64'],
         buildName: 'clang-strict',
         buildDescription: 'CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code"',
-        buildCommand: './configure --enable-debug CC="clang" && make --keep-going CC="clang -Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code" V=1 || exit 0; make --keep-going check || exit 0',
+        buildCommand: "./configure ${defaultConfigureOpts.common} CC=clang CFLAGS='-Wall -Werror -Wextra -Wpedantic -Wconversion -Wformat=2 -Wshadow -Wunreachable-code' && make --keep-going || exit 0; make --keep-going check || exit 0",
         warning: ['Clang (LLVM based)'],
       ],
       [
         archs: ['amd64'],
         buildName: 'scan-build',
-        buildDescription: 'clang\'s scan-build static analyzer',
-        buildCommand: 'scan-build --keep-going -o ./scan-build ./configure --enable-debug && scan-build --keep-going -o ./scan-build make V=1',
+        buildDescription: "clang's scan-build static analyzer",
+        buildCommand: "scan-build --keep-going -o ./scan-build ./configure ${defaultConfigureOpts.common} && scan-build --keep-going -o ./scan-build make",
         artifacts: ['collectd-${COLLECTD_BUILD}/scan-build/**'],
       ],
     ],
@@ -129,8 +131,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
-        buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and dpkg build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.wheezy}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
@@ -144,8 +146,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
-        buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and dpkg build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.squeeze}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
@@ -159,8 +161,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
-        buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and dpkg build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.trusty}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
@@ -174,8 +176,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and dpkg build options',
-        buildCommand: "./configure ${defaultConfigureOpts.debian} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and dpkg build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.precise}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
@@ -189,8 +191,8 @@ buildEnvironments = [
       [
         archs: ['x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and rpm build options',
-        buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and rpm build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel7}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
@@ -204,8 +206,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and rpm build options',
-        buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and rpm build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel6}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
@@ -219,8 +221,8 @@ buildEnvironments = [
       [
         archs: ['i386', 'x86_64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain and rpm build options',
-        buildCommand: "./configure ${defaultConfigureOpts.redhat} && make --keep-going V=1; make --keep-going check",
+        buildDescription: "distro's default toolchain and rpm build options",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} && make --keep-going; make --keep-going check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel5}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
@@ -234,8 +236,8 @@ buildEnvironments = [
       [
         archs: ['amd64'],
         buildName: 'default-toolchain',
-        buildDescription: 'distro\'s default toolchain',
-        buildCommand: "./configure ${defaultConfigureOpts.freebsd} && make -k V=1; make -k check",
+        buildDescription: "distro's default toolchain",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.freebsd} && make -k; make -k check",
         setupTask: "${defaultSetupTask.freebsd}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'pkg-query.txt'],
