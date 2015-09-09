@@ -58,7 +58,7 @@ for i in ${PLUGIN_LIST}; do
   fi
 done
 
-echo "### Checking for new/unknown plugins on this platform ###"
+echo "### Looking for any plugins previously unsupported on this platform ###"
 for i in ${SRCDIR}/.libs/*.so; do
   plugin="$(basename $i)"
   FOUND=0
@@ -66,7 +66,7 @@ for i in ${SRCDIR}/.libs/*.so; do
     [ "x${plugin}" = "x${j}.so" ] && FOUND=1
   done
   if [ $FOUND -eq 0 ]; then
-    echo "found unknown plugin: ${plugin}"
+    echo "found this new plugin: ${plugin}"
     ldd "${SRCDIR}/.libs/${plugin}"
   fi
 done
