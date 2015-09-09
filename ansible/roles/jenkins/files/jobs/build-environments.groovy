@@ -4,13 +4,13 @@ def defaultConfigureOpts = [
     '--disable-dependency-tracking',
   ].join(' '),
 
-  debian: [ // default build flags & options use when building .deb packages
+  debian: [ // default build flags & options used when building .deb packages
     'CFLAGS="$(dpkg-buildflags --get CFLAGS) -Wall -Wno-error=deprecated-declarations"',
     'CPPLAGS="$(dpkg-buildflags --get CPPFLAGS)"',
     'LDFLAGS="$(dpkg-buildflags --get LDFLAGS)"',
   ].join(' '),
 
-  redhat: [ // default build flags & options use when building .rpm packages
+  redhat: [ // default build flags & options used when building .rpm packages
     'CFLAGS="$(rpm --eval \'%optflags\')"',
   ].join(' '),
 
