@@ -175,6 +175,26 @@ Configuration generated automatically, do not edit!
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
+        job('pull-requests-build-on-jessie-amd64-with-libstatgrab') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
+        job('pull-requests-build-on-wheezy-amd64-with-libstatgrab') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
+        job('pull-requests-build-on-squeeze-amd64-with-libstatgrab') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
+        job('pull-requests-build-on-epel6-x86_64-with-libstatgrab') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
+        job('pull-requests-build-on-freebsd10-amd64-with-libstatgrab') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
       }
     }
 

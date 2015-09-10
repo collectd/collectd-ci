@@ -2,6 +2,7 @@ def defaultConfigureOpts = [
   common: [
     '--enable-debug',
     '--disable-dependency-tracking',
+    '--without-libstatgrab',
   ].join(' '),
 
   debian: [ // default build flags & options used when building .deb packages
@@ -28,6 +29,18 @@ def defaultConfigureOpts = [
     '--with-python=/usr/local/bin/python3.4',
     '--with-java=/usr/local/openjdk8',
    ].join(' '),
+
+   statgrab: [
+     '--with-libstatgrab',
+     '--disable-all-plugins',
+     '--enable-cpu',
+     '--enable-disk',
+     '--enable-interface',
+     '--enable-load',
+     '--enable-memory',
+     '--enable-swap',
+     '--enable-users',
+   ].join(' ')
 ]
 
 def defaultSetupTask = [
@@ -68,6 +81,25 @@ for i in ${SRCDIR}/.libs/*.so; do
   if [ $FOUND -eq 0 ]; then
     echo "found this new plugin: ${plugin}"
     ldd "${SRCDIR}/.libs/${plugin}"
+  fi
+done
+
+exit $STATUS
+'''
+
+def statgrabTeardownTask = '''
+set +x
+
+PLUGIN_LIST="cpu disk interface load memory swap users"
+SRCDIR="collectd-${COLLECTD_BUILD}/src"
+STATUS=0
+
+for i in ${PLUGIN_LIST}; do
+  if $(ldd "${SRCDIR}/.libs/${i}.so" | grep -q 'libstatgrab.so'); then
+    echo "plugin $i linked against libstatgrab"
+  else
+    echo "plugin $i NOT linked against libstatgrab"
+    STATUS=1
   fi
 done
 
@@ -122,6 +154,16 @@ buildEnvironments = [
         buildCommand: "scan-build -k -o ./scan-build ./configure ${defaultConfigureOpts.common} && scan-build -k -o ./scan-build make",
         artifacts: ['collectd-${COLLECTD_BUILD}/scan-build/**'],
       ],
+      [
+        archs: ['amd64'],
+        buildName: 'libstatgrab',
+        buildDescription: "default toolchain, using libstatgrab",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} ${defaultConfigureOpts.statgrab} && make -sk",
+        setupTask: "${defaultSetupTask.debian}",
+        teardownTask: "${statgrabTeardownTask}",
+        artifacts: ['collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
+      ],
     ],
   ],
 
@@ -137,6 +179,16 @@ buildEnvironments = [
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
         warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
+      [
+        archs: ['amd64'],
+        buildName: 'libstatgrab',
+        buildDescription: "default toolchain, using libstatgrab",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} ${defaultConfigureOpts.statgrab} && make -sk",
+        setupTask: "${defaultSetupTask.debian}",
+        teardownTask: "${statgrabTeardownTask}",
+        artifacts: ['collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
+      ],
     ],
   ],
 
@@ -150,6 +202,16 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.debian}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.squeeze}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
+      ],
+      [
+        archs: ['amd64'],
+        buildName: 'libstatgrab',
+        buildDescription: "default toolchain, using libstatgrab",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} ${defaultConfigureOpts.statgrab} && make -sk",
+        setupTask: "${defaultSetupTask.debian}",
+        teardownTask: "${statgrabTeardownTask}",
+        artifacts: ['collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
         warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
     ],
@@ -212,6 +274,16 @@ buildEnvironments = [
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
         warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
+      [
+        archs: ['x86_64'],
+        buildName: 'libstatgrab',
+        buildDescription: "default toolchain, using libstatgrab",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} ${defaultConfigureOpts.statgrab} && make -sk",
+        setupTask: "${defaultSetupTask.redhat}",
+        teardownTask: "${statgrabTeardownTask}",
+        artifacts: ['collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
+      ],
     ],
   ],
 
@@ -240,6 +312,16 @@ buildEnvironments = [
         setupTask: "${defaultSetupTask.freebsd}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.freebsd10}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'pkg-query.txt'],
+        warning: ['Clang (LLVM based)'],
+      ],
+      [
+        archs: ['amd64'],
+        buildName: 'libstatgrab',
+        buildDescription: "default toolchain, using libstatgrab",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.freebsd} ${defaultConfigureOpts.statgrab} && make -sk",
+        setupTask: "${defaultSetupTask.freebsd}",
+        teardownTask: "${statgrabTeardownTask}",
+        artifacts: ['collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'pkg-query.txt'],
         warning: ['Clang (LLVM based)'],
       ],
     ],

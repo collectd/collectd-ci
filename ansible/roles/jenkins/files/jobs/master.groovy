@@ -166,6 +166,26 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
+      job('master-build-on-jessie-amd64-with-libstatgrab') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-wheezy-amd64-with-libstatgrab') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-squeeze-amd64-with-libstatgrab') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-epel6-x86_64-with-libstatgrab') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-freebsd10-amd64-with-libstatgrab') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
     }
 
     phase('informative (static analysis and stricter than usual build options)', 'SUCCESSFUL') {
