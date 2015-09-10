@@ -164,6 +164,15 @@ buildEnvironments = [
         artifacts: ['collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
         warning: ['GNU Make + GNU C Compiler (gcc)'],
       ],
+      [
+        archs: ['amd64'],
+        buildName: 'musl-libc',
+        buildDescription: "CC=musl-gcc (wrapper for linking with musl-libc)",
+        buildCommand: "./configure CC=musl-gcc ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make -sk || exit 0; make -sk check || exit 0",
+        setupTask: "${defaultSetupTask.debian}",
+        artifacts: ['collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
+        warning: ['GNU Make + GNU C Compiler (gcc)'],
+      ],
     ],
   ],
 

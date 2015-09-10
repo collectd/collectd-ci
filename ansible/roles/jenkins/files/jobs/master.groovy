@@ -189,11 +189,18 @@ git show --stat HEAD
       }
     }
 
-    phase('informative (static analysis and stricter than usual build options)', 'SUCCESSFUL') {
+    phase('informative (build options and environments which are know to fail)', 'ALWAYS') {
       job('master-build-on-jessie-amd64-with-clang-strict') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
+      job('master-build-on-jessie-amd64-with-musl-libc') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+    }
+
+    phase('static analysis', 'SUCCESSFUL') {
       job('master-build-on-jessie-amd64-with-scan-build') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
