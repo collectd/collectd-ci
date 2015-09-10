@@ -6,7 +6,7 @@ test "x$(id -un)" = "xjenkins"
 
 ./build.sh
 ./configure
-make dist-gzip
+make -s dist-gzip
 
 COLLECTD_BUILD="$(./version-gen.sh)"
 TARBALL="collectd-$COLLECTD_BUILD.tar.gz"

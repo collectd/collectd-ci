@@ -84,7 +84,7 @@ git show --stat HEAD
       }
     }
 
-    shell('make distcheck')
+    shell('make -s distcheck')
 
     environmentVariables {
       propertiesFile('${JENKINS_HOME}/jobs/master-prepare-tarball/workspace/env-${BUILD_GIT_COMMIT}.sh')
