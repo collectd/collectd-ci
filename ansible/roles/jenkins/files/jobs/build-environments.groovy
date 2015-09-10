@@ -134,8 +134,8 @@ buildEnvironments = [
       [
         archs: ['amd64'],
         buildName: 'clang',
-        buildDescription: 'CC="clang -Wall -Werror"',
-        buildCommand: "./configure ${defaultConfigureOpts.common} CC=clang CFLAGS='-Wall -Werror' && make -sk; make -sk check",
+        buildDescription: 'CC="clang"',
+        buildCommand: "./configure CC=clang ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} && make -sk; make -sk check",
         teardownTask: "PLUGIN_LIST=\"${pluginList.jessie}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
         warning: ['Clang (LLVM based)'],
