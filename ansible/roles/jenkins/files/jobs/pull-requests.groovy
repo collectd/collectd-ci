@@ -110,6 +110,7 @@ Configuration generated automatically, do not edit!
 
       phase('mandatory (platforms for which packages are built)', 'SUCCESSFUL') {
         job('pull-requests-build-on-jessie-i386-with-default-toolchain') {
+          killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
         job('pull-requests-build-on-trusty-amd64-with-default-toolchain') {

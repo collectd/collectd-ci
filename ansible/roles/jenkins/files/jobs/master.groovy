@@ -101,6 +101,7 @@ git show --stat HEAD
 
     phase('mandatory (platforms for which packages are built)', 'SUCCESSFUL') {
       job('master-build-on-jessie-i386-with-default-toolchain') {
+        killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
       job('master-build-on-trusty-amd64-with-default-toolchain') {
