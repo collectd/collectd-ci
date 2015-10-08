@@ -64,10 +64,11 @@ if [ $(git branch --list $DEBIAN_BRANCH | wc -l) -eq "1" ]; then
   git branch -D $DEBIAN_BRANCH
 fi
 git checkout -B $DEBIAN_BRANCH
-git rm debian/patches/*.dpatch
+rm -f debian/patches/*patch
 echo > debian/patches/00list
-git add debian/patches/00list
-git commit -m "remove dpatches"
+echo > debian/patches/series
+git add debian/patches/
+git commit -m "remove (d)patches"
 
 dch -D unstable -v $PKG_VERSION "nightly build"
 git add debian/changelog
