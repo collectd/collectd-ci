@@ -64,9 +64,8 @@ if [ $(git branch --list $DEBIAN_BRANCH | wc -l) -eq "1" ]; then
   git branch -D $DEBIAN_BRANCH
 fi
 git checkout -B $DEBIAN_BRANCH
-rm -f debian/patches/*patch
-echo > debian/patches/00list
-echo > debian/patches/series
+rm -f debian/patches/*
+rmdir debian/patches/
 git add debian/patches/
 git commit -m "remove (d)patches"
 
