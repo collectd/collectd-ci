@@ -1,8 +1,6 @@
 {
   "exoscale_key": "xxx",
   "exoscale_secret": "xxx",
-  "digitalocean_v1_apikey": "xxx",
-  "digitalocean_v1_clientid": "xxx",
   "digitalocean_v2_token": "xxx",
   "digitalocean_sshkeyid": "123456",
   "digitalocean_sshprivatekey": "aGVsbG8gd29ybGQK",

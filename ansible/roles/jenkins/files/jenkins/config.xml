@@ -10,8 +10,7 @@
     <com.dubture.jenkins.digitalocean.Cloud>
       <name>digitalocean</name>
       <instanceCap>30</instanceCap>
-      <apiKey>abc123</apiKey>
-      <clientId>def456</clientId>
+      <authToken>abc123</authToken>
       <sshKeyId>789</sshKeyId>
       <privateKey>-----BEGIN RSA PRIVATE KEY-----
 aGVsbG8K

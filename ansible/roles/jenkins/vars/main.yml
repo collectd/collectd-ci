@@ -9,7 +9,7 @@ jenkins_plugins: # version: 0 means latest version available
   - { plugin: parameterized-trigger, version: 0 }
   - { plugin: throttle-concurrents, version: 0 }
   - { plugin: libvirt-slave, version: 0 }
-  - { plugin: digitalocean-plugin, version: 0 }
+  - { plugin: digitalocean-plugin, version: 0.6.1 }
   - { plugin: console-tail, version: 0 }
   - { plugin: greenballs, version: 0 }
   - { plugin: extra-columns, version: 0 }

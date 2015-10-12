@@ -25,8 +25,11 @@ def slave_template(image):
   <labelString />
   <labels />
   <idleTerminationInMinutes>30</idleTerminationInMinutes>
-  <sizeId>66</sizeId>
-  <regionId>10</regionId>
+  <numExecutors>3</numExecutors>
+  <sizeId>512mb</sizeId>
+  <regionId>fra1</regionId>
+  <userData></userData>
+  <initScript></initScript>
 </com.dubture.jenkins.digitalocean.SlaveTemplate>
 ''')
 
@@ -40,12 +43,6 @@ def slave_template(image):
 def setup_digitalocean_cloud():
     xmlnode = root.find('clouds').find('com.dubture.jenkins.digitalocean.Cloud')
 
-    if 'digitalocean_v1_apikey' in vars:
-        xmlnode.find('apiKey').text = vars['digitalocean_v1_apikey']
-
-    if 'digitalocean_v1_clientid' in vars:
-        xmlnode.find('clientId').text = vars['digitalocean_v1_clientid']
-
     if 'digitalocean_sshkeyid' in vars:
         xmlnode.find('sshKeyId').text = vars['digitalocean_sshkeyid']
 
@@ -55,6 +52,7 @@ def setup_digitalocean_cloud():
         xmlnode.find('privateKey').text += "\n-----END RSA PRIVATE KEY-----"
 
     if 'digitalocean_v2_token' in vars:
+        xmlnode.find('authToken').text = vars['digitalocean_v2_token']
         snapshots = digitalocean_snapshots(vars['digitalocean_v2_token'])
         templates = xmlnode.find('templates')
         templates.clear()
