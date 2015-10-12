@@ -24,7 +24,7 @@ def slave_template(image):
   <imageId />
   <labelString />
   <labels />
-  <idleTerminationInMinutes>30</idleTerminationInMinutes>
+  <idleTerminationInMinutes>50</idleTerminationInMinutes>
   <numExecutors>3</numExecutors>
   <sizeId>512mb</sizeId>
   <regionId>fra1</regionId>
