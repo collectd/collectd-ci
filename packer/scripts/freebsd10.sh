@@ -13,3 +13,6 @@ cat << EOF | sudo tee -a /etc/fstab
 fdesc   /dev/fd         fdescfs         rw      0       0
 proc    /proc           procfs          rw      0       0
 EOF
+
+sudo mkdir -p /opt/jenkins
+sudo ln -s /usr/local/bin/java /opt/jenkins/

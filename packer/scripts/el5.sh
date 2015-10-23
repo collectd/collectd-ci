@@ -16,3 +16,6 @@ yum -y install autoconf automake bison cpp curl flex gcc gdb git glibc-devel lib
 yum -y install OpenIPMI-devel curl-devel ganglia-devel gtk2-devel iptables-devel java-1.7.0-openjdk-devel java-devel jpackage-utils libcap-devel libdbi-devel libesmtp-devel libmemcached-devel libmnl-devel libnotify-devel liboping-devel libpcap-devel librabbitmq-devel libvirt-devel libxml2-devel lm_sensors-devel mysql-devel net-snmp-devel nut-devel openldap-devel postgresql-devel protobuf-c-devel python26-devel rrdtool-devel varnish-libs-devel openldap-devel
 
 yum -y clean all
+
+mkdir -p /opt/jenkins
+ln -s /usr/lib/jvm/jre-1.7.0/bin/java /opt/jenkins/
