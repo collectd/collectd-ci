@@ -52,7 +52,7 @@
     - waiting for jenkins to reboot
 
 - name: setup github commit status credentials
-  template: src=com.cloudbees.jenkins.GitHubPushTrigger.xml.j2 dest=/var/lib/jenkins/com.cloudbees.jenkins.GitHubPushTrigger.xml owner=jenkins group=jenkins mode=0644
+  template: src=com.cloudbees.jenkins.GitHubPushTrigger.xml.j2 dest=/var/lib/jenkins/com.cloudbees.jenkins.GitHubPushTrigger.xml owner=jenkins group=jenkins mode=0644 force=no
   when: github_api_token is defined
   notify:
     - restart jenkins
