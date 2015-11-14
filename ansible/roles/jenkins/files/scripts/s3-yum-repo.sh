@@ -19,9 +19,8 @@ if test "$DIST" = "epel-5-i386" || test "$DIST" = "epel-5-x86_64"; then
   createrepo -s sha "$REPO"
 else
   createrepo "$REPO"
+  gpg --detach-sign --armor --batch --default-key ci@collectd.org "$REPO/repodata/repomd.xml"
 fi
-
-gpg --detach-sign --armor --batch --default-key ci@collectd.org "$REPO/repodata/repomd.xml"
 
 cat << EOF > "$REPO/status.json"
 {

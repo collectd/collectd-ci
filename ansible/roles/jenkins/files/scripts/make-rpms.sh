@@ -54,7 +54,9 @@ mkdir -p "$RESULTDIR"
 
 mock --verbose --cleanup-after --rpmbuild_timeout=600 -r "$DIST" --rebuild $RPMBUILD/SRPMS/collectd-${COLLECTD_BUILD}-*.src.rpm --resultdir="$RESULTDIR"
 
-rpm --addsign $RESULTDIR/*.rpm
+if test "$DIST" != "epel-5-i386" && test "$DIST" != "epel-5-x86_64"; then
+  rpm --addsign $RESULTDIR/*.rpm
+fi
 
 cat > "${WORKSPACE}/s3repo.sh" << EOF
 BRANCH=$BRANCH
