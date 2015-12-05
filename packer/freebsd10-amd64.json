@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "digitalocean",
-      "image": "freebsd-10-1-x64",
+      "image": "freebsd-10-2-x64",
       "region": "fra1",
       "size": "512mb",
       "snapshot_name": "freebsd10-amd64",
