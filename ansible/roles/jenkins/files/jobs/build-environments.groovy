@@ -16,16 +16,6 @@ def defaultConfigureOpts = [
   ].join(' '),
 
   freebsd: [
-    '--with-libdbi=/usr/local',
-    '--with-libesmtp=/usr/local',
-    '--with-libhiredis=/usr/local/',
-    '--with-libldap=/usr/local',
-    '--with-libmemcached=/usr/local',
-    '--with-libmosquitto=/usr/local',
-    '--with-liboping=/usr/local',
-    '--with-librabbitmq=/usr/local',
-    '--with-librrd=/usr/local',
-    '--with-libyajl=/usr/local/',
     '--with-python=/usr/local/bin/python3.4',
     '--with-java=/usr/local/openjdk8',
    ].join(' '),
