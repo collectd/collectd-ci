@@ -1,4 +1,4 @@
-apt-get -y install sudo rsync
+apt-get -y install sudo rsync curl
 
 sed -i 's/main$/main contrib non-free/' /etc/apt/sources.list
 echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/50no-install-recommends

@@ -16,6 +16,11 @@
       "type": "shell",
       "execute_command": "/bin/sh -xe {{ .Path }}",
       "script": "scripts/jessie.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -xe {{ .Path }} \"{{user `coverity_token`}}\"",
+      "script": "scripts/coverity.sh"
     }
   ]
 }
