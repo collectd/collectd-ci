@@ -17,6 +17,7 @@
 - name: install jenkins job descriptions
   copy: src=jobs/{{item}} dest=/var/lib/jenkins/jobs/Job_DSL_seed/workspace/ owner=jenkins group=jenkins mode=0644
   with_items:
+    - autoreconf.groovy
     - packages.groovy
     - build-environments.groovy
     - pull-requests.groovy
