@@ -1,4 +1,7 @@
 {
+  "variables": {
+    "coverity_token": ""
+  },
   "builders": [
     {
       "type": "digitalocean",

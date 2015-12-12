@@ -10,6 +10,11 @@ if [ "x" = "x$DIGITALOCEAN_API_TOKEN" ]; then
   exit 1
 fi
 
+if [ "x" = "x$COVERITY_TOKEN" ]; then
+  echo "Missing \$COVERITY_TOKEN environment variable"
+  exit 1
+fi
+
 DISTRO=$1
 TEMPLATE=$(basename "${DISTRO}.json")
 
@@ -24,4 +29,4 @@ if $(grep -q digitalocean $TEMPLATE); then
   python ./delete_digitalocean_image.py "${DISTRO}"
 fi
 
-packer build $TEMPLATE
+packer build -var "coverity_token=$COVERITY_TOKEN" $TEMPLATE
