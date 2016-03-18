@@ -5,12 +5,6 @@ if [ "x$PBCURRENTCOMMANDLINEOPERATION" != "xbuild" ]; then
       COMPONENTS="main universe multiverse"
       DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/ubuntu-archive-keyring.gpg' )
       ;;
-    squeeze)
-      MIRRORSITE="http://httpredir.debian.org/debian"
-      COMPONENTS="main contrib non-free"
-      OTHERMIRROR="deb http://httpredir.debian.org/debian-backports squeeze-backports main contrib non-free"
-      DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/debian-archive-keyring.gpg' )
-      ;;
     wheezy)
       MIRRORSITE="http://httpredir.debian.org/debian"
       COMPONENTS="main contrib non-free"

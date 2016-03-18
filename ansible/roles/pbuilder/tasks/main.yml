@@ -38,8 +38,6 @@
     - { dist: precise, arch: amd64 }
     - { dist: trusty, arch: i386 }
     - { dist: trusty, arch: amd64 }
-    - { dist: squeeze, arch: i386 }
-    - { dist: squeeze, arch: amd64 }
     - { dist: wheezy, arch: i386 }
     - { dist: wheezy, arch: amd64 }
     - { dist: jessie, arch: i386 }

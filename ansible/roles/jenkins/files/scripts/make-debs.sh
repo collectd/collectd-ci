@@ -9,7 +9,7 @@ test -n "$1"
 test "$2" = "i386" || test "$2" = "amd64"
 
 case "$1" in
-  precise|trusty|squeeze|wheezy|jessie)
+  precise|trusty|wheezy|jessie)
     DIST="$1"
     ARCH="$2"
   ;;
