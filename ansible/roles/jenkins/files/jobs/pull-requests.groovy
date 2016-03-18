@@ -137,14 +137,6 @@ Configuration generated automatically, do not edit!
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('pull-requests-build-on-squeeze-amd64-with-default-toolchain') {
-          killPhaseCondition('NEVER')
-          props(downstreamProperties)
-        }
-        job('pull-requests-build-on-squeeze-i386-with-default-toolchain') {
-          killPhaseCondition('NEVER')
-          props(downstreamProperties)
-        }
         job('pull-requests-build-on-epel7-x86_64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
@@ -181,10 +173,6 @@ Configuration generated automatically, do not edit!
           props(downstreamProperties)
         }
         job('pull-requests-build-on-wheezy-amd64-with-libstatgrab') {
-          killPhaseCondition('NEVER')
-          props(downstreamProperties)
-        }
-        job('pull-requests-build-on-squeeze-amd64-with-libstatgrab') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }

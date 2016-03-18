@@ -128,14 +128,6 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
-      job('master-build-on-squeeze-amd64-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
-      job('master-build-on-squeeze-i386-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
       job('master-build-on-epel7-x86_64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
@@ -172,10 +164,6 @@ git show --stat HEAD
         props(downstreamProperties)
       }
       job('master-build-on-wheezy-amd64-with-libstatgrab') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
-      job('master-build-on-squeeze-amd64-with-libstatgrab') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
