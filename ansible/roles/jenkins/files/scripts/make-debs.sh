@@ -34,7 +34,7 @@ BRANCH=$(basename $GIT_BRANCH)
 PKGDIR="/srv/build_artifacts/deb"
 export DEBEMAIL='ci@collectd.org'
 
-test -d $REPO || git clone https://github.com/mfournier/pkg-debian.git "$REPO"
+test -d $REPO || git clone https://github.com/collectd/pkg-debian.git "$REPO"
 cd "$REPO"
 
 git reset --hard
