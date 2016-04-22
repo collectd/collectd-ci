@@ -75,6 +75,7 @@ apt-get -y install \
   libupsclient1-dev \
   libvarnish-dev \
   libvirt-dev \
+  libxen-dev \
   libxml2-dev \
   libyajl-dev \
   linux-libc-dev \

@@ -64,6 +64,7 @@ yum -y install \
   python26-devel \
   rrdtool-devel \
   varnish-libs-devel \
+  xen-devel \
   xfsprogs-devel
 
 yum -y clean all

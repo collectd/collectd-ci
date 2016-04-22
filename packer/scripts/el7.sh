@@ -3,7 +3,7 @@ sysctl -p
 
 yum -y install sudo rsync
 
-yum -y install epel-release
+yum -y install epel-release centos-release-xen
 yum -y update
 
 yum -y install \
@@ -69,6 +69,7 @@ yum -y install \
   python-devel \
   rrdtool-devel \
   varnish-libs-devel \
+  xen-devel \
   xfsprogs-devel \
   xmms-devel \
   yajl-devel
