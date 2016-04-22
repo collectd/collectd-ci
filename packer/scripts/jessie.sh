@@ -66,6 +66,7 @@ apt-get -y install \
   libprotobuf-c0-dev \
   librabbitmq-dev \
   librdkafka-dev \
+  libriemann-client-dev \
   librrd-dev \
   libsensors4-dev \
   libsigrok-dev \

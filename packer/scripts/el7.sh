@@ -67,6 +67,7 @@ yum -y install \
   postgresql-devel \
   protobuf-c-devel \
   python-devel \
+  riemann-c-client-devel \
   rrdtool-devel \
   varnish-libs-devel \
   xen-devel \
