@@ -1,6 +1,54 @@
-sudo pkg install -y autoconf automake bison gdb git libtool m4 pkgconf valgrind curl
+sudo pkg install -y \
+  autoconf \
+  automake \
+  bison \
+  curl \
+  gdb \
+  git \
+  libtool \
+  m4 \
+  pkgconf \
+  valgrind
 
-sudo pkg install -y openjdk8 gnutls libdbi libesmtp libgcrypt glib hiredis openldap-sasl-client libltdl libmemcached libmodbus mosquitto mysql56-client libnotify openipmi liboping libpcap postgresql94-client protobuf protobuf-c rabbitmq-c-devel rrdtool net-snmp libstatgrab tokyocabinet tokyotyrant nut varnish4 libvirt libxml2 yajl python34 libsigrok librouteros ganglia-monitor-core librdkafka owfs xmms
+sudo pkg install -y \
+  ganglia-monitor-core \
+  glib \
+  gnutls \
+  hiredis \
+  libdbi \
+  libesmtp \
+  libgcrypt \
+  libltdl \
+  libmemcached \
+  libmodbus \
+  libnotify \
+  liboping \
+  libpcap \
+  librdkafka \
+  librouteros \
+  libsigrok \
+  libstatgrab \
+  libvirt \
+  libxml2 \
+  mosquitto \
+  mysql56-client \
+  net-snmp \
+  nut \
+  openipmi \
+  openjdk8 \
+  openldap-sasl-client \
+  owfs \
+  postgresql94-client \
+  protobuf \
+  protobuf-c \
+  python34 \
+  rabbitmq-c-devel \
+  rrdtool \
+  tokyocabinet \
+  tokyotyrant \
+  varnish4 \
+  xmms \
+  yajl
 
 sed '/ForceCommand.*droplet/d' /etc/ssh/sshd_config > ~/sshd_config
 sudo cp ~/sshd_config /etc/ssh/sshd_config
