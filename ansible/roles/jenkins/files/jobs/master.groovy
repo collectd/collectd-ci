@@ -163,7 +163,7 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
-      job('master-build-on-jessie-amd64-with-clang') {
+      job('master-build-on-xenial-amd64-with-clang') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
@@ -186,7 +186,7 @@ git show --stat HEAD
     }
 
     phase('informative (build options and environments which are know to fail)', 'ALWAYS') {
-      job('master-build-on-jessie-amd64-with-clang-strict') {
+      job('master-build-on-xenial-amd64-with-clang-strict') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
@@ -197,7 +197,7 @@ git show --stat HEAD
     }
 
     phase('static analysis', 'SUCCESSFUL') {
-      job('master-build-on-jessie-amd64-with-scan-build') {
+      job('master-build-on-xenial-amd64-with-scan-build') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
