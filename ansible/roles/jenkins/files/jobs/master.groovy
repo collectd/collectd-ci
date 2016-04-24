@@ -104,6 +104,14 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
+      job('master-build-on-xenial-amd64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-xenial-i386-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
       job('master-build-on-trusty-amd64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
