@@ -172,7 +172,7 @@ Configuration generated automatically, do not edit!
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('pull-requests-build-on-jessie-amd64-with-clang') {
+        job('pull-requests-build-on-xenial-amd64-with-clang') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
