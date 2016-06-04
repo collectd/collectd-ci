@@ -22,6 +22,11 @@ apt-get -y install \
   gcc-4.6 \
   gcc-4.7 \
   gcc-4.8 \
+  g++ \
+  g++-4.4 \
+  g++-4.6 \
+  g++-4.7 \
+  g++-4.8 \
   gdb \
   git \
   libc6-dev \

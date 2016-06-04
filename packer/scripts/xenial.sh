@@ -19,6 +19,8 @@ apt-get -y install \
   flex \
   gcc \
   gcc-4.8 \
+  g++ \
+  g++-4.8 \
   gdb \
   git \
   libc6-dev \
