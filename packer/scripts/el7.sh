@@ -15,6 +15,7 @@ yum -y install \
   curl \
   flex \
   gcc \
+  gcc-c++ \
   gdb \
   git \
   glibc-devel \

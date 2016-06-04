@@ -20,6 +20,9 @@ apt-get -y install \
   gcc \
   gcc-4.4 \
   gcc-4.5 \
+  g++ \
+  g++-4.4 \
+  g++-4.5 \
   gdb \
   git \
   libc6-dev \
