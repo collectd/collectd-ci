@@ -5,7 +5,7 @@
     - 3B4FE6ACC0B21F32
 
 - name: ubuntu apt repo
-  apt_repository: repo='deb http://archive.ubuntu.com/ubuntu trusty main' state=present
+  apt_repository: repo='deb http://archive.ubuntu.com/ubuntu xenial main' state=present
 
 - name: apt prefs for ubuntu, git-buildpackage and pbuilder
   copy: src=apt_prefs dest=/etc/apt/preferences.d/pbuilder
@@ -38,6 +38,8 @@
     - { dist: precise, arch: amd64 }
     - { dist: trusty, arch: i386 }
     - { dist: trusty, arch: amd64 }
+    - { dist: xenial, arch: i386 }
+    - { dist: xenial, arch: amd64 }
     - { dist: wheezy, arch: i386 }
     - { dist: wheezy, arch: amd64 }
     - { dist: jessie, arch: i386 }

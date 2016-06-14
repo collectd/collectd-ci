@@ -1,6 +1,6 @@
 if [ "x$PBCURRENTCOMMANDLINEOPERATION" != "xbuild" ]; then
   case $DIST in
-    precise|trusty)
+    precise|trusty|xenial)
       MIRRORSITE="http://archive.ubuntu.com/ubuntu"
       COMPONENTS="main universe multiverse"
       DEBOOTSTRAPOPTS=( '--variant=buildd' '--keyring' '/usr/share/keyrings/ubuntu-archive-keyring.gpg' )

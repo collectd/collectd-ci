@@ -65,6 +65,7 @@ Replace `<branch>` with one of the branches mentioned above. Replace
 
 * precise
 * trusty
+* xenial
 * wheezy
 * jessie
 
