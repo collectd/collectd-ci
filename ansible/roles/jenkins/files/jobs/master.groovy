@@ -8,6 +8,7 @@ This job will run various checks against the master branch:
 
  * merge bugfixes from supported release branches (implicitly checking for merge conflicts)
  * run checkbashisms on each shell script
+ * run podchecker on each pod file
  * generate and archive a release tarball
  * "make distcheck"
  * build collectd on various environments
@@ -72,6 +73,7 @@ done
 git show --stat HEAD
 ''')
     shell('/var/lib/jenkins/scripts/check-bashisms.sh')
+    shell('/var/lib/jenkins/scripts/check-pod.sh')
     shell('/var/lib/jenkins/scripts/prepare-tarball.sh')
 
     environmentVariables {
