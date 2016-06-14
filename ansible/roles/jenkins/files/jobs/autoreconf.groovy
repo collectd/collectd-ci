@@ -25,6 +25,7 @@ test -d "${WORKSPACE}/ansible/roles/jenkins/files/scripts/"
 test -d "${WORKSPACE}/ansible/roles/jenkins/files/jobs/"
 rsync -rltgoD -v --delete "${WORKSPACE}/ansible/roles/jenkins/files/scripts/" /var/lib/jenkins/scripts/
 rsync -rltgoD -v --delete "${WORKSPACE}/ansible/roles/jenkins/files/jobs/" /var/lib/jenkins/jobs/Job_DSL_seed/workspace/
+chmod +x /var/lib/jenkins/scripts/*.sh
 ''')
   }
 
