@@ -7,7 +7,7 @@
 - name: ubuntu apt repo
   apt_repository: repo='deb http://archive.ubuntu.com/ubuntu xenial main' state=present
 
-- name: apt prefs for ubuntu, git-buildpackage and pbuilder
+- name: apt prefs for ubuntu and debootstrap
   copy: src=apt_prefs dest=/etc/apt/preferences.d/pbuilder
 
 - name: install git-buildpackage and dependencies
