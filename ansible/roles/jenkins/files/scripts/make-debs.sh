@@ -52,7 +52,7 @@ if ! git show upstream > /dev/null 2>&1; then
 fi
 
 if [ $(git tag -l upstream/$COLLECTD_BUILD | wc -l) -eq "0" ]; then
-  gbp import-orig --no-interactive --no-merge "${WORKSPACE}/${TARBALL}"
+  gbp import-orig --no-interactive --no-pristine-tar --no-merge "${WORKSPACE}/${TARBALL}"
 fi
 
 git checkout -f "origin/nightlies/${BRANCH}/${DIST}"
