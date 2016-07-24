@@ -38,6 +38,7 @@ yum -y install \
 
 yum -y install \
   ganglia-devel \
+  hal-devel \
   hiredis-devel \
   iproute-devel \
   iptables-devel \

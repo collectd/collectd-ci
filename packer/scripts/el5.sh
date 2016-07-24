@@ -39,6 +39,7 @@ yum -y install \
   curl-devel \
   ganglia-devel \
   gtk2-devel \
+  hal-devel \
   iptables-devel \
   java-1.7.0-openjdk-devel \
   java-devel \
