@@ -69,6 +69,7 @@ yum -y install \
   OpenIPMI-devel \
   openldap-devel \
   perl-ExtUtils-Embed \
+  perl-ExtUtils-MakeMaker \
   postgresql-devel \
   protobuf-c-devel \
   python-devel \
