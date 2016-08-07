@@ -328,7 +328,7 @@ buildEnvironments = [
         archs: ['i386', 'x86_64'],
         buildName: 'default-toolchain',
         buildDescription: "distro's default toolchain and rpm build options",
-        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} --with-python=/usr/bin/python2.6 && make -sk; make -sk check",
+        buildCommand: "./configure ${defaultConfigureOpts.common} ${defaultConfigureOpts.redhat} --with-python=/usr/bin/python2.6 PYTHON_CONFIG=/usr/bin/python2.6-config && make -sk; make -sk check",
         setupTask: "${defaultSetupTask.redhat}",
         teardownTask: "PLUGIN_LIST=\"${pluginList.epel5}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test-*.log', 'collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'rpm-qa.txt'],
