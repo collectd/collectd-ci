@@ -30,6 +30,9 @@ sudo pkg install -y \
   libstatgrab \
   libvirt \
   libxml2 \
+  lua51 \
+  lua52 \
+  lua53 \
   mosquitto \
   mysql56-client \
   net-snmp \

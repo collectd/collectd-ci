@@ -62,6 +62,7 @@ yum -y install \
   libvirt-devel \
   libxml2-devel \
   lm_sensors-devel \
+  lua-devel \
   lvm2-devel \
   mysql-devel \
   net-snmp-devel \

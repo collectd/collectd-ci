@@ -57,6 +57,7 @@ yum -y install \
   libvirt-devel \
   libxml2-devel \
   lm_sensors-devel \
+  lua-devel \
   lvm2-devel \
   mosquitto-devel \
   mysql-devel \
