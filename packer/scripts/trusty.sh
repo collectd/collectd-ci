@@ -54,6 +54,7 @@ apt-get -y install \
   libhiredis-dev \
   libi2c-dev \
   libldap2-dev \
+  liblua-5.1-0-dev \
   libltdl-dev \
   liblvm2-dev \
   libmemcached-dev \
