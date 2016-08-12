@@ -1,0 +1,21 @@
+{
+  "variables": {
+    "coverity_token": ""
+  },
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "fedora-24-x64",
+      "region": "fra1",
+      "size": "512mb",
+      "snapshot_name": "fedora24-x86_64"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -xe {{ .Path }}",
+      "script": "scripts/fedora24.sh"
+    }
+  ]
+}
