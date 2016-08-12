@@ -1,3 +1,5 @@
+sudo pkg update -f
+
 sudo pkg install -y \
   autoconf \
   automake \
