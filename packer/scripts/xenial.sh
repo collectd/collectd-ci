@@ -89,6 +89,7 @@ apt-get -y install \
   linux-libc-dev \
   perl \
   protobuf-c-compiler \
+  python-dev \
   python3-dev \
   xfslibs-dev
 

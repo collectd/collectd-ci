@@ -47,6 +47,7 @@ sudo pkg install -y \
   protobuf \
   protobuf-c \
   python34 \
+  python35 \
   rabbitmq-c-devel \
   rrdtool \
   tokyocabinet \
