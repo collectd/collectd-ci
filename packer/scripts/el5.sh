@@ -6,6 +6,10 @@ if [ "x$(uname -m)" = "xx86_64" ]; then
   echo "exclude = *.i?86" >> /etc/yum.conf
 fi
 
+yum -y install acpid
+chkconfig acpid on
+service acpid start
+
 yum -y install sudo rsync
 
 yum -y install epel-release
