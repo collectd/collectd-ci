@@ -5,7 +5,7 @@
   "builders": [
     {
       "type": "digitalocean",
-      "image": "debian-7-0-x64",
+      "image": "debian-7-x64",
       "region": "fra1",
       "size": "512mb",
       "snapshot_name": "wheezy-amd64"

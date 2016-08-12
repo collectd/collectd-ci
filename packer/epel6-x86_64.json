@@ -5,7 +5,7 @@
   "builders": [
     {
       "type": "digitalocean",
-      "image": "centos-6-5-x64",
+      "image": "centos-6-x64",
       "region": "fra1",
       "size": "512mb",
       "snapshot_name": "epel6-x86_64"
