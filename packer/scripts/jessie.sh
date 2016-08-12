@@ -45,7 +45,7 @@ apt-get -y install \
   libdbi0-dev \
   libesmtp-dev \
   libganglia1-dev \
-  libgcrypt11-dev \
+  libgcrypt20-dev \
   libglib2.0-dev \
   libgps-dev \
   libhiredis-dev \
