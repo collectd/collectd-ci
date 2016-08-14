@@ -18,6 +18,7 @@ def defaultConfigureOpts = [
   freebsd: [
     'CPPFLAGS="-I/usr/local/include"',
     'LDFLAGS="-L/usr/local/lib"',
+    'LIBLUA_PKG_CONFIG_NAME="lua-53"',
     '--with-python=/usr/local/bin/python3.4',
     '--with-java=/usr/local/openjdk8',
    ].join(' '),
