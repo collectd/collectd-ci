@@ -12,6 +12,8 @@ time new commits are added to the following branches:
 
 * ["master"](https://github.com/collectd/collectd/tree/master/) (feature branch
   which will become the next point release)
+* ["collectd-5.6"](https://github.com/collectd/collectd/tree/collectd-5.6)
+  (pre-release branch)
 * ["collectd-5.5"](https://github.com/collectd/collectd/tree/collectd-5.5)
   (release branch including only bugfixes)
 * ["collectd-5.4"](https://github.com/collectd/collectd/tree/collectd-5.4)

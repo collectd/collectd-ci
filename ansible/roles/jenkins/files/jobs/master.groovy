@@ -65,7 +65,7 @@ test -n "$BUILD_NUMBER"
 git branch "build-${BUILD_NUMBER}" origin/master
 git checkout -f "build-${BUILD_NUMBER}"
 
-BRANCHES="$(git branch --list --all | grep -E 'origin/collectd-[0-9\\.]+$' | sort -t '.' -k 1,1 -k 2,2n | tail -n 2)"
+BRANCHES="$(git branch --list --all | grep -E 'origin/collectd-[0-9\\.]+$' | sort -t '.' -k 1,1 -k 2,2n | tail -n 3)"
 for branch in $BRANCHES; do
   git merge --ff --no-edit --log $branch || (git diff && exit 1)
 done
