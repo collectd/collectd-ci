@@ -61,6 +61,7 @@ apt-get -y install \
   liblvm2-dev \
   libmemcached-dev \
   libmnl-dev \
+  libmicrohttpd-dev \
   libmodbus-dev \
   libmosquitto0-dev \
   libmysqlclient-dev \

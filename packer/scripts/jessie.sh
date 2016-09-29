@@ -57,6 +57,7 @@ apt-get -y install \
   liblua5.2-dev \
   liblvm2-dev \
   libmemcached-dev \
+  libmicrohttpd-dev \
   libmnl-dev \
   libmodbus-dev \
   libmosquitto-dev \
