@@ -209,6 +209,12 @@ git show --stat HEAD
       }
     }
   }
+
+  publishers {
+    if (setupGithubHooks == 'true') {
+      githubCommitNotifier()
+    }
+  }
 }
 
 job('master-prepare-tarball') {
