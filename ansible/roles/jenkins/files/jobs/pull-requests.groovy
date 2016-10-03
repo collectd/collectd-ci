@@ -209,7 +209,6 @@ job('pull-requests-prepare-tarball') {
   displayName('Prepare tarball for testing pull-requests')
   description("""
 This job:
- * merges the pull-request with the master branch
  * generates a release tarball and archives it
  * exports a couple of environment variables to allow downstream tasks to refer to the release tarball
 
@@ -243,12 +242,6 @@ Configuration generated automatically, do not edit!
 
   steps {
     shell('/var/lib/jenkins/scripts/cleanup-build-area.sh')
-    shell('''# merge PR into master branch
-test -n "$BUILD_GIT_BRANCH"
-git checkout -f target/master
-git merge --ff --no-edit --log $BUILD_GIT_BRANCH || (git diff && exit 1)
-git show --stat HEAD
-''')
     shell('/var/lib/jenkins/scripts/check-bashisms.sh')
     shell('/var/lib/jenkins/scripts/prepare-tarball.sh')
   }
