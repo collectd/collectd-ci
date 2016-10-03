@@ -51,6 +51,7 @@ yum -y install \
   libdbi-devel \
   libesmtp-devel \
   libmemcached-devel \
+  libmicrohttpd-devel \
   libmnl-devel \
   libmodbus-devel \
   libnotify-devel \

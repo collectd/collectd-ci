@@ -22,6 +22,7 @@ sudo pkg install -y \
   libgcrypt \
   libltdl \
   libmemcached \
+  libmicrohttpd \
   libmodbus \
   libnotify \
   liboping \
