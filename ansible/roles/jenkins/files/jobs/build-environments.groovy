@@ -50,21 +50,25 @@ pkg query %n-%v > pkg-query.txt
 def defaultTeardownTask = '''
 set +x
 
-SRCDIR="collectd-${COLLECTD_BUILD}/src"
+SRCDIR="collectd-${COLLECTD_BUILD}"
 
 echo "### Checking whether all known working plugins on this platform have been built ###"
 STATUS=0
 for i in ${PLUGIN_LIST}; do
   echo "$i plugin:"
-  if test -f ${SRCDIR}/$i.c; then
-    ldd "${SRCDIR}/.libs/${i}.so" || STATUS=1
+  if test -f ${SRCDIR}/src/$i.c; then
+    if test -f ${SRCDIR}/.libs/${i}.so; then
+      ldd "${SRCDIR}/.libs/${i}.so" || STATUS=1
+    else
+      ldd "${SRCDIR}/src/.libs/${i}.so" || STATUS=1
+    fi
   else
     echo "... doesn't exist in this version"
   fi
 done
 
 echo "### Looking for any plugins previously unsupported on this platform ###"
-for i in ${SRCDIR}/.libs/*.so; do
+for i in ${SRCDIR}/.libs/*.so ${SRCDIR}/src/libs/*.so; do
   plugin="$(basename $i)"
   FOUND=0
   for j in ${PLUGIN_LIST}; do
@@ -72,7 +76,7 @@ for i in ${SRCDIR}/.libs/*.so; do
   done
   if [ $FOUND -eq 0 ]; then
     echo "found this new plugin: ${plugin}"
-    ldd "${SRCDIR}/.libs/${plugin}"
+    ldd "${i}"
   fi
 done
 
