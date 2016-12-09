@@ -50,6 +50,7 @@ sudo pkg install -y \
   python34 \
   python35 \
   rabbitmq-c-devel \
+  riemann-c-client \
   rrdtool \
   tokyocabinet \
   tokyotyrant \
