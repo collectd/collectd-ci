@@ -48,6 +48,7 @@ pkg query %n-%v > pkg-query.txt
 ]
 
 def defaultTeardownTask = '''
+#!/usr/bin/env bash
 set +x
 shopt -s nullglob
 
