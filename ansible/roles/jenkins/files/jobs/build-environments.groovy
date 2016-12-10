@@ -88,7 +88,7 @@ def statgrabTeardownTask = '''
 set +x
 
 PLUGIN_LIST="cpu disk interface load memory swap users"
-SRCDIR="collectd-${COLLECTD_BUILD}/src"
+SRCDIR="collectd-${COLLECTD_BUILD}"
 STATUS=0
 
 for i in ${PLUGIN_LIST}; do
