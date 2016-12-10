@@ -48,9 +48,7 @@ pkg query %n-%v > pkg-query.txt
 ]
 
 def defaultTeardownTask = '''
-#!/usr/bin/env bash
 set +x
-shopt -s nullglob
 
 SRCDIR="collectd-${COLLECTD_BUILD}"
 
@@ -72,6 +70,7 @@ done
 echo "### Looking for any plugins previously unsupported on this platform ###"
 for i in ${SRCDIR}/.libs/*.so ${SRCDIR}/src/libs/*.so; do
   plugin="$(basename $i)"
+  [ plugin = '*.so' ] && continue
   FOUND=0
   for j in ${PLUGIN_LIST}; do
     [ "x${plugin}" = "x${j}.so" ] && FOUND=1
