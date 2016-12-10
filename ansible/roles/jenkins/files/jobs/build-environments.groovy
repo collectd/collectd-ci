@@ -92,7 +92,9 @@ SRCDIR="collectd-${COLLECTD_BUILD}/src"
 STATUS=0
 
 for i in ${PLUGIN_LIST}; do
-  if $(ldd "${SRCDIR}/.libs/${i}.so" | grep -q 'libstatgrab.so'); then
+  if $(ldd "${SRCDIR}/.libs/${i}.so" 2>/dev/null | grep -q 'libstatgrab.so'); then
+    echo "plugin $i linked against libstatgrab"
+  elif $(ldd "${SRCDIR}/src/.libs/${i}.so" 2>/dev/null | grep -q 'libstatgrab.so'); then
     echo "plugin $i linked against libstatgrab"
   else
     echo "plugin $i NOT linked against libstatgrab"
