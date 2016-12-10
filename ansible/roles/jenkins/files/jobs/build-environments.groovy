@@ -49,6 +49,7 @@ pkg query %n-%v > pkg-query.txt
 
 def defaultTeardownTask = '''
 set +x
+shopt -s nullglob
 
 SRCDIR="collectd-${COLLECTD_BUILD}"
 
