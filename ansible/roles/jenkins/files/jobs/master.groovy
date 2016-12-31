@@ -150,14 +150,6 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
-      job('master-build-on-epel5-x86_64-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
-      job('master-build-on-epel5-i386-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
     }
 
     phase('supported (platforms known to work that new patches shouldn\'t break)', 'SUCCESSFUL') {
@@ -197,6 +189,14 @@ git show --stat HEAD
         props(downstreamProperties)
       }
       job('master-build-on-fedora24-x86_64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-epel5-x86_64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-epel5-i386-with-default-toolchain') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
