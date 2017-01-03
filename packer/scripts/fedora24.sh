@@ -35,6 +35,7 @@ dnf -y install \
   gpsd-devel \
   gtk2-devel \
   hiredis-devel \
+  intel-cmt-cat \
   iproute-devel \
   iptables-devel \
   java-1.8.0-openjdk-devel \
