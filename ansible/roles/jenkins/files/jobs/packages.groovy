@@ -146,7 +146,7 @@ Configuration generated automatically, do not edit!
     }
 
     axes {
-      text('distro', 'epel-5-i386', 'epel-5-x86_64', 'epel-6-i386', 'epel-6-x86_64', 'epel-7-x86_64')
+      text('distro', 'epel-6-i386', 'epel-6-x86_64', 'epel-7-x86_64')
       label('buildhost', 'master')
     }
 

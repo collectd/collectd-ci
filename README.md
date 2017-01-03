@@ -40,13 +40,10 @@ repo_gpgcheck=1
 Replace `<branch>` with one of the branches mentioned above. Replace `<rel>`
 with one of:
 
-* 5
 * 6
 * 7
 
 Both i386 and x86\_64 architecture are supported, except for EL7 (no i386).
-EL5 users will need to set `gpgcheck` and `repo_gpgcheck` to 0, as this
-distribution is too old to support the GPG key format the repository uses.
 
 **Debian/Ubuntu-LTS**
 

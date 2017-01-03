@@ -20,8 +20,6 @@
     creates: /var/cache/mock/{{item}}
   when: skip_mock_cache is not defined
   with_items:
-    - epel-5-i386
-    - epel-5-x86_64
     - epel-6-i386
     - epel-6-x86_64
     - epel-7-x86_64

@@ -192,14 +192,6 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
-      job('master-build-on-epel5-x86_64-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
-      job('master-build-on-epel5-i386-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
     }
 
     phase('static analysis', 'SUCCESSFUL') {

@@ -157,14 +157,6 @@ Configuration generated automatically, do not edit!
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('pull-requests-build-on-epel5-x86_64-with-default-toolchain') {
-          killPhaseCondition('NEVER')
-          props(downstreamProperties)
-        }
-        job('pull-requests-build-on-epel5-i386-with-default-toolchain') {
-          killPhaseCondition('NEVER')
-          props(downstreamProperties)
-        }
       }
 
       phase('supported (platforms known to work that new patches shouldn\'t break)', 'SUCCESSFUL') {

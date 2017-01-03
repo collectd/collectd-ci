@@ -8,7 +8,7 @@ test "x$(id -un)" = "xjenkins"
 test -n "$1"
 
 case "$1" in
-  epel-5-i386|epel-5-x86_64|epel-6-i386|epel-6-x86_64|epel-7-x86_64)
+  epel-6-i386|epel-6-x86_64|epel-7-x86_64)
     DIST="$1"
     RPMBUILD="${WORKSPACE}/rpmbuild"
   ;;
@@ -54,9 +54,7 @@ mkdir -p "$RESULTDIR"
 
 mock --verbose --cleanup-after --rpmbuild_timeout=600 -r "$DIST" --rebuild $RPMBUILD/SRPMS/collectd-${COLLECTD_BUILD}-*.src.rpm --resultdir="$RESULTDIR"
 
-if test "$DIST" != "epel-5-i386" && test "$DIST" != "epel-5-x86_64"; then
-  rpm --addsign $RESULTDIR/*.rpm
-fi
+rpm --addsign $RESULTDIR/*.rpm
 
 cat > "${WORKSPACE}/s3repo.sh" << EOF
 BRANCH=$BRANCH
