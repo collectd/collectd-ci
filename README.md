@@ -13,10 +13,8 @@ time new commits are added to the following branches:
 * ["master"](https://github.com/collectd/collectd/tree/master/) (feature branch
   which will become the next point release)
 * ["collectd-5.7"](https://github.com/collectd/collectd/tree/collectd-5.7)
-  (pre-release branch)
-* ["collectd-5.6"](https://github.com/collectd/collectd/tree/collectd-5.6)
   (release branch including only bugfixes)
-* ["collectd-5.5"](https://github.com/collectd/collectd/tree/collectd-5.5)
+* ["collectd-5.6"](https://github.com/collectd/collectd/tree/collectd-5.6)
   (release branch including only bugfixes)
 
 The status of these builds can be tracked in [Jenkins](https://ci.collectd.org/view/packages/).

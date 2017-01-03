@@ -1,4 +1,4 @@
-def branches = ['master', 'collectd-5.5', 'collectd-5.6', 'collectd-5.7']
+def branches = ['master', 'collectd-5.6', 'collectd-5.7']
 branches.each {
   def branchName = "${it}"
 
