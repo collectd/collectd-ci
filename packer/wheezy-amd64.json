@@ -8,7 +8,8 @@
       "image": "debian-7-x64",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "wheezy-amd64"
+      "snapshot_name": "wheezy-amd64",
+      "ssh_username": "root"
     }
   ],
   "provisioners": [

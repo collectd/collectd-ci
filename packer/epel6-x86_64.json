@@ -8,7 +8,8 @@
       "image": "centos-6-x64",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "epel6-x86_64"
+      "snapshot_name": "epel6-x86_64",
+      "ssh_username": "root"
     }
   ],
   "provisioners": [

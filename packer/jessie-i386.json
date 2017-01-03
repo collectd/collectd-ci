@@ -8,7 +8,8 @@
       "image": "debian-8-x32",
       "region": "fra1",
       "size": "512mb",
-      "snapshot_name": "jessie-i386"
+      "snapshot_name": "jessie-i386",
+      "ssh_username": "root"
     }
   ],
   "provisioners": [
