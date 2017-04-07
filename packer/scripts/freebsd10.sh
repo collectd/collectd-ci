@@ -36,6 +36,7 @@ sudo pkg install -y \
   lua51 \
   lua52 \
   lua53 \
+  mongo-c-driver \
   mosquitto \
   mysql56-client \
   net-snmp \

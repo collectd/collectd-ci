@@ -50,6 +50,7 @@ dnf -y install \
   libmicrohttpd-devel \
   libmnl-devel \
   libmodbus-devel \
+  libmongo-c-driver-devel \
   libnotify-devel \
   liboping-devel \
   libpcap-devel \

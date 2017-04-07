@@ -60,6 +60,7 @@ yum -y install \
   lm_sensors-devel \
   lua-devel \
   lvm2-devel \
+  mongo-c-driver-devel \
   mosquitto-devel \
   mysql-devel \
   net-snmp-devel \
