@@ -6,4 +6,5 @@
     - s3
     - jvm
     - nginx
+    - letsencrypt
     - pkgrepo

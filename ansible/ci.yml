@@ -8,5 +8,6 @@
     - pbuilder
     - s3
     - jvm
+    - letsencrypt
     - nginx
     - jenkins

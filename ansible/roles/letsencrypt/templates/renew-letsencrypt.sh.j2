@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+letsencrypt certonly -d {{cert_cn}} --webroot-path {{webroot}} \
+  --non-interactive --keep-until-expiring
+
+nginx -t
+nginx -s reload

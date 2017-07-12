@@ -1,0 +1,3 @@
+Package: letsencrypt certbot python-certbot python-acme python-setuptools python-dnspython python-pkg-resources python-cryptography python-pyasn1 python-openssl
+Pin: release a=jessie-backports
+Pin-Priority: 1010
