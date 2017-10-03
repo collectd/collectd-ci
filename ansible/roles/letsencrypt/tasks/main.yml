@@ -8,5 +8,5 @@
   copy: src=letsencrypt-cli.ini dest=/etc/letsencrypt/cli.ini
 
 - name: letsencrypt cron
-  template: src=renew-letsencrypt.sh.j2 dest=/etc/cron.weekly/renew-letsencrypt.sh owner=root group=root mode=0755
+  template: src=renew-letsencrypt.sh.j2 dest=/etc/cron.weekly/renew-letsencrypt owner=root group=root mode=0755
 
