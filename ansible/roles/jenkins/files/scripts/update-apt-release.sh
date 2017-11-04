@@ -18,7 +18,7 @@ test -f "$RELEASE"
 rm -f "$DISTDIR/Release" "$DISTDIR/Release.gpg"
 
 apt-ftparchive	-o "APT::FTPArchive::Release::Architectures"="amd64 i386" \
-		-o "APT::FTPArchive::Release::Components"="master collectd-5.7 collectd-5.6" \
+		-o "APT::FTPArchive::Release::Components"="master collectd-5.8 collectd-5.7 collectd-5.6" \
 		-o "APT::FTPArchive::Release::Codename=$DIST" \
 		release "$DISTDIR" > "$RELEASE"
 mv "$RELEASE" "$DISTDIR/Release"
