@@ -34,8 +34,6 @@
     creates: /var/cache/pbuilder/base-{{item.dist}}-{{item.arch}}.cow
   when: skip_pbuilder_cache is not defined
   with_items:
-    - { dist: precise, arch: i386 }
-    - { dist: precise, arch: amd64 }
     - { dist: trusty, arch: i386 }
     - { dist: trusty, arch: amd64 }
     - { dist: xenial, arch: i386 }

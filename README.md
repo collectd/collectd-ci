@@ -60,7 +60,6 @@ deb http://pkg.ci.collectd.org/deb/ <codename> <branch>
 Replace `<branch>` with one of the branches mentioned above. Replace
 `<codename>` with one of:
 
-* precise
 * trusty
 * xenial
 * wheezy

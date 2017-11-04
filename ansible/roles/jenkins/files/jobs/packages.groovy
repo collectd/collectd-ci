@@ -92,7 +92,7 @@ Configuration generated automatically, do not edit!
     }
 
     axes {
-      text('distro', 'precise', 'trusty', 'xenial', 'wheezy', 'jessie')
+      text('distro', 'trusty', 'xenial', 'wheezy', 'jessie')
       text('arch', 'i386', 'amd64')
       label('buildhost', 'master')
     }

@@ -122,14 +122,6 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
-      job('master-build-on-precise-amd64-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
-      job('master-build-on-precise-i386-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
       job('master-build-on-wheezy-amd64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
