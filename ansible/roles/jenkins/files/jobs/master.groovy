@@ -180,7 +180,15 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
+      job('master-build-on-stretch-amd64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
       job('master-build-on-fedora24-x86_64-with-default-toolchain') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-fedora26-x86_64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }

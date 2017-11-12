@@ -1,0 +1,22 @@
+{
+  "variables": {
+    "coverity_token": ""
+  },
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "debian-9-x64",
+      "region": "fra1",
+      "size": "512mb",
+      "snapshot_name": "stretch-amd64",
+      "ssh_username": "root"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -xe {{ .Path }}",
+      "script": "scripts/stretch.sh"
+    }
+  ]
+}

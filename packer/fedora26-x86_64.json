@@ -1,0 +1,22 @@
+{
+  "variables": {
+    "coverity_token": ""
+  },
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "fedora-26-x64",
+      "region": "fra1",
+      "size": "512mb",
+      "snapshot_name": "fedora26-x86_64",
+      "ssh_username": "root"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -xe {{ .Path }}",
+      "script": "scripts/fedora26.sh"
+    }
+  ]
+}
