@@ -180,7 +180,15 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
+      job('master-build-on-stretch-amd64-with-clang-strict') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
       job('master-build-on-jessie-amd64-with-musl-libc') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-stretch-amd64-with-musl-libc') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
@@ -192,10 +200,22 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
+      job('master-build-on-stretch-amd64-with-libstatgrab') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-stretch-amd64-with-clang') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
     }
 
     phase('static analysis', 'SUCCESSFUL') {
       job('master-build-on-xenial-amd64-with-scan-build') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
+      job('master-build-on-stretch-amd64-with-scan-build') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
