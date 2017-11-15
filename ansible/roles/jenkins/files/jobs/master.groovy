@@ -157,6 +157,10 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
+      job('master-build-on-stretch-amd64-with-libstatgrab') {
+        killPhaseCondition('NEVER')
+        props(downstreamProperties)
+      }
       job('master-build-on-jessie-amd64-with-libstatgrab') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
@@ -197,10 +201,6 @@ git show --stat HEAD
         props(downstreamProperties)
       }
       job('master-build-on-fedora26-x86_64-with-default-toolchain') {
-        killPhaseCondition('NEVER')
-        props(downstreamProperties)
-      }
-      job('master-build-on-stretch-amd64-with-libstatgrab') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
