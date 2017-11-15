@@ -102,14 +102,19 @@ Configuration generated automatically, do not edit!
 
       // NB: unforunately "phase" blocks don't support groovy iterators, so this
       // forces us to file all the jobs manually here.
+
       phase('touchstone (won\'t continue further down if this step fails)', 'SUCCESSFUL') {
-        job('pull-requests-build-on-jessie-amd64-with-default-toolchain') {
+        job('pull-requests-build-on-stretch-amd64-with-default-toolchain') {
           props(downstreamProperties)
         }
       }
 
       phase('mandatory (platforms for which packages are built)', 'SUCCESSFUL') {
         job('pull-requests-build-on-jessie-i386-with-default-toolchain') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
+        job('pull-requests-build-on-jessie-amd64-with-default-toolchain') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
@@ -157,6 +162,10 @@ Configuration generated automatically, do not edit!
           props(downstreamProperties)
         }
         job('pull-requests-build-on-xenial-amd64-with-clang') {
+          killPhaseCondition('NEVER')
+          props(downstreamProperties)
+        }
+        job('master-build-on-stretch-amd64-with-libstatgrab') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
