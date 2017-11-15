@@ -96,7 +96,7 @@ git show --stat HEAD
     // forces us to file all the jobs manually here.
 
     phase('touchstone (won\'t continue further down if this step fails)', 'SUCCESSFUL') {
-      job('master-build-on-jessie-amd64-with-default-toolchain') {
+      job('master-build-on-stretch-amd64-with-default-toolchain') {
         props(downstreamProperties)
       }
     }
@@ -106,7 +106,7 @@ git show --stat HEAD
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
-      job('master-build-on-stretch-amd64-with-default-toolchain') {
+      job('master-build-on-jessie-amd64-with-default-toolchain') {
         killPhaseCondition('NEVER')
         props(downstreamProperties)
       }
