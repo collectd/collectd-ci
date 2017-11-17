@@ -165,7 +165,7 @@ Configuration generated automatically, do not edit!
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
-        job('master-build-on-stretch-amd64-with-libstatgrab') {
+        job('pull-requests-build-on-stretch-amd64-with-libstatgrab') {
           killPhaseCondition('NEVER')
           props(downstreamProperties)
         }
