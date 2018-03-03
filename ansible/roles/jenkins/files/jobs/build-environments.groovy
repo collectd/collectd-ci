@@ -212,7 +212,6 @@ buildEnvironments = [
         buildName: 'clang',
         buildDescription: 'CC="clang"',
         buildCommand: "./configure CC=clang ${defaultConfigureOpts.common} ${defaultConfigureOpts.debian} --disable-ipmi && make -sk || exit 0; make -sk check || exit 0",
-        teardownTask: "PLUGIN_LIST=\"${pluginList.stretch}\"; ${defaultTeardownTask}",
         artifacts: ['collectd-${COLLECTD_BUILD}/**/test-*.log', 'collectd-${COLLECTD_BUILD}/**/test_*.log', 'collectd-${COLLECTD_BUILD}/src/config.h', 'collectd-${COLLECTD_BUILD}/config.log', 'dpkg-l.txt'],
         warning: ['Clang (LLVM based)'],
       ],
