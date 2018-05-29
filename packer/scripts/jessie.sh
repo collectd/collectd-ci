@@ -70,6 +70,7 @@ apt-get -y install \
   libperl-dev \
   libpq-dev \
   libprotobuf-c0-dev \
+  libqpid-proton2-dev \
   librabbitmq-dev \
   librdkafka-dev \
   libriemann-client-dev \
