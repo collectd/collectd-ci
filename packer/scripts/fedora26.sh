@@ -76,6 +76,7 @@ dnf -y install \
   protobuf-c-devel \
   python-devel \
   python3-devel \
+  qpid-proton-c-devel \
   riemann-c-client-devel \
   rrdtool-devel \
   varnish-libs-devel \
