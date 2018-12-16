@@ -41,6 +41,7 @@ dpkg -l > dpkg-l.txt
 ''',
   redhat: '''
 rpm -qa --nosignature --nodigest | sort > rpm-qa.txt
+cat /etc/group > groups.txt
 ''',
   freebsd: '''
 pkg query %n-%v > pkg-query.txt
