@@ -67,6 +67,7 @@ yum -y install \
   nut-devel \
   OpenIPMI-devel \
   openldap-devel \
+  openssl-devel \
   perl-ExtUtils-Embed \
   postgresql-devel \
   protobuf-c-devel \

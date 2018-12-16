@@ -66,6 +66,7 @@ yum -y install \
   nut-devel \
   OpenIPMI-devel \
   openldap-devel \
+  openssl-devel \
   postgresql-devel \
   protobuf-c-devel \
   python26-devel \

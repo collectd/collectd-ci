@@ -79,6 +79,7 @@ apt-get -y install \
   libsensors4-dev \
   libsigrok-dev \
   libsnmp-dev \
+  libssl-dev \
   libstatgrab-dev \
   libtokyocabinet-dev \
   libtokyotyrant-dev \

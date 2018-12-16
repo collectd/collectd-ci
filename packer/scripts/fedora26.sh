@@ -70,6 +70,7 @@ dnf -y install \
   nut-devel \
   OpenIPMI-devel \
   openldap-devel \
+  openssl-devel \
   owfs-devel \
   perl-ExtUtils-Embed \
   postgresql-devel \
