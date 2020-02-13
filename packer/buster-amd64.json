@@ -1,0 +1,22 @@
+{
+  "variables": {
+    "coverity_token": ""
+  },
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "debian-10-x64",
+      "region": "fra1",
+      "size": "512mb",
+      "snapshot_name": "buster-amd64",
+      "ssh_username": "root"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -xe {{ .Path }}",
+      "script": "scripts/buster.sh"
+    }
+  ]
+}

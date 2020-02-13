@@ -64,8 +64,10 @@ Replace `<branch>` with one of the branches mentioned above. Replace
 
 * trusty
 * xenial
-* wheezy
+* bionic
 * jessie
+* stretch
+* buster
 
 Only i386 and amd64 architectures are supported.
 

@@ -1,8 +1,8 @@
 Unattended-Upgrade::Origins-Pattern {
-  "o=Debian,n=jessie";
-  "o=Debian,n=jessie-updates";
-  "o=Debian,n=jessie-proposed-updates";
-  "o=Debian,n=jessie,label=Debian-Security";
+  "o=Debian,n=buster";
+  "o=Debian,n=buster-updates";
+  "o=Debian,n=buster-proposed-updates";
+  "o=Debian,n=buster,label=Debian-Security";
 
   "o=jenkins-ci.org";
 };

@@ -38,7 +38,11 @@
     - { dist: trusty, arch: amd64 }
     - { dist: xenial, arch: i386 }
     - { dist: xenial, arch: amd64 }
-    - { dist: wheezy, arch: i386 }
-    - { dist: wheezy, arch: amd64 }
+    - { dist: bionic, arch: i386 }
+    - { dist: bionic, arch: amd64 }
     - { dist: jessie, arch: i386 }
     - { dist: jessie, arch: amd64 }
+    - { dist: stretch, arch: i386 }
+    - { dist: stretch, arch: amd64 }
+    - { dist: buster, arch: i386 }
+    - { dist: buster, arch: amd64 }
